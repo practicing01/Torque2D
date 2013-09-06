@@ -29,11 +29,11 @@ function CompositeSpriteToy::create( %this )
     exec( "./scripts/customLayout.cs" );
         
     // Set the sandbox drag mode availability.
-    Sandbox.allowManipulation( pan );
-    Sandbox.allowManipulation( pull );
+    //Sandbox.allowManipulation( pan );
+    //Sandbox.allowManipulation( pull );
     
     // Set the manipulation mode.
-    Sandbox.useManipulation( pan );   
+    //Sandbox.useManipulation( pan );   
 
     // Configure the toy.
     CompositeSpriteToy.LayoutMode = "None";
@@ -82,6 +82,7 @@ function CompositeSpriteToy::reset( %this )
         case "Isometric":
             %this.createIsoLayout();
     }
+    
 }
 
 //-----------------------------------------------------------------------------
@@ -140,21 +141,33 @@ function CompositeSpriteToy::createBackground(%this)
 
 function CompositeSpriteToy::onTouchDown(%this, %touchID, %worldPosition)
 {
+   if (isObject(hit_box))
+   {
+    hit_box.safeDelete();
+   }
+   %shape=new ShapeVector(hit_box)
+    {
+      Position=%worldPosition;
+      Size=2;
+    };
+    %shape.setPolyPrimitive(4);
+    SandboxScene.add(%shape);
+    
     // Fetch the composite sprite.
     %compositeSprite = CompositeSpriteToy.CompositeSprite;
     
     // Pick sprites.
-    %sprites = %compositeSprite.pickPoint( %worldPosition );    
-
+    %sprites = %compositeSprite.pickArea(%worldPosition.X-0.5 SPC %worldPosition.Y-0.5,%worldPosition.X+0.5 SPC %worldPosition.Y+0.5 );    
+   //%sprites = %compositeSprite.pickPoint(%worldPosition);
     // Fetch sprite count.    
     %spriteCount = %sprites.count;
     
     // Finish if no sprites picked.
-    if ( %spriteCount == 0 )
-        return;    
+    //if ( %spriteCount == 0 )
+        //return;    
         
     // Iterate sprites.
-    for( %i = 0; %i < %spriteCount; %i++ )
+    for( %i = 0; %i < getWordCount(%sprites); %i++ )
     {
         // Fetch sprite Id.
         %spriteId = getWord( %sprites, %i );

@@ -1021,29 +1021,33 @@ ConsoleMethod(CompositeSprite, pickArea, const char*, 4, 6, "(startx/y, endx/y )
         return NULL;
     }
 
-    // Calculate normalized AABB.
+    // Fetch the render transform.
+    const b2Transform& renderTransform = object->getRenderTransform();
+    
+	// Translate into local space.
+    v1 -= renderTransform.p;
+    v2 -= renderTransform.p;
+
+	Vector2 center;
+	center.x=renderTransform.p.x;
+	center.y=renderTransform.p.y;
+	F32 angle=-renderTransform.q.GetAngle();
+	
+	v1.rotate(center,angle);
+	v2.rotate(center,angle);
+
+	// Calculate normalized AABB.
     b2AABB aabb;
     aabb.lowerBound.x = getMin( v1.x, v2.x );
     aabb.lowerBound.y = getMin( v1.y, v2.y );
     aabb.upperBound.x = getMax( v1.x, v2.x );
     aabb.upperBound.y = getMax( v1.y, v2.y );
 
-	// Calculate local OOBB.
-    b2Vec2 localOOBB[4];
-    CoreMath::mAABBtoOOBB( aabb, localOOBB );
-    CoreMath::mCalculateInverseOOBB( localOOBB, object->getRenderTransform(), localOOBB );
-
-	// Calculate local AABB.
-    b2AABB localAABB;
-    CoreMath::mOOBBtoAABB( localOOBB, localAABB );
-  
-	// Convert OOBB to a PolygonShape
-    b2PolygonShape oobb_polygon;
-    oobb_polygon.Set(localOOBB, 4);
+    // Rotate the AABB into local space.
+    //CoreMath::mRotateAABB( aabb, -renderTransform.q.GetAngle(), aabb );
 
     // Perform query.
-    pSpriteBatchQuery->queryOOBB( localAABB, oobb_polygon, true );
-
+    pSpriteBatchQuery->queryArea( aabb, false );
 
     // Fetch result count.
     const U32 resultCount = pSpriteBatchQuery->getQueryResultsCount();
@@ -1069,7 +1073,7 @@ ConsoleMethod(CompositeSprite, pickArea, const char*, 4, 6, "(startx/y, endx/y )
     {
         // Output Object ID.
         bufferCount += dSprintf( pBuffer + bufferCount, maxBufferSize-bufferCount, "%d ", queryResults[n].mpSpriteBatchItem->getBatchId() );
-
+		//Con::warnf("obj id: %d",queryResults[n].mpSpriteBatchItem->getBatchId());
         // Finish early if we run out of buffer space.
         if ( bufferCount >= maxBufferSize )
         {

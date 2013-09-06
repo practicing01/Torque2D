@@ -63,6 +63,18 @@ function CompositeSpriteToy::createNoLayout( %this )
         %composite.SetSpriteDepth( getRandom( -10.0, 10 ) );                
 	}  
 	
+	/*for (%x=-5;%x<5;%x++)
+	{
+   for (%y=-5;%y<5;%y++)
+   {
+   %composite.addSprite();
+   %composite.setSpriteLocalPosition(%x*5,%y*5);
+   %composite.setSpriteSize(5);
+   %composite.setSpriteImage( "ToyAssets:Gems", getRandom(0,63) );
+   %composite.setAngularVelocity( CompositeSpriteToy.AngularVelocity );
+   }
+	}*/
+	
 	// Add to the scene.
 	SandboxScene.add( %composite );
 	

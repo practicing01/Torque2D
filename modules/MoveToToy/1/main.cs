@@ -115,6 +115,19 @@ function MoveToToy::createSight( %this )
     
     // Add to the scene.
     SandboxScene.add( %object );    
+    
+    %mountedobj=new Sprite();
+    %mountedobj.Animation = "ToyAssets:TD_Wizard_WalkSouth";
+    %mountedobj.Size = 30;
+    SandboxScene.add(%mountedobj);
+    %mountedobj.mount(%object,"20 0",0,true,10);
+    //%mountedobj.dismount();
+    
+    %mountedobj=new Sprite();
+    %mountedobj.Animation = "ToyAssets:TD_Barbarian_WalkSouth";
+    %mountedobj.Size = 30;
+    SandboxScene.add(%mountedobj);
+    %mountedobj.mount(%object,"-20 0",0,true,0);
 }
 
 //-----------------------------------------------------------------------------

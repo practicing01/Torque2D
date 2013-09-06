@@ -234,6 +234,8 @@ bool initializeGame(int argc, const char **argv)
     globalMap->registerObject("GlobalActionMap");
     Sim::getActiveActionMapSet()->pushObject(globalMap);
 
+	Sim::getClientGroup()->assignName("ClientGroup");
+
     // Let the remote debugger process the command-line.
     RemoteDebuggerBridge::processCommandLine( argc, argv );
 

@@ -232,6 +232,9 @@ SceneObject::SceneObject() :
 
     // Set size.
     setSize( Vector2::getOne() );
+
+	mSceneObjectMounted=false;
+	mpAttachedSceneObject=NULL;
 }
 
 //-----------------------------------------------------------------------------
@@ -562,6 +565,143 @@ void SceneObject::preIntegrate( const F32 totalTime, const F32 elapsedTime, Debu
 
 //-----------------------------------------------------------------------------
 
+void SceneObject::dismount( void )
+{
+    // Nothing to do if we're not mounted!
+    if (!isSceneObjectMounted() )
+        return;
+
+    // Remove Camera Mount Reference.
+    //mpMountedTo->removeSceneObjectMountReference();
+
+    // Reset Camera Object Mount.
+    mpMountedTo = NULL;
+
+    // Flag Camera not mounted.
+    mSceneObjectMounted = false;
+
+}
+
+//-----------------------------------------------------------------------------
+
+void SceneObject::dismountMe( SceneObject* pSceneObject )
+{
+    // Are we mounted to the specified object?
+    if ( isSceneObjectMounted() && pSceneObject != mpMountedTo )
+    {
+        // No, so warn.
+        Con::warnf("SceneWindow::dismountMe() - Object is not mounted by the SceneObject!");
+        return;
+    }
+
+    // Dismount Object.
+    dismount();
+}
+
+//-----------------------------------------------------------------------------
+
+void SceneObject::mount( SceneObject* pSceneObject, const Vector2& mountOffset, const F32 mountForce, const bool sendToMount, const bool mountAngle )
+{
+    // Sanity!
+    AssertFatal( pSceneObject != NULL, "Scene object cannot be NULL." );
+
+    // Cannot mount if not in a scene.
+    if ( !mpScene )
+    {
+        // Warn!
+        Con::warnf("Cannot mount scene window (%d) to a scene object (%d) if scene window is not attached to a scene.", getId(), pSceneObject->getId() );
+        return;
+    }
+
+    // Fetch objects' scene.
+    const Scene* pScene = pSceneObject->getScene();
+
+    // Scene object must be in a scene.
+    if ( !pScene )
+    {
+        // Warn!
+        Con::warnf("Cannot mount scene window (%d) to a scene object (%d) that is not in a scene.", getId(), pSceneObject->getId() );
+        return;
+    }
+
+    // Scene object must be in same scene as the one the scene window is attached to.
+    if ( pScene != mpScene )
+    {
+        // Warn!
+        Con::warnf("Cannot mount scene window (%d) to a scene object (%d) that are not using the same scene.", getId(), pSceneObject->getId() );
+        return;
+    }
+
+    // Are we mounted to an object?
+    if ( isSceneObjectMounted() )
+    {
+        // Yes, so dismount object.
+        dismount();
+    }
+    else
+    {
+        // No, so stop any Camera Move.
+       // if ( mMovingCamera ) stopCameraMove();
+    }
+
+    // Set Mount Object Reference.
+    mpMountedTo = pSceneObject;
+
+    // Store Mount Offset.
+    mMountOffset = mountOffset;
+
+    // Set Mount Force.
+    mMountForce = mountForce;
+
+    // Set Mount Angle.
+    mMountAngle = mountAngle;
+
+    // Add Camera Mount Reference.
+	//don't want this without mpAttachedSceneObject being a list
+    //pSceneObject->addSceneObjectMountReference( this );
+
+    // Flag Camera mounted.
+    mSceneObjectMounted = true;
+
+    // Send directly to mount (if selected).
+    if ( sendToMount )
+    {
+        // Fetch Mount Position.
+        const Vector2& mountPos = mpMountedTo->getBody()->GetWorldPoint( mountOffset );
+
+        // Calculate Window Half-Dimensions.
+        //const F32 halfWidth = mCameraCurrent.mSourceArea.len_x() * 0.5f;
+        //const F32 halfHeight = mCameraCurrent.mSourceArea.len_y() * 0.5f;
+
+        // Set Current View to Object Position.
+        //mCameraCurrent.mSourceArea.point.set( mountPos.x - halfWidth, mountPos.y - halfHeight );
+		setPosition(mountPos);
+    }
+
+}
+
+//-----------------------------------------------------------------------------
+
+void SceneObject::calculateSceneObjectMount( const F32 elapsedTime )
+{
+    // Debug Profiling.
+    PROFILE_SCOPE(SceneObject_CalculateSceneObjectMount);
+
+    // Fetch Mount Position.
+    const Vector2& mountPos = mpMountedTo->getBody()->GetWorldPoint( mMountOffset );
+
+    // Set Current Camera Position.
+    setPosition(mountPos);
+
+    // Mount the angle?
+    //if ( mMountAngle )
+       // mMountAngle = -mpMountedTo->getAngle();
+	if ( mMountAngle )
+		setAngle(mMountAngle);
+}
+
+//-----------------------------------------------------------------------------
+
 void SceneObject::integrateObject( const F32 totalTime, const F32 elapsedTime, DebugStats* pDebugStats )
 {
     // Debug Profiling.
@@ -610,6 +750,18 @@ void SceneObject::integrateObject( const F32 totalTime, const F32 elapsedTime, D
         // Yes, so calculate camera mount.
         mpAttachedCamera->calculateCameraMount( elapsedTime );
     }
+
+	//Is there an object attached?
+	//don't want this unless mpAttachedSceneObject is a list
+	/*if (mpAttachedSceneObject)
+	{
+		mpAttachedSceneObject->calculateSceneObjectMount(elapsedTime);
+	}*/
+
+	if (isSceneObjectMounted())
+	{
+		calculateSceneObjectMount(elapsedTime);
+	}
 }
 
 //-----------------------------------------------------------------------------
@@ -711,6 +863,7 @@ void SceneObject::interpolateObject( const F32 timeDelta )
         // Yes, so interpolate camera mount.
         mpAttachedCamera->interpolateCameraMount( timeDelta );
     }
+
 };
 
 //-----------------------------------------------------------------------------
@@ -2666,7 +2819,7 @@ void SceneObject::onInputEvent( StringTableEntry name, const GuiEvent& event, co
 
 //-----------------------------------------------------------------------------
 
-void SceneObject::attachGui( GuiControl* pGuiControl, SceneWindow* pSceneWindow, const bool sizeControl )
+void SceneObject::attachGui( GuiControl* pGuiControl, SceneWindow* pSceneWindow, const bool sizeControl, Vector2 offset )
 {
     // Attach Gui Control.
     mpAttachedGui = pGuiControl;
@@ -2676,6 +2829,8 @@ void SceneObject::attachGui( GuiControl* pGuiControl, SceneWindow* pSceneWindow,
 
     // Set Size Gui Flag.
     mAttachedGuiSizeControl = sizeControl;
+
+	mAttachedGuiOffset = offset;
 
     // Register Gui Control/Window References.
     mpAttachedGui->registerReference( (SimObject**)&mpAttachedGui );
@@ -2758,6 +2913,10 @@ void SceneObject::updateAttachedGui( void )
         // Convert Control Dimensions.
         topLeftI.set( S32(upperLeft.x), S32(upperLeft.y) );
         extentI.set( S32(lowerRight.x-upperLeft.x), S32(lowerRight.y-upperLeft.y) );
+
+		//add offset
+		topLeftI.x+=mAttachedGuiOffset.x;
+		topLeftI.y+=mAttachedGuiOffset.y;
     }
     else
     {
@@ -2775,6 +2934,10 @@ void SceneObject::updateAttachedGui( void )
         extentI = mpAttachedGui->getExtent();
         // Calculate new top-left.
         topLeftI.set( S32(positionI.x-extentI.x/2), S32(positionI.y-extentI.y/2) );
+
+		//add offset
+		topLeftI.x+=mAttachedGuiOffset.x;
+		topLeftI.y+=mAttachedGuiOffset.y;
     }
 
     // Set Control Dimensions.

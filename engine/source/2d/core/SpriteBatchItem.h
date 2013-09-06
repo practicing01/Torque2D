@@ -291,7 +291,6 @@ public:
 
     virtual void copyTo( SpriteBatchItem* pSpriteBatchItem ) const;
 
-    inline const Vector2* getLocalOOBB( void ) const { return mLocalOOBB; }
     inline const Vector2* getRenderOOBB( void ) const { return mRenderOOBB; }
 
     void prepareRender( SceneRenderRequest* pSceneRenderRequest, const U32 batchTransformId );

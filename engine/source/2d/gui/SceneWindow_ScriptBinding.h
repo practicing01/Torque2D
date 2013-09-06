@@ -19,7 +19,7 @@
 // FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS
 // IN THE SOFTWARE.
 //-----------------------------------------------------------------------------
-
+#include "game/gameinterface.h"
 
 ConsoleMethod(SceneWindow, getWindowExtents, const char*, 2, 2, "() Fetch Window Extents (Position/Size)."
               "@return Returns the window dimensions as a string formatted as follows: <position.x> <position.y> <width> <height>")
@@ -1403,3 +1403,16 @@ ConsoleMethod(SceneWindow, getIsWindowPoint, bool, 3, 4, "(X / Y) Checks if Worl
     // Check if point is in window bounds.
     return object->mBounds.pointInRect( Point2I( S32(mFloor(dstPoint.x)+object->mBounds.point.x), S32(mFloor(dstPoint.y)+object->mBounds.point.y )) );
 }
+
+/*
+ConsoleMethod(SceneWindow, SimulateonMouseDown, void, 4, 4, "() Simulates Mouse Click.")
+{
+    GuiEvent dummyevent;
+	dummyevent.eventID=0;//does this work for touch too?
+	dummyevent.mouseClickCount=1;
+	dummyevent.mousePoint.x=(S32)dAtoi(argv[2]);
+	dummyevent.mousePoint.y=(S32)dAtoi(argv[3]);
+    object->onMouseDown(dummyevent);
+	object->onMouseUp(dummyevent);
+}
+*/

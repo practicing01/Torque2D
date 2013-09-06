@@ -92,9 +92,6 @@ static ALenum getEnum(const char * name, U32 flags)
       { "AL_CONE_INNER_ANGLE",            AL_CONE_INNER_ANGLE,             (Source|Get|Set|Int) },
       { "AL_CONE_OUTER_ANGLE",            AL_CONE_OUTER_ANGLE,             (Source|Get|Set|Int) },
       { "AL_LOOPING",                     AL_LOOPING,                      (Source|Get|Set|Int) },
-	  { "AL_SAMPLE_OFFSET",               AL_SAMPLE_OFFSET,                (Source|Get|Set|Int) },
-	  { "AL_SEC_OFFSET",                  AL_SEC_OFFSET,                   (Source|Get|Set|Int) },
-	  { "AL_BYTE_OFFSET",                 AL_BYTE_OFFSET,                  (Source|Get|Set|Int) },
       //{ "AL_STREAMING",                   AL_STREAMING,                    (Source|Get|Set|Int) },
       //{ "AL_BUFFER",                      AL_BUFFER,                       (Source|Get|Set|Int) },
 
@@ -165,6 +162,7 @@ ConsoleFunction(OpenALInitDriver, bool, 1, 1, "() Use the OpenALInitDriver funct
                                                                 "@return Returns true on successful initialization, false otherwise.\n"
                                                                 "@sa OpenALShutdownDriver")
 {
+
    if (Audio::OpenALInit())
    {
       static bool registered = false;
@@ -345,7 +343,7 @@ ConsoleFunction(alxSourcei, void, 4, 4, "( handle , ALEnum , value ) Use the alx
       return;
    }
 
-   alxSourcei(dAtoi(argv[1]), e, static_cast<ALint>(dAtoi(argv[3])));
+   alxSourcei(dAtoi(argv[1]), e, dAtoi(argv[3]));
 }
 
 
@@ -409,9 +407,9 @@ ConsoleFunction(alxGetSourcei, S32, 3, 3, "( handle , ALEnum ) Use the alxGetSou
       return(0);
    }
 
-   ALint value;
+   S32 value;
    alxGetSourcei(dAtoi(argv[1]), e, &value);
-   return(static_cast<S32>(value));
+   return(value);
 }
 
 
@@ -743,6 +741,5 @@ ConsoleFunction(setiOSAudioStreamVolume, void, 3, 3, "setiPhoneAudioVolume( Stre
     }
 }
 #endif
-
-
+//-----------------------------------------------
 ConsoleFunctionGroupEnd(Audio);
