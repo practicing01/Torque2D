@@ -1015,7 +1015,7 @@ void ImageAsset::calculateImplicitMode( void )
     }
 
     // The Cell Offset Y needs to be within the image.
-    if ( mCellOffsetY < 0 || mCellOffsetY >= imageWidth )
+    if ( mCellOffsetY < 0 || mCellOffsetY >= mCellHeight )
     {
         // Warn.
         Con::warnf("ImageAsset::calculateImage() - Invalid Cell OffsetY of %d.", mCellOffsetY );

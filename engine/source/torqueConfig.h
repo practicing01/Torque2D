@@ -70,6 +70,7 @@
 /// end-user to report.
 ///
 /// 'TORQUE_UNICODE'
+#define TORQUE_UNICODE
 /// When defined, enables unicode support.
 ///
 /// 'TORQUE_ENABLE_PROFILER'
