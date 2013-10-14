@@ -1,0 +1,14 @@
+<ModuleDefinition
+	ModuleId="Water1"
+	VersionId="1"
+	Description="Demonstrates 1 Water Effect."
+	Type="toy"
+	ToyCategoryIndex="3"
+	ScriptFile="main.cs"
+	CreateFunction="create"
+    DestroyFunction="destroy">
+        <DeclaredAssets
+            Path="assets"
+            Extension="asset.taml"
+            Recurse="true"/>		
+</ModuleDefinition>

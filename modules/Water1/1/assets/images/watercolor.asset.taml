@@ -1,0 +1,8 @@
+<ImageAsset
+    AssetName="image_watercolor"
+    ImageFile="watercolor.png"
+	CellCountX="1"
+    CellCountY="1"
+    CellWidth="1024"
+    CellHeight="768"
+	OptimalResolution="1024 768"/>
