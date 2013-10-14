@@ -1,0 +1,266 @@
+<GuiControl
+    Name="gui_mainmenu"
+    Profile="gui_profile_modalless"
+    HorizSizing="relative"
+    VertSizing="relative"
+    Position="0 0"
+    Extent="800 480"
+    MinExtent="1 1"
+    Visible="1"
+	HelpTag="0">
+	
+	<!-- chat box -->
+	<GuiScrollCtrl
+			Name="gui_scroller_chatbox"
+			canSaveDynamicFields="1"
+			isContainer="1"
+			Profile="GuiLightScrollProfile"
+			HorizSizing="relative"
+			VertSizing="relative"
+			Position="0 420"
+			Extent="200 60"
+			MinExtent="1 1"
+			canSave="1"
+			Visible="1"
+			Active="1"
+			hovertime="1000"
+			willFirstRespond="1"
+			hScrollBar="dynamic"
+			vScrollBar="dynamic"
+			constantThumbHeight="0"
+			childMargin="2 3" >
+			
+				<GuiMLTextEditCtrl
+					Name="gui_mltextedit_chatbox"
+					Profile="GuiTextEditProfile"
+					command=""
+					isContainer="0"
+					HorizSizing="relative"
+					VertSizing="relative"
+					Position="2 2"
+					Extent="200 60"
+					MinExtent="1 1"
+					canSave="1"
+					Visible="1"
+					Active="1"
+					maxChars="255"
+					text=""
+					escapeCommand=""/>
+	</GuiScrollCtrl>
+	
+	<GuiControl
+		Profile="GuiDefaultProfile"
+		HorizSizing="relative"
+		VertSizing="relative"
+		Position="352 280"
+		Extent="208 144">
+		
+		<!-- Master Server -->
+		<GuiRadioCtrl
+			Name="gui_radio_masterserver"
+			Profile="GuiRadioProfileColored"
+			Text="Master Server"
+			ButtonType="RadioButton"
+			command="gui_mainmenu.apptype(0);"
+			canSaveDynamicFields="0"
+			isContainer="0"
+			HorizSizing="relative"
+			VertSizing="relative"
+			Position="40 8"
+			Extent="168 32"
+			MinExtent="1 1"
+			canSave="1"
+			Visible="1"
+			Active="1"
+			hovertime="1000"
+			groupNum="-1"
+			useMouseEvents="1" />
+		
+		<!-- Server -->
+		<GuiRadioCtrl
+			Name="gui_radio_server"
+			Profile="GuiRadioProfileColored"
+			Text="Server"
+			ButtonType="RadioButton"
+			command="gui_mainmenu.apptype(1);"
+			canSaveDynamicFields="0"
+			isContainer="0"
+			HorizSizing="relative"
+			VertSizing="relative"
+			Position="40 56"
+			Extent="140 30"
+			MinExtent="1 1"
+			canSave="1"
+			Visible="1"
+			Active="1"
+			hovertime="1000"
+			groupNum="-1"
+			useMouseEvents="1" />
+			
+			<!-- Client -->
+		<GuiRadioCtrl
+			Name="gui_radio_client"
+			Profile="GuiRadioProfileColored"
+			Text="Client"
+			ButtonType="RadioButton"
+			command="gui_mainmenu.apptype(2);"
+			canSaveDynamicFields="0"
+			isContainer="0"
+			HorizSizing="relative"
+			VertSizing="relative"
+			Position="40 104"
+			Extent="140 30"
+			MinExtent="1 1"
+			canSave="1"
+			Visible="1"
+			Active="1"
+			hovertime="1000"
+			groupNum="-1"
+			useMouseEvents="1" />
+		
+	</GuiControl>
+	
+	<!-- query master server button -->
+	<GuiButtonCtrl
+		Name="gui_button_querymasterserver"
+		Profile="BlueButtonProfile"
+		Text="Query Master Server"
+		ButtonType="PushButton"
+		command="gui_mainmenu.querymasterserver();"
+		canSaveDynamicFields="0"
+		isContainer="0"
+		HorizSizing="relative"
+		VertSizing="relative"
+		Position="392 440"
+		Extent="140 30"
+		MinExtent="1 1"
+		canSave="1"
+		Visible="1"
+		Active="1"
+		hovertime="1000"
+		groupNum="-1"
+		useMouseEvents="1" />	
+	
+	<!-- connect button -->
+	<GuiButtonCtrl
+		Name="gui_button_connect"
+		Profile="BlueButtonProfile"
+		Text="Connect to Server"
+		ButtonType="PushButton"
+		command="gui_mainmenu.Connect_to_Server();"
+		canSaveDynamicFields="0"
+		isContainer="0"
+		HorizSizing="relative"
+		VertSizing="relative"
+		Position="568 440"
+		Extent="140 30"
+		MinExtent="1 1"
+		canSave="1"
+		Visible="1"
+		Active="1"
+		hovertime="1000"
+		groupNum="-1"
+		useMouseEvents="1" />		
+	
+	
+	<!-- send text button -->
+	<GuiButtonCtrl
+		Name="gui_button_send"
+		Profile="BlueButtonProfile"
+		Text="Send"
+		ButtonType="PushButton"
+		command="gui_mainmenu.sendtext();"
+		canSaveDynamicFields="0"
+		isContainer="0"
+		HorizSizing="relative"
+		VertSizing="relative"
+		Position="211 442"
+		Extent="140 30"
+		MinExtent="1 1"
+		canSave="1"
+		Visible="1"
+		Active="1"
+		hovertime="1000"
+		groupNum="-1"
+		useMouseEvents="1" />		
+	
+<!-- previous text list -->
+	<GuiScrollCtrl
+			Name="gui_scroller_previoustext"
+			canSaveDynamicFields="1"
+			isContainer="1"
+			Profile="GuiLightScrollProfile"
+			HorizSizing="relative"
+			VertSizing="relative"
+			Position="0 216"
+			Extent="200 200"
+			MinExtent="1 1"
+			canSave="1"
+			Visible="1"
+			Active="1"
+			hovertime="1000"
+			willFirstRespond="1"
+			hScrollBar="dynamic"
+			vScrollBar="dynamic"
+			constantThumbHeight="0"
+			childMargin="2 3" >
+			
+				<GuiDynamicCtrlArrayControl 
+					Name="gui_list_previoustext"
+					Profile="gui_list_profile_colored"
+					command=""
+					isContainer="0"
+					HorizSizing="relative"
+					VertSizing="relative"
+					Position="2 2"
+					Extent="200 200"
+					MinExtent="1 1"
+					canSave="1"
+					Visible="1"
+					Active="1"
+					colCount="1"
+					colSize="200"
+					colSpacing="0"
+					rowSize="20"
+					rowSpacing="0"/>
+	</GuiScrollCtrl>
+
+	
+<!-- server list -->
+	<GuiScrollCtrl
+			Name="gui_scroller_serverlist"
+			canSaveDynamicFields="1"
+			isContainer="1"
+			Profile="GuiLightScrollProfile"
+			HorizSizing="relative"
+			VertSizing="relative"
+			Position="563 233"
+			Extent="200 200"
+			MinExtent="1 1"
+			canSave="1"
+			Visible="1"
+			Active="1"
+			hovertime="1000"
+			willFirstRespond="1"
+			hScrollBar="dynamic"
+			vScrollBar="dynamic"
+			constantThumbHeight="0"
+			childMargin="2 3" >
+			
+				<GuiListBoxCtrl 
+					Name="gui_list_serverlist"
+					Profile="gui_list_profile_colored"
+					command=""
+					isContainer="0"
+					HorizSizing="relative"
+					VertSizing="relative"
+					Position="2 2"
+					Extent="200 200"
+					MinExtent="1 1"
+					canSave="1"
+					Visible="1"
+					Active="1"
+					AllowMultipleSelections="0"/>
+	</GuiScrollCtrl>	
+
+</GuiControl>
