@@ -583,7 +583,7 @@ public:
     F32                 mMountForce;
     bool                mMountAngle;
 	inline bool isSceneObjectMounted( void ) { return mSceneObjectMounted; }
-	void mount( SceneObject* pSceneObject, const Vector2& mountOffset, const F32 mountForce, const bool sendToMount, const bool mountAngle );
+	void mount( SceneObject* pSceneObject, const Vector2& mountOffset, const F32 mountForce, const bool sendToMount, F32 mountAngle );
     void dismount( void );
     void dismountMe( SceneObject* pSceneObject );
     void calculateSceneObjectMount( const F32 elapsedTime );

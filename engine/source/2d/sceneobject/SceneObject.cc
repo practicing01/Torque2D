@@ -600,7 +600,7 @@ void SceneObject::dismountMe( SceneObject* pSceneObject )
 
 //-----------------------------------------------------------------------------
 
-void SceneObject::mount( SceneObject* pSceneObject, const Vector2& mountOffset, const F32 mountForce, const bool sendToMount, const bool mountAngle )
+void SceneObject::mount( SceneObject* pSceneObject, const Vector2& mountOffset, const F32 mountForce, const bool sendToMount, F32 mountAngle )
 {
     // Sanity!
     AssertFatal( pSceneObject != NULL, "Scene object cannot be NULL." );
