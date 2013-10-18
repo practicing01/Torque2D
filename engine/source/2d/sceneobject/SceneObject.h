@@ -581,7 +581,7 @@ public:
     Vector2             mMountOffset;
     U32                 mMountToID;
     F32                 mMountForce;
-    bool                mMountAngle;
+    F32                 mMountAngle;
 	inline bool isSceneObjectMounted( void ) { return mSceneObjectMounted; }
 	void mount( SceneObject* pSceneObject, const Vector2& mountOffset, const F32 mountForce, const bool sendToMount, F32 mountAngle );
     void dismount( void );

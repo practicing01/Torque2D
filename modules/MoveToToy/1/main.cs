@@ -120,7 +120,7 @@ function MoveToToy::createSight( %this )
     %mountedobj.Animation = "ToyAssets:TD_Wizard_WalkSouth";
     %mountedobj.Size = 30;
     SandboxScene.add(%mountedobj);
-    %mountedobj.mount(%object,"20 0",0,true,10);
+    %mountedobj.mount(%object,"20 0",0,true,90);
     //%mountedobj.dismount();
     
     %mountedobj=new Sprite();
