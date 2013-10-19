@@ -3827,7 +3827,7 @@ ConsoleMethod(SceneObject, mount, void, 3, 8,   "(sceneObject, [offsetX / offset
     Vector2 mountOffset(0.0f, 0.0f);
     F32 mountForce = 0.0f;
     bool sendToMount = true;
-    bool mountAngle = false;
+    F32 mountAngle = 0.0f;
     
     U32 nextArg = 3;
     if ( (U32)argc > nextArg )
@@ -3865,7 +3865,7 @@ ConsoleMethod(SceneObject, mount, void, 3, 8,   "(sceneObject, [offsetX / offset
 
 
     if ( (U32)argc > nextArg )
-        mountAngle = dAtob(argv[nextArg++]);
+        mountAngle = dAtof(argv[nextArg++]);
 
     // Mount Object.
     object->mount( pSceneObject, mountOffset, mountForce, sendToMount, mountAngle );

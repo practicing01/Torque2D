@@ -695,21 +695,22 @@ void SceneObject::calculateSceneObjectMount( const F32 elapsedTime )
 
     // Mount the angle?
     //if ( mMountAngle )
-       // mMountAngle = -mpMountedTo->getAngle();
-	//if ( mMountAngle )
-		//setAngle(mMountAngle);
+        //mMountAngle = mpMountedTo->getAngle();
 
-	F32 mounted_angle, new_angle;
+	if ( mMountAngle!=-1)
+		setAngle(mMountAngle+mpMountedTo->getAngle());
 
-	mounted_angle = -(mpMountedTo->getAngle());
+	/*if ( mMountAngle )
+		setAngle(mMountAngle);*/
 
-	new_angle = (mMountAngle + mounted_angle);
+	/*F32 new_angle=(-mpMountedTo->getAngle())+mMountAngle;
 
-	if (mMountAngle)
+	if (new_angle>6.28)
 	{
-
-		setAngle(new_angle);
+		new_angle-=6.28;
 	}
+	setAngle(new_angle);*/
+
 }
 
 //-----------------------------------------------------------------------------
