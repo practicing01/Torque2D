@@ -126,7 +126,7 @@ bool initializeLibraries()
     // Create the stock colors.
     StockColor::create();
     
-#ifdef TORQUE_OS_IOS
+#if defined(TORQUE_OS_IOS) || defined(TORQUE_OS_ANDROID)
    //3MB default is way too big for iPhone!!!
 #ifdef	TORQUE_SHIPPING
     FrameAllocator::init(256 * 1024);	//256KB for now... but let's test and see!
@@ -274,7 +274,7 @@ bool initializeGame(int argc, const char **argv)
     if (useDefaultScript)
     {
         bool success = false;
-            success = scriptFileStream.open(defaultScriptName, FileStream::Read);
+        success = scriptFileStream.open(defaultScriptName, FileStream::Read);
 
         if( !success )
         {
@@ -382,6 +382,21 @@ bool DefaultGame::mainInitialize(int argc, const char **argv)
 #ifdef TORQUE_OS_IOS_PROFILE
     iPhoneProfilerProfilerInit();
 #endif
+
+    #endif
+
+#ifdef TORQUE_OS_ANDROID
+
+      //-Mat this is a bit of a hack, but if we don't want the network, we shut it off now.
+    // We can't do it until we've run the entry script, otherwise the script variable will not have ben loaded
+    bool usesNet = false; //dAtob( Con::getVariable( "$pref::iOS::UseNetwork" ) );
+    if( !usesNet ) {
+        Net::shutdown();
+    }
+
+#ifdef TORQUE_OS_ANDROID_PROFILE
+    AndroidProfilerProfilerInit();
+#endif
     #endif
 
    return true;
@@ -436,6 +451,9 @@ void DefaultGame::mainLoop( void )
 #ifdef TORQUE_OS_IOS_PROFILE
     iPhoneProfilerStart("MAIN_LOOP");
 #endif	
+#ifdef TORQUE_OS_ANDROID_PROFILE
+    AndroidProfilerStart("MAIN_LOOP");
+#endif
          PROFILE_START(MainLoop);
 #ifdef TORQUE_ALLOW_JOURNALING
          PROFILE_START(JournalMain);
@@ -467,6 +485,13 @@ void DefaultGame::mainLoop( void )
     if(iPhoneProfilerGetCount() >= 60){
         iPhoneProfilerPrintAllResults();
         iPhoneProfilerProfilerInit();
+    }
+#endif
+#ifdef TORQUE_OS_ANDROID_PROFILE
+    AndroidProfilerEnd("MAIN_LOOP");
+    if(AndroidProfilerGetCount() >= 60){
+        AndroidProfilerPrintAllResults();
+        AndroidProfilerProfilerInit();
     }
 #endif
 }
@@ -574,9 +599,15 @@ void DefaultGame::processTimeEvent(TimeEvent *event)
 #ifdef TORQUE_OS_IOS_PROFILE
 iPhoneProfilerStart("SERVER_PROC");
 #endif    
+#ifdef TORQUE_OS_ANDROID_PROFILE
+AndroidProfilerStart("SERVER_PROC");
+#endif
     tickPass = gServerProcessList.advanceTime(elapsedTime);
 #ifdef TORQUE_OS_IOS_PROFILE
     iPhoneProfilerEnd("SERVER_PROC");
+#endif
+#ifdef TORQUE_OS_ANDROID_PROFILE
+    AndroidProfilerEnd("SERVER_PROC");
 #endif
     PROFILE_END();	
 
@@ -590,15 +621,24 @@ iPhoneProfilerStart("SERVER_PROC");
 #ifdef TORQUE_OS_IOS_PROFILE
     iPhoneProfilerStart("SIM_TIME");
 #endif
+#ifdef TORQUE_OS_ANDROID_PROFILE
+    AndroidProfilerStart("SIM_TIME");
+#endif
     Sim::advanceTime(elapsedTime);
 #ifdef TORQUE_OS_IOS_PROFILE
     iPhoneProfilerEnd("SIM_TIME");
+#endif
+#ifdef TORQUE_OS_ANDROID_PROFILE
+    AndroidProfilerEnd("SIM_TIME");
 #endif
     PROFILE_END();
 
    PROFILE_START(ClientProcess);
 #ifdef TORQUE_OS_IOS_PROFILE
     iPhoneProfilerStart("CLIENT_PROC");
+#endif
+#ifdef TORQUE_OS_ANDROID_PROFILE
+    AndroidProfilerStart("CLIENT_PROC");
 #endif
 
    PROFILE_START(TickableAdvanceTime);
@@ -625,6 +665,9 @@ iPhoneProfilerStart("SERVER_PROC");
 #ifdef TORQUE_OS_IOS_PROFILE
     iPhoneProfilerEnd("CLIENT_PROC");
 #endif
+#ifdef TORQUE_OS_ANDROID_PROFILE
+    AndroidProfilerEnd("CLIENT_PROC");
+#endif
     PROFILE_END();
    PROFILE_START(ClientNetProcess);
       GNet->processClient();
@@ -634,6 +677,9 @@ iPhoneProfilerStart("SERVER_PROC");
    {
 #ifdef TORQUE_OS_IOS_PROFILE	   
 iPhoneProfilerStart("GL_RENDER");
+#endif
+#ifdef TORQUE_OS_ANDROID_PROFILE
+AndroidProfilerStart("GL_RENDER");
 #endif
       bool preRenderOnly = false;
       if(gFrameSkip && gFrameCount % gFrameSkip)
@@ -645,6 +691,9 @@ iPhoneProfilerStart("GL_RENDER");
       gFrameCount++;
 #ifdef TORQUE_OS_IOS_PROFILE
 iPhoneProfilerEnd("GL_RENDER");
+#endif
+#ifdef TORQUE_OS_ANDROID_PROFILE
+AndroidProfilerEnd("GL_RENDER");
 #endif
    }
    GNet->checkTimeouts();
