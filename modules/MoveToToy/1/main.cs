@@ -112,6 +112,7 @@ function MoveToToy::createSight( %this )
     
     // Set the sprite rotating to make it more interesting.
     %object.AngularVelocity = -90;
+    //%object.setAngle(45);
     
     // Add to the scene.
     SandboxScene.add( %object );    
@@ -121,6 +122,7 @@ function MoveToToy::createSight( %this )
     %mountedobj.Size = 30;
     SandboxScene.add(%mountedobj);
     %mountedobj.mount(%object,"20 0",0,true,mDegToRad(90));
+    //%mountedobj.mount(%object,"20 0",0,true,90);
     //%mountedobj.dismount();
     
     %mountedobj=new Sprite();
