@@ -4046,7 +4046,7 @@ ConsoleMethodWithDocs(SceneObject, setDebugOff, ConsoleVoid, 3, 2 + DEBUG_MODE_C
     @param sizeControl Whether or not to size the GuiControl to the size of this object.
     @return No return Value.
 */
-ConsoleMethodWithDocs(SceneObject, attachGui, ConsoleVoid, 4, 5, (guiControl guiObject, SceneWindow window, [sizeControl? = false]))
+ConsoleMethodWithDocs(SceneObject, attachGui, ConsoleVoid, 6, 7, (guiControl guiObject, SceneWindow window, [sizeControl? = false], Vector2 offset))
 {
     // Find GuiControl Object.
     GuiControl* pGuiControl = dynamic_cast<GuiControl*>(Sim::findObject(argv[2]));
@@ -4071,8 +4071,29 @@ ConsoleMethodWithDocs(SceneObject, attachGui, ConsoleVoid, 4, 5, (guiControl gui
     // Calculate Send to Mount.
     const bool sizeControl = argc >= 5 ? dAtob(argv[4]) : false;
 
+	// The new offset.
+   Vector2 offset(0,0);
+
+   // Elements in the first argument.
+   U32 elementCount = Utility::mGetStringElementCount(argv[5]);
+
+   // ("x y")
+   if ((elementCount == 2) && (argc == 6))
+      offset = Utility::mGetStringElementVector(argv[5]);
+
+   // (x, y)
+   else if ((elementCount == 1) && (argc == 7))
+      offset = Vector2(dAtof(argv[5]), dAtof(argv[6]));
+
+   // Invalid
+   else
+   {
+      Con::warnf("SceneObject::attachGui() - Invalid number of parameters!");
+      return;
+   }
+
     // Attach GUI Control.
-    object->attachGui( pGuiControl, pSceneWindow, sizeControl );
+    object->attachGui( pGuiControl, pSceneWindow, sizeControl, offset);
 }
 
 //-----------------------------------------------------------------------------
@@ -4150,5 +4171,88 @@ ConsoleMethodWithDocs(SceneObject, safeDelete, ConsoleVoid, 2, 2, ())
     // Script Delete.
     object->safeDelete();
 }
+
+//-----------------------------------------------------------------------------
+
+/*! Mounts the camera onto the specified object.
+    @param sceneObject The scene object to mount the camera to.
+    @param offsetX / offsetY The offset from the objects position to mount the camera to.  Optional: Defaults to no offset.
+    @param mountForce The force to use to keep the camera mounted to the object.  Zero is a rigid mount.  Optional: Defaults to zero.
+    @param sendToMount Whether to immediately move the camera to the objects position or not.  Optional: Defaults to true.
+    @param mountAngle Whether to mount the cameras angle to the objects angle or not.  Optional: Defaults to false.
+    @return No return value
+*/
+ConsoleMethodWithDocs(SceneObject, mount, ConsoleVoid, 3, 8, (sceneObject, [offsetX / offsetY], [mountForce], [sendToMount?], [mountAngle?]))
+{
+    // Grab the object. Always specified.
+    SceneObject* pSceneObject = dynamic_cast<SceneObject*>(Sim::findObject(argv[2]));
+
+    // Validate Object.
+    if (!pSceneObject)
+    {
+        Con::warnf("SceneWindow::mount() - Couldn't find/Invalid object '%s'.", argv[2]);
+        return;
+    }
+
+    // Set defaults.
+    Vector2 mountOffset(0.0f, 0.0f);
+    F32 mountForce = 0.0f;
+    bool sendToMount = true;
+    F32 mountAngle = 0.0f;
+    
+    U32 nextArg = 3;
+    if ( (U32)argc > nextArg )
+    {
+        // Fetch Element Count.
+        const U32 elementCount = Utility::mGetStringElementCount(argv[nextArg]);
+
+        // (object, "offsetX offsetY", ...)
+        if ( elementCount == 2 )
+        {
+            mountOffset = Utility::mGetStringElementVector(argv[nextArg++]);
+        }
+        // (object, offsetX, offsetY, ...)
+        else if ( elementCount == 1 && (U32)argc >= nextArg+1 )
+        {
+            mountOffset = Vector2(dAtof(argv[nextArg]), dAtof(argv[nextArg+1]));
+            nextArg += 2;
+        }
+        // Invalid.
+        else
+        {
+            Con::warnf("SceneWindow::mount() - Invalid number of parameters!");
+            return;
+        }
+    }
+
+    // Grab the mount force - if it's specified.
+    if ( (U32)argc > nextArg )
+        mountForce = dAtof(argv[nextArg++]);
+
+    // Grab the send to mount flag.
+
+    if ( (U32)argc > nextArg )
+        sendToMount = dAtob(argv[nextArg++]);
+
+
+    if ( (U32)argc > nextArg )
+        mountAngle = dAtof(argv[nextArg++]);
+
+    // Mount Object.
+    object->mount( pSceneObject, mountOffset, mountForce, sendToMount, mountAngle );
+}
+
+//-----------------------------------------------------------------------------
+
+/*! Dismounts Camera from object.
+    @return No return value
+*/
+ConsoleMethodWithDocs(SceneObject, dismount, ConsoleVoid, 2, 2, ())
+{
+    // Dismount Object.
+    object->dismount();
+}
+
+//-----------------------------------------------------------------------------
 
 ConsoleMethodGroupEndWithDocs(SceneObject)

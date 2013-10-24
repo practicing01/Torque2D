@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<merger>
+
+    <dataSet config="main" >
+        <source path="C:\Users\user\Documents\GitHub\Torque2D\engine\compilers\android\assets" >
+            <file
+                name="splash.png"
+                path="C:\Users\user\Documents\GitHub\Torque2D\engine\compilers\android\assets\splash.png" />
+        </source>
+    </dataSet>
+    <dataSet config="debug" >
+        <source path="C:\Users\user\Documents\GitHub\Torque2D\engine\compilers\android\build-types\debug\assets" />
+    </dataSet>
+
+</merger>

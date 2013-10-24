@@ -1,0 +1,43 @@
+<ParticleAsset
+    AssetName="ParticleAsset_2">
+    <ParticleAssetEmitter
+        EmitterName="MovingBubbles"
+        Image="@asset=ToyAssets:Particles5"
+        Frame="1">
+        <ParticleAssetEmitter.Fields>
+            <Key
+                Time="0"
+                Value="0.2" />
+            <Key
+                Time="0"
+                Value="5" />
+            <Key
+                Time="0"
+                Value="0" />
+            <Key
+                Time="0"
+                Value="0.3" />
+            <Key
+                Time="1"
+                Value="1" />
+            <Key
+                Time="0"
+                Value="72" />
+            <Key
+                Time="0"
+                Value="0" />
+            <Key
+                Time="0.3"
+                Value="0.2" />
+            <Key
+                Time="0.9"
+                Value="0.1" />
+            <Key
+                Time="1"
+                Value="0" />
+            <Key
+                Time="0"
+                Value="0.1" />
+        </ParticleAssetEmitter.Fields>
+    </ParticleAssetEmitter>
+</ParticleAsset>
