@@ -1,0 +1,71 @@
+<GuiControl
+    Name="Gui_Server"
+    Profile="gui_profile_modalless"
+    HorizSizing="relative"
+    VertSizing="relative"
+    Position="0 0"
+    Extent="800 480"
+    MinExtent="1 1"
+    Visible="1"
+	HelpTag="0">
+	
+	<GuiTextEditCtrl
+		Name="Gui_Textedit_Server_Name"
+		Profile="GuiTextEditProfile"
+		command=""
+		isContainer="0"
+		HorizSizing="relative"
+		VertSizing="relative"
+		Position="304 261"
+		Extent="160 24"
+		MinExtent="1 1"
+		canSave="1"
+		Visible="1"
+		Active="1"
+		maxChars="255"
+		text="Dots & Crits Server"
+		escapeCommand=""/>
+		
+	<!-- Set Server Name Button -->
+	<GuiButtonCtrl
+		Name="Gui_Button_Set_Server_Name"
+		Profile="BlueButtonProfile"
+		Text="Set Server Name"
+		ButtonType="PushButton"
+		command="Gui_Config_Menu.Set_Server_Name();"
+		canSaveDynamicFields="0"
+		isContainer="0"
+		HorizSizing="relative"
+		VertSizing="relative"
+		Position="464 261"
+		Extent="128 40"
+		MinExtent="1 1"
+		canSave="1"
+		Visible="1"
+		Active="1"
+		hovertime="1000"
+		groupNum="-1"
+		useMouseEvents="1" />
+	
+	<!-- go back to main menu -->
+	<GuiButtonCtrl
+		Name="Gui_Button_Server_Go_Main_Menu"
+		Profile="BlueButtonProfile"
+		Text="Main Menu"
+		ButtonType="PushButton"
+		command="Gui_Server.Go_Main_Menu();"
+		canSaveDynamicFields="0"
+		isContainer="0"
+		HorizSizing="relative"
+		VertSizing="relative"
+		Position="336 220"
+		Extent="128 40"
+		MinExtent="1 1"
+		canSave="1"
+		Visible="1"
+		Active="1"
+		hovertime="1000"
+		groupNum="-1"
+		useMouseEvents="1" />
+	
+</GuiControl>

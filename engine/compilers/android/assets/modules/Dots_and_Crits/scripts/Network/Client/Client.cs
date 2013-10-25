@@ -1,0 +1,13 @@
+exec("./Client_Load.cs");
+exec("./Client_Unload.cs");
+exec("./Query_Master_Server.cs");
+exec("./Query_Response.cs");
+exec("./clientCmdRecieve_Text.cs");
+exec("./clientCmdRegister_Card_To_Load.cs");
+exec("./clientCmdRegister_Map_To_Load.cs");
+exec("./clientCmdCast_Card.cs");
+exec("./clientCmdRegister_Player_Information.cs");
+exec("./clientCmdRegister_Player_Disconnect.cs");
+exec("./clientCmdRegister_Play.cs");
+exec("./clientCmdUnregister_Card_To_Load.cs");
+exec("./clientCmdRelay_Module_Function.cs");

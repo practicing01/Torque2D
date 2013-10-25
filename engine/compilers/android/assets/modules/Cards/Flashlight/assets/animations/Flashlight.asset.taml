@@ -1,0 +1,6 @@
+<AnimationAsset
+    AssetName="Animation_Flashlight"
+    Image="@asset=Module_Card_Flashlight:Image_Flashlight"
+    AnimationFrames="0"
+    AnimationCycle="true"
+	AnimationTime="0.5" />

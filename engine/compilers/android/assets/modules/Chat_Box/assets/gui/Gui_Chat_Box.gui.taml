@@ -1,0 +1,184 @@
+<GuiControl
+    Name="Gui_Chat_Box"
+    Profile="gui_profile_modalless"
+    HorizSizing="relative"
+    VertSizing="relative"
+    Position="0 0"
+    Extent="800 480"
+    MinExtent="1 1"
+    Visible="1"
+	HelpTag="0">
+
+	<!-- Toggle Pause Menu Button -->
+	<GuiButtonCtrl
+		Name="Gui_Button_Chat_Box_Toggle_Pause_Menu"
+		Profile="BlueButtonProfile"
+		Text="Pause Menu"
+		ButtonType="PushButton"
+		command="Dots_and_Crits.Toggle_Pause_Menu();"
+		canSaveDynamicFields="0"
+		isContainer="0"
+		HorizSizing="relative"
+		VertSizing="relative"
+		Position="730 0"
+		Extent="70 30"
+		MinExtent="1 1"
+		canSave="1"
+		Visible="1"
+		Active="1"
+		hovertime="1000"
+		groupNum="-1"
+		useMouseEvents="1"
+		Delete_Me="0"/>
+	
+	<!-- Send Text Button -->
+	<GuiButtonCtrl
+		Name="Gui_Button_Chat_Box_Send"
+		Profile="BlueButtonProfile"
+		Text="Send"
+		ButtonType="PushButton"
+		command="Gui_Chat_Box.Send_Text();"
+		canSaveDynamicFields="0"
+		isContainer="0"
+		HorizSizing="relative"
+		VertSizing="relative"
+		Position="211 450"
+		Extent="70 30"
+		MinExtent="1 1"
+		canSave="1"
+		Visible="1"
+		Active="1"
+		hovertime="1000"
+		groupNum="-1"
+		useMouseEvents="1"
+		Delete_Me="0"/>
+
+	<!-- End Turn Button -->
+	<GuiButtonCtrl
+		Name="Gui_Button_Chat_Box_End_Turn"
+		Profile="BlueButtonProfile"
+		Text="End Turn"
+		ButtonType="PushButton"
+		command="Gui_Chat_Box.End_Turn();"
+		canSaveDynamicFields="0"
+		isContainer="0"
+		HorizSizing="relative"
+		VertSizing="relative"
+		Position="211 420"
+		Extent="70 30"
+		MinExtent="1 1"
+		canSave="1"
+		Visible="1"
+		Active="1"
+		hovertime="1000"
+		groupNum="-1"
+		useMouseEvents="1"
+		Delete_Me="0"/>
+
+	<!-- Roll Dice Button -->
+	<GuiButtonCtrl
+		Name="Gui_Button_Chat_Box_Roll_Dice"
+		Profile="BlueButtonProfile"
+		Text="Roll Dice"
+		ButtonType="PushButton"
+		command="Gui_Chat_Box.Roll_Dice();"
+		canSaveDynamicFields="0"
+		isContainer="0"
+		HorizSizing="relative"
+		VertSizing="relative"
+		Position="211 390"
+		Extent="70 30"
+		MinExtent="1 1"
+		canSave="1"
+		Visible="1"
+		Active="1"
+		hovertime="1000"
+		groupNum="-1"
+		useMouseEvents="1"
+		Delete_Me="0"/>
+		
+	<!-- chat box -->
+	<GuiScrollCtrl
+			Name="Gui_Scroller_Chat_Box"
+			canSaveDynamicFields="1"
+			isContainer="1"
+			Profile="GuiLightScrollProfile"
+			HorizSizing="relative"
+			VertSizing="relative"
+			Position="0 420"
+			Extent="210 60"
+			MinExtent="1 1"
+			canSave="1"
+			Visible="1"
+			Active="1"
+			hovertime="1000"
+			willFirstRespond="1"
+			hScrollBar="dynamic"
+			vScrollBar="dynamic"
+			constantThumbHeight="0"
+			childMargin="2 3"
+			Delete_Me="0">
+			
+				<GuiMLTextEditCtrl
+					Name="Gui_MLTextEdit_Chat_Box"
+					Profile="GuiTextEditProfile"
+					command=""
+					isContainer="0"
+					HorizSizing="relative"
+					VertSizing="relative"
+					Position="0 0"
+					Extent="175 60"
+					MinExtent="1 1"
+					canSave="1"
+					Visible="1"
+					Active="1"
+					maxChars="255"
+					text=""
+					escapeCommand=""
+					Delete_Me="0"/>
+	</GuiScrollCtrl>
+	
+	<!-- Previous Text List -->
+	<GuiScrollCtrl
+			Name="Gui_Scroller_Previous_Text"
+			canSaveDynamicFields="1"
+			isContainer="1"
+			Profile="GuiLightScrollProfile"
+			HorizSizing="relative"
+			VertSizing="relative"
+			Position="0 216"
+			Extent="210 200"
+			MinExtent="1 1"
+			canSave="1"
+			Visible="1"
+			Active="1"
+			hovertime="1000"
+			willFirstRespond="1"
+			hScrollBar="dynamic"
+			vScrollBar="dynamic"
+			constantThumbHeight="0"
+			childMargin="2 3"
+			Delete_Me="0">
+			
+				<GuiDynamicCtrlArrayControl 
+					Name="Gui_List_Previous_Text"
+					Profile="gui_list_profile_colored"
+					command=""
+					isContainer="1"
+					HorizSizing="relative"
+					VertSizing="relative"
+					Position="0 0"
+					Extent="210 200"
+					MinExtent="1 1"
+					canSave="1"
+					Visible="1"
+					Active="1"
+					colCount="1"
+					colSize="210"
+					colSpacing="0"
+					rowSize="60"
+					rowSpacing="0"
+					Delete_Me="0"/>
+	</GuiScrollCtrl>
+
+</GuiControl>

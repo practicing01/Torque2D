@@ -1,0 +1,23 @@
+<SimSet>
+    <ScriptObject
+        Card_Slot_Position="278 430"
+        Module_ID_Card="Module_Card_Teleport" />
+    <ScriptObject
+        Card_Slot_Position="328 430"
+        Module_ID_Card="Module_Card_Stealth" />
+    <ScriptObject
+        Card_Slot_Position="378 430"
+        Module_ID_Card="Module_Card_Flashlight" />
+    <ScriptObject
+        Card_Slot_Position="428 430"
+        Module_ID_Card="Module_Card_Heal" />
+    <ScriptObject
+        Card_Slot_Position="478 430"
+        Module_ID_Card="Module_Card_Snare" />
+    <ScriptObject
+        Card_Slot_Position="528 430"
+        Module_ID_Card="Module_Card_Speedboof" />
+    <ScriptObject
+        Card_Slot_Position="578 430"
+        Module_ID_Card="Module_Card_Scale" />
+</SimSet>

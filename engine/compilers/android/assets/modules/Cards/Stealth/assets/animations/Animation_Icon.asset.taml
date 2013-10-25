@@ -1,0 +1,6 @@
+<AnimationAsset
+    AssetName="Animation_Icon"
+    Image="@asset=Module_Card_Stealth:Image_Icon"
+    AnimationFrames="0"
+    AnimationCycle="true"
+	AnimationTime="0.5" />

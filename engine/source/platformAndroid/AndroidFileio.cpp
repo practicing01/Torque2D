@@ -130,6 +130,25 @@ File::~File()
 	handle = NULL;
 }
 
+////////////////////////////////////////////////
+
+	
+
+    inline void catPath(char *dst, const char *src, U32 len)
+    {
+       if(*dst != '/')
+       {
+          ++dst; --len;
+          *dst = '/';
+       }
+     
+       ++dst; --len;
+     
+       dStrncpy(dst, src, len);
+       dst[len - 1] = 0;
+    }
+
+
 
 //-----------------------------------------------------------------------------
 // Open a file in the mode specified by openMode (Read, Write, or ReadWrite).
@@ -208,12 +227,86 @@ File::Status File::open(const char *filename, const AccessMode openMode)
    if (currentStatus != Closed || buffer != NULL)
       close();
    
+   //////////////////////
+   
+   int fileBufferSize = 255; 
+   char fileNameBuffer[fileBufferSize];
+   fileNameBuffer[0] = '\0';
+   char *ptr;
+   char *slash;
+   char *endptr;
+
+   ///////////////////////
+
    // create the appropriate type of file...
    switch (openMode)
    {
       case Read:
     	filePointer = 0;
-    	buffer = (U8*)_AndroidLoadFile(filename, &size);
+		
+		Con::errorf(avar("filename: %s",filename));
+
+		/*for (U32 x=0;x<dStrlen(filename);x++)
+		{
+
+
+
+		}*/
+
+		///////////////////////////////////////////
+			
+	   
+	   ptr = (char *)filename;
+       slash = NULL;
+       endptr = fileNameBuffer + dStrlen(fileNameBuffer) - 1;
+     
+       do
+       {
+          slash = dStrchr(ptr, '/');
+          if(slash)
+          {
+             *slash = 0;
+     
+             // Directory
+     
+             if(dStrcmp(ptr, "..") == 0)
+             {
+                // Parent
+                endptr = dStrrchr(fileNameBuffer, '/');
+             }
+             else if(dStrcmp(ptr, ".") == 0)
+             {
+                // Current dir
+             }
+             else if(endptr)
+             {
+                catPath(endptr, ptr, fileBufferSize - (endptr - fileNameBuffer));
+                endptr += dStrlen(endptr) - 1;
+             }
+             
+             ptr = slash + 1;
+          }
+          else if(endptr)
+          {
+             // File
+     
+             catPath(endptr, ptr, fileBufferSize - (endptr - fileNameBuffer));
+             endptr += dStrlen(endptr) - 1;
+          }
+     
+       } while(slash);
+
+	   if (strlen(fileNameBuffer) == 0)
+	   {
+			   strcpy(fileNameBuffer, filename);
+	   }
+
+	   Con::errorf(avar("filename: %s",fileNameBuffer));
+		///////////////////////////////////////////
+
+    	//buffer = (U8*)_AndroidLoadFile(filename, &size);
+	   buffer = (U8*)_AndroidLoadFile(fileNameBuffer, &size);
+	   Con::errorf(avar("size: %d",size));
 		if (buffer == NULL) {
 			currentStatus = UnknownError;
 			capability = FileRead;

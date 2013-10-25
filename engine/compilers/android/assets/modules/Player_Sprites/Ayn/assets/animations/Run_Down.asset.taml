@@ -1,0 +1,6 @@
+<AnimationAsset
+    AssetName="Animation_Run_Down"
+    Image="@asset=Module_Player_Sprite_Ayn:Image_Ayn"
+    AnimationFrames="15 16 17 18 19 20 21 22 23 24 25 26 27 28 29"
+    AnimationCycle="true"
+	AnimationTime="0.5" />

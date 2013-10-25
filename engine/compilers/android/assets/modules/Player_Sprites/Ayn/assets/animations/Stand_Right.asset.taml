@@ -1,0 +1,6 @@
+<AnimationAsset
+    AssetName="Animation_Stand_Right"
+    Image="@asset=Module_Player_Sprite_Ayn:Image_Ayn"
+    AnimationFrames="63"
+    AnimationCycle="true"
+	AnimationTime="0.5" />

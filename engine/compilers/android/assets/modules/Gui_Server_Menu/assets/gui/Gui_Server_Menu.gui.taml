@@ -1,0 +1,191 @@
+<GuiControl
+    Name="Gui_Server_Menu"
+    Profile="gui_profile_modalless"
+    HorizSizing="relative"
+    VertSizing="relative"
+    Position="0 0"
+    Extent="800 480"
+    MinExtent="1 1"
+    Visible="1"
+	HelpTag="0">
+	
+	<!-- Ready Check Box -->
+	<GuiCheckBoxCtrl
+		Name="Gui_Check_Box_Server_Menu_Ready"
+		Profile="GuiCheckBoxProfile"
+		Text="Ready"
+		ButtonType="ToggleButton"
+		command="Gui_Server_Menu.Ready();"
+		canSaveDynamicFields="0"
+		isContainer="0"
+		HorizSizing="relative"
+		VertSizing="relative"
+		Position="300 0"
+		Extent="100 32"
+		MinExtent="1 1"
+		canSave="1"
+		Visible="1"
+		Active="1"
+		hovertime="1000"
+		groupNum="-1"
+		useMouseEvents="1" />
+
+	<!-- Play -->
+	<GuiButtonCtrl
+		Name="Gui_Button_Server_Menu_Play"
+		Profile="BlueButtonProfile"
+		Text="Play!"
+		ButtonType="PushButton"
+		command="Gui_Server_Menu.Play();"
+		canSaveDynamicFields="0"
+		isContainer="0"
+		HorizSizing="relative"
+		VertSizing="relative"
+		Position="435 450"
+		Extent="140 30"
+		MinExtent="1 1"
+		canSave="1"
+		Visible="1"
+		Active="1"
+		hovertime="1000"
+		groupNum="-1"
+		useMouseEvents="1" />	
+
+	<!-- Go Main Menu -->
+	<GuiButtonCtrl
+		Name="Gui_Button_Server_Menu_Go_Main_Menu"
+		Profile="BlueButtonProfile"
+		Text="Main Menu"
+		ButtonType="PushButton"
+		command="Gui_Server_Menu.Go_Main_Menu();"
+		canSaveDynamicFields="0"
+		isContainer="0"
+		HorizSizing="relative"
+		VertSizing="relative"
+		Position="660 450"
+		Extent="140 30"
+		MinExtent="1 1"
+		canSave="1"
+		Visible="1"
+		Active="1"
+		hovertime="1000"
+		groupNum="-1"
+		useMouseEvents="1" />
+	
+	<!-- Select Map -->
+	<GuiButtonCtrl
+		Name="Gui_Button_Server_Menu_Select_Map"
+		Profile="BlueButtonProfile"
+		Text="Select Map"
+		ButtonType="PushButton"
+		command="Gui_Server_Menu.Select_Map();"
+		canSaveDynamicFields="0"
+		isContainer="0"
+		HorizSizing="relative"
+		VertSizing="relative"
+		Position="328 360"
+		Extent="140 30"
+		MinExtent="1 1"
+		canSave="1"
+		Visible="1"
+		Active="1"
+		hovertime="1000"
+		groupNum="-1"
+		useMouseEvents="1" />
+		
+	<!-- Select Deck -->
+	<GuiButtonCtrl
+		Name="Gui_Button_Server_Menu_Select_Deck"
+		Profile="BlueButtonProfile"
+		Text="Select Deck"
+		ButtonType="PushButton"
+		command="Gui_Server_Menu.Select_Deck();"
+		canSaveDynamicFields="0"
+		isContainer="0"
+		HorizSizing="relative"
+		VertSizing="relative"
+		Position="584 360"
+		Extent="140 30"
+		MinExtent="1 1"
+		canSave="1"
+		Visible="1"
+		Active="1"
+		hovertime="1000"
+		groupNum="-1"
+		useMouseEvents="1" />
+	
+	<!-- Maps -->
+	<GuiScrollCtrl
+			Name="Gui_Scroller_Server_Menu_Maps"
+			canSaveDynamicFields="1"
+			isContainer="1"
+			Profile="GuiLightScrollProfile"
+			HorizSizing="relative"
+			VertSizing="relative"
+			Position="300 140"
+			Extent="200 200"
+			MinExtent="1 1"
+			canSave="1"
+			Visible="1"
+			Active="1"
+			hovertime="1000"
+			willFirstRespond="1"
+			hScrollBar="dynamic"
+			vScrollBar="dynamic"
+			constantThumbHeight="0"
+			childMargin="2 3" >
+			
+				<GuiListBoxCtrl 
+					Name="Gui_List_Server_Menu_Maps"
+					Profile="gui_list_profile_colored"
+					command=""
+					isContainer="0"
+					HorizSizing="relative"
+					VertSizing="relative"
+					Position="0 0"
+					Extent="200 200"
+					MinExtent="1 1"
+					canSave="1"
+					Visible="1"
+					Active="1"
+					AllowMultipleSelections="0"/>
+	</GuiScrollCtrl>
+	
+	<!-- Decks -->
+	<GuiScrollCtrl
+			Name="Gui_Scroller_Server_Menu_Decks"
+			canSaveDynamicFields="1"
+			isContainer="1"
+			Profile="GuiLightScrollProfile"
+			HorizSizing="relative"
+			VertSizing="relative"
+			Position="550 140"
+			Extent="200 200"
+			MinExtent="1 1"
+			canSave="1"
+			Visible="1"
+			Active="1"
+			hovertime="1000"
+			willFirstRespond="1"
+			hScrollBar="dynamic"
+			vScrollBar="dynamic"
+			constantThumbHeight="0"
+			childMargin="2 3" >
+			
+				<GuiListBoxCtrl 
+					Name="Gui_List_Server_Menu_Decks"
+					Profile="gui_list_profile_colored"
+					command=""
+					isContainer="0"
+					HorizSizing="relative"
+					VertSizing="relative"
+					Position="0 0"
+					Extent="200 200"
+					MinExtent="1 1"
+					canSave="1"
+					Visible="1"
+					Active="1"
+					AllowMultipleSelections="0"/>
+	</GuiScrollCtrl>
+
+</GuiControl>

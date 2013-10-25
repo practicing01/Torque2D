@@ -1,0 +1,8 @@
+<ImageAsset
+    AssetName="Image_Ayn"
+    ImageFile="Ayn.png"
+	CellCountX="15"
+    CellCountY="5"
+    CellWidth="128"
+    CellHeight="128"
+	Optimal_Resolution="1280 800"/>

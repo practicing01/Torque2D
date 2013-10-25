@@ -1,0 +1,102 @@
+<Scene>
+    <Sprite
+        SceneLayer="17"
+		SceneGroup="2"
+        Size="100 75"
+        BodyType="Static"
+        GatherContacts="1"
+        Image="@asset=Module_Map_Deathball_Valley:upperLeftDesert"
+        Frame="0" />
+    <Sprite
+        SceneLayer="17"
+		SceneGroup="2"
+        Size="100 75"
+        Position="100 0"
+        BodyType="Static"
+        GatherContacts="1"
+        Image="@asset=Module_Map_Deathball_Valley:upperRightDesert"
+        Frame="0" />
+    <Sprite
+        SceneLayer="17"
+		SceneGroup="2"
+        Size="100 75"
+        Position="100 -75"
+        BodyType="Static"
+        GatherContacts="1"
+        Image="@asset=Module_Map_Deathball_Valley:lowerRightDesert"
+        Frame="0" />
+    <Sprite
+        SceneLayer="17"
+		SceneGroup="2"
+        Size="100 75"
+        Position="0 -75"
+        BodyType="Static"
+        GatherContacts="1"
+        Image="@asset=Module_Map_Deathball_Valley:lowerLeftDesert"
+        Frame="0" />
+    <SceneObject
+        SceneGroup="30"
+        Size="10 150"
+        Position="-55 -37.5"
+        BodyType="Static"
+        GatherContacts="1">
+        <SceneObject.CollisionShapes>
+            <Polygon>
+                <Point>5 -75</Point>
+                <Point>5 75</Point>
+                <Point>-5 75</Point>
+                <Point>-5 -75</Point>
+            </Polygon>
+        </SceneObject.CollisionShapes>
+    </SceneObject>
+    <SceneObject
+        SceneGroup="30"
+        Size="200 10"
+        Position="50 42.5"
+        BodyType="Static"
+        GatherContacts="1">
+        <SceneObject.CollisionShapes>
+            <Polygon>
+                <Point>100 -5</Point>
+                <Point>100 5</Point>
+                <Point>-100 5</Point>
+                <Point>-100 -5</Point>
+            </Polygon>
+        </SceneObject.CollisionShapes>
+    </SceneObject>
+    <SceneObject
+        SceneGroup="30"
+        Size="10 150"
+        Position="155 -37.5"
+        BodyType="Static"
+        GatherContacts="1">
+        <SceneObject.CollisionShapes>
+            <Polygon>
+                <Point>5 -75</Point>
+                <Point>5 75</Point>
+                <Point>-5 75</Point>
+                <Point>-5 -75</Point>
+            </Polygon>
+        </SceneObject.CollisionShapes>
+    </SceneObject>
+    <SceneObject
+        SceneGroup="30"
+        Size="200 10"
+        Position="50 -117.5"
+        BodyType="Static"
+        GatherContacts="1">
+        <SceneObject.CollisionShapes>
+            <Polygon>
+                <Point>100 -5</Point>
+                <Point>100 5</Point>
+                <Point>-100 5</Point>
+                <Point>-100 -5</Point>
+            </Polygon>
+        </SceneObject.CollisionShapes>
+    </SceneObject>
+    <SceneObject
+        class="Class_Portal_Spawn"
+        Size="10 10"
+        Position="10 10"
+        BodyType="Static"/>
+</Scene>
