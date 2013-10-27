@@ -13,15 +13,9 @@
 # limitations under the License.
 #
 
-<<<<<<< HEAD
-NDK_APP_SHORT_COMMANDS := true
- 
-LOCAL_SHORT_COMMANDS := true
-=======
 #required for compiling on windows
 NDK_APP_SHORT_COMMANDS  := true
 LOCAL_SHORT_COMMANDS  := true
->>>>>>> refs/remotes/upstream/development
 
 MY_LOCAL_PATH := $(call my-dir)
 
