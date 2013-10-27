@@ -1,6 +1,0 @@
-<AnimationAsset
-    AssetName="Animation_Stand_Up_Left"
-    Image="@asset=Module_Player_Sprite_Ayn:Image_Ayn"
-    AnimationFrames="62"
-    AnimationCycle="true"
-	AnimationTime="0.5" />
