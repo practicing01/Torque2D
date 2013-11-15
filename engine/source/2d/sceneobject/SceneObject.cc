@@ -693,23 +693,8 @@ void SceneObject::calculateSceneObjectMount( const F32 elapsedTime )
     // Set Current Camera Position.
     setPosition(mountPos);
 
-    // Mount the angle?
-    //if ( mMountAngle )
-        //mMountAngle = mpMountedTo->getAngle();
-
 	if ( mMountAngle!=-1)
 		setAngle(mMountAngle+mpMountedTo->getAngle());
-
-	/*if ( mMountAngle )
-		setAngle(mMountAngle);*/
-
-	/*F32 new_angle=(-mpMountedTo->getAngle())+mMountAngle;
-
-	if (new_angle>6.28)
-	{
-		new_angle-=6.28;
-	}
-	setAngle(new_angle);*/
 
 }
 

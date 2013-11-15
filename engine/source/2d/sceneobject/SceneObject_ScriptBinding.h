@@ -4255,4 +4255,11 @@ ConsoleMethodWithDocs(SceneObject, dismount, ConsoleVoid, 2, 2, ())
 
 //-----------------------------------------------------------------------------
 
+ConsoleMethodWithDocs(SceneObject, isMounted, ConsoleBool, 2, 2, ())
+{
+    return object->isSceneObjectMounted();
+}
+
+//-----------------------------------------------------------------------------
+
 ConsoleMethodGroupEndWithDocs(SceneObject)
