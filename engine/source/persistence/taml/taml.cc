@@ -75,15 +75,15 @@
 #endif
 
 #ifndef _VECTOR2_H_
-#include "2d/core/vector2.h"
+#include "2d/core/Vector2.h"
 #endif
 
 #ifndef _IMAGE_ASSET_H_
-#include "2d/assets/imageAsset.h"
+#include "2d/assets/ImageAsset.h"
 #endif
 
 #ifndef _ANIMATION_ASSET_H_
-#include "2d/assets/animationAsset.h"
+#include "2d/assets/AnimationAsset.h"
 #endif
 
 #ifndef _AUDIO_ASSET_H_

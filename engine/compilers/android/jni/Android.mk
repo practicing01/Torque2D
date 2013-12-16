@@ -14,8 +14,8 @@
 #
 
 #required for compiling on windows
-NDK_APP_SHORT_COMMANDS  := true
-LOCAL_SHORT_COMMANDS  := true
+#NDK_APP_SHORT_COMMANDS  := true
+#LOCAL_SHORT_COMMANDS  := true
 
 MY_LOCAL_PATH := $(call my-dir)
 
@@ -220,7 +220,7 @@ LOCAL_SRC_FILES :=  ../../../lib/ljpeg/jcapimin.c \
 					../../../source/assets/assetTagsManifest.cc \
 					../../../source/assets/declaredAssets.cc \
 					../../../source/assets/referencedAssets.cc \
-					../../../source/audio/AudioAsset.cc \
+					../../../source/audio/audioAsset.cc \
 					../../../source/box2d/Collision/b2BroadPhase.cpp \
 					../../../source/box2d/Collision/b2CollideCircle.cpp \
 					../../../source/box2d/Collision/b2CollideEdge.cpp \
@@ -502,7 +502,7 @@ LOCAL_SRC_FILES :=  ../../../lib/ljpeg/jcapimin.c \
 					../../../source/sim/simFieldDictionary.cc \
 					../../../source/sim/simManager.cc \
 					../../../source/sim/simObject.cc \
-					../../../source/sim/SimObjectList.cc \
+					../../../source/sim/simObjectList.cc \
 					../../../source/sim/simSerialize.cpp \
 					../../../source/sim/simSet.cc \
 					../../../source/string/findMatch.cc \

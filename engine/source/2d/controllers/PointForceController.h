@@ -24,11 +24,11 @@
 #define _ATTRACTOR_CONTROLLER_H_
 
 #ifndef _PICKING_SCENE_CONTROLLER_H_
-#include "2d/controllers/core/pickingSceneController.h"
+#include "2d/controllers/core/PickingSceneController.h"
 #endif
 
 #ifndef _VECTOR2_H_
-#include "2d/core/vector2.h"
+#include "2d/core/Vector2.h"
 #endif
 
 //------------------------------------------------------------------------------
