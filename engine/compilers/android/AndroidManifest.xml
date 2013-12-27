@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<manifest package="com.garagegames.torque2d"
+<manifest package="org.mds.dnc"
     android:versionCode="1"
     android:versionName="3.0" xmlns:android="http://schemas.android.com/apk/res/android">
     
