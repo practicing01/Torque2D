@@ -645,11 +645,8 @@ AndroidProfilerStart("SERVER_PROC");
    Tickable::advanceTime(elapsedTime);	
    PROFILE_END();
 
-    // This is based on PW's stuff
-#ifndef NO_AUDIO_SUPPORT
-
-    // Milliseconds between audio updates.
-    const U32 AudioUpdatePeriod = 125;
+   // Milliseconds between audio updates.
+   const U32 AudioUpdatePeriod = 125;
 
    // alxUpdate is somewhat expensive and does not need to be updated constantly,
    // though it does need to be updated in real time
@@ -660,7 +657,6 @@ AndroidProfilerStart("SERVER_PROC");
       alxUpdate();
       lastAudioUpdate = realTime;
    }
-#endif
 
 #ifdef TORQUE_OS_IOS_PROFILE
     iPhoneProfilerEnd("CLIENT_PROC");
