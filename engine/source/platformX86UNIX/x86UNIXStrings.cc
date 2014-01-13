@@ -354,9 +354,9 @@ void dPrintf(const char *format, ...)
    vprintf(format, args);
 }   
 
-S32 dVprintf(const char *format, void *arglist)
+S32 dVprintf(const char *format, va_list arglist)
 {
-   S32 len = vprintf(format, (char*)arglist);
+   S32 len = vprintf(format, arglist);
    return (len);
 }   
 
@@ -376,11 +376,15 @@ S32 dSprintf(char *buffer, U32 bufferSize, const char *format, ...)
 
 S32 dVsprintf(char *buffer, U32 bufferSize, const char *format, va_list arglist)
 {
+<<<<<<< HEAD
    S32 len = vsprintf(buffer, format, arglist);
 
    // Sanity!
    AssertFatal(len <= bufferSize, "dSprintf - String format exceeded buffer size.  This will cause corruption.");
 
+=======
+   S32 len = vsnprintf(buffer, bufferSize, format, arglist);
+>>>>>>> refs/remotes/origin/sixtyfoursupport
    return (len);
 }
 

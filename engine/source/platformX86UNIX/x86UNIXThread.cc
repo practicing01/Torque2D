@@ -139,9 +139,15 @@ U32 ThreadManager::getCurrentThreadId()
    return (U32)pthread_self();
 }
 
+<<<<<<< HEAD
 bool ThreadManager::compare(U32 threadId_1, U32 threadId_2)
 {
    return pthread_equal((pthread_t)threadId_1, (pthread_t)threadId_2);
+=======
+ThreadIdent Thread::getCurrentThreadId()
+{
+   return SDL_ThreadID();
+>>>>>>> refs/remotes/origin/sixtyfoursupport
 }
 
 class PlatformThreadStorage

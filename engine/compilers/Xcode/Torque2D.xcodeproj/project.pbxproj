@@ -3572,7 +3572,11 @@
 		865A20AF165152EA00527C44 /* Shipping */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+<<<<<<< HEAD
 				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+=======
+				ARCHS = "$(ARCHS_STANDARD_32_64_BIT)";
+>>>>>>> refs/remotes/origin/sixtyfoursupport
 				COMBINE_HIDPI_IMAGES = YES;
 				CONFIGURATION_BUILD_DIR = ../../..;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
@@ -3673,7 +3677,11 @@
 		869FF8D71651518C002FE082 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+<<<<<<< HEAD
 				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+=======
+				ARCHS = "$(ARCHS_STANDARD_32_64_BIT)";
+>>>>>>> refs/remotes/origin/sixtyfoursupport
 				COMBINE_HIDPI_IMAGES = YES;
 				CONFIGURATION_BUILD_DIR = ../../..;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
@@ -3709,7 +3717,11 @@
 		869FF8D81651518C002FE082 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+<<<<<<< HEAD
 				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+=======
+				ARCHS = "$(ARCHS_STANDARD_32_64_BIT)";
+>>>>>>> refs/remotes/origin/sixtyfoursupport
 				COMBINE_HIDPI_IMAGES = YES;
 				CONFIGURATION_BUILD_DIR = ../../..;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
