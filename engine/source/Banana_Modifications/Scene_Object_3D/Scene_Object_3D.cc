@@ -217,12 +217,12 @@ void Scene_Object_3D::renderPolygonShape(U32 vertexCount)
         glColor4fv( (GLfloat*)&mFillColor );
 
         // Draw Object.
-        glBegin( GL_POLYGON );
+        /*glBegin( GL_POLYGON );
             for ( U32 n = 0; n < vertexCount; n++ )
             {
                 glVertex2fv ( (GLfloat*)&(mPolygonLocalList[n]) );
             }
-        glEnd();
+        glEnd();*/
 
         F32 Vector_3D_Vertices[3];
 
@@ -243,7 +243,7 @@ void Scene_Object_3D::renderPolygonShape(U32 vertexCount)
     }
 
     // Set Line color.
-    glColor4fv( (GLfloat*)&mLineColor );
+    /*glColor4fv( (GLfloat*)&mLineColor );
 
     // Draw Object.
     glBegin(GL_LINES);
@@ -252,7 +252,7 @@ void Scene_Object_3D::renderPolygonShape(U32 vertexCount)
             glVertex2fv ( (GLfloat*)&(mPolygonLocalList[n - 1]) );
             glVertex2fv ( (GLfloat*)&(mPolygonLocalList[n == vertexCount ? 0 : n]) );
         }
-    glEnd();
+    glEnd();*/
 
 #endif
 }
