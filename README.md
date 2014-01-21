@@ -10,3 +10,14 @@ This branch is dedicated to active development. Bug fixes, new features, and pul
 =======
 This branch is from a pull request to add 64 bit support to the engine. It needs testing and community buy-in before merged into the main branches.
 >>>>>>> refs/remotes/origin/sixtyfoursupport
+
+Linux building:
+
+    build-essential
+    libsdl-dev
+    libxft-dev
+    libopenal-dev
+    nasm
+
+make -f Torque2D.makefile debug
+
