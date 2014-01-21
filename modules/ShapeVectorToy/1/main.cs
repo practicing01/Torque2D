@@ -94,25 +94,54 @@ function ShapeVectorToy::setFillMode( %this, %value)
 
 //-----------------------------------------------------------------------------
 
+function ShapeVectorToy::Rotate_Shape( %this , %Shape)
+{
+
+%Vector_3D_Rotation=%Shape.getPolyPrimitiveRotation();
+
+%Vector_3D_Rotation.X++;
+
+%Vector_3D_Rotation.X=%Vector_3D_Rotation.X%360;
+
+%Vector_3D_Rotation.Y++;
+
+%Vector_3D_Rotation.Y=%Vector_3D_Rotation.Y%360;
+
+%Vector_3D_Rotation.Z++;
+
+%Vector_3D_Rotation.Z=%Vector_3D_Rotation.Z%360;
+
+%Shape.setPolyPrimitiveRotation(%Vector_3D_Rotation);
+
+schedule(25,0,"ShapeVectorToy::Rotate_Shape",%this,%Shape);
+
+}
+
 function ShapeVectorToy::generateShape( %this )
 {
     // Create the shape vector
-    %shape = new ShapeVector();
+    %shape = new /*ShapeVector*/Scene_Object_3D();
     %shape.setPosition("0 0");
-    %shape.setSize(20);
+    %shape.setSize(5);
     %shape.setLineColor(%this.lineColor);
     %shape.setFillColor(%this.fillColor);
     %shape.setFillMode(%this.fillMode);
 
+    %shape.setPolyCustom(3,"0 5 -5 -5 5 -5");
+
+    %shape.setPolyPrimitiveZ(3,"-5 0 -5 0 -5 0");
+
+    schedule(1000,0,"ShapeVectorToy::Rotate_Shape",%this,%shape);
+
     // Check if circle, if not make an equiangular convex polygon with n number of sides
-    if (%this.circle)
+    /*if (%this.circle)
     {
         %shape.setIsCircle(true);
         %shape.setCircleRadius(20);
     }else
     {
         %shape.setPolyPrimitive(%this.shape);
-    }
+    }*/
 
     // Return the shape to be added to the scene
     return %shape;

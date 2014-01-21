@@ -434,7 +434,8 @@ SOURCES := ../../lib/ljpeg/jcapimin.c \
 	../../source/gui/editor/guiInspector.cc \
 	../../source/gui/editor/guiInspectorTypes.cc \
 	../../source/gui/editor/guiMenuBar.cc \
-	../../source/gui/editor/guiSeparatorCtrl.cc 
+	../../source/gui/editor/guiSeparatorCtrl.cc \
+	../../source/Banana_Modifications/Scene_Object_3D/Scene_Object_3D.cc  
 
 LDFLAGS := -g -m32
 LDLIBS := -lstdc++ -lm -ldl -lpthread -lrt -lX11 -lXft -lSDL -lopenal

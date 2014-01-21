@@ -63,8 +63,8 @@ $pref::Video::disableVerticalSync = 1;
 $pref::Video::displayDevice = "OpenGL";
 $pref::Video::preferOpenGL = 1;
 $pref::Video::fullScreen = 0;
-$pref::Video::defaultResolution = "1024 768";
-$pref::Video::windowedRes = "1024 768 32";
+$pref::Video::defaultResolution = "800 600";
+$pref::Video::windowedRes = "800 600 32";
 $pref::OpenGL::gammaCorrection = 0.5;
 
 /// Fonts.
