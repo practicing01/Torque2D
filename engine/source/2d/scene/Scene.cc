@@ -576,6 +576,37 @@ void Scene::dispatchBeginContactCallbacks( void )
         if (    (pSceneObjectB->mCollisionGroupMask & pSceneObjectA->mSceneGroupMask) != 0 &&
                 (pSceneObjectB->mCollisionLayerMask & pSceneObjectA->mSceneLayerMask) != 0 )
         {
+
+            if ( pointCount == 2 )
+            {
+                dSprintf(miscInfoBuffer, sizeof(miscInfoBuffer),
+                    "%d %d %0.4f %0.4f %0.4f %0.4f %0.4f %0.4f %0.4f %0.4f %0.4f %0.4f",
+                    shapeIndexB, shapeIndexA,
+                    normal.x, normal.y,
+                    point1.x, point1.y,
+                    normalImpulse1,
+                    tangentImpulse1,
+                    point2.x, point2.y,
+                    normalImpulse2,
+                    tangentImpulse2 );
+            }
+            else if ( pointCount == 1 )
+            {
+                dSprintf(miscInfoBuffer, sizeof(miscInfoBuffer),
+                    "%d %d %0.4f %0.4f %0.4f %0.4f %0.4f %0.4f",
+                    shapeIndexB, shapeIndexA,
+                    normal.x, normal.y,
+                    point1.x, point1.y,
+                    normalImpulse1,
+                    tangentImpulse1 );
+            }
+            else
+            {
+                dSprintf(miscInfoBuffer, sizeof(miscInfoBuffer),
+                    "%d %d",
+                    shapeIndexB, shapeIndexA );
+            }
+
             // Yes, so does it handle the collision callback?
             if ( pSceneObjectB->isMethod("onCollision") )            
             {
@@ -688,6 +719,9 @@ void Scene::dispatchEndContactCallbacks( void )
         if (    (pSceneObjectB->mCollisionGroupMask & pSceneObjectA->mSceneGroupMask) != 0 &&
                 (pSceneObjectB->mCollisionLayerMask & pSceneObjectA->mSceneLayerMask) != 0 )
         {
+
+        	dSprintf(miscInfoBuffer, sizeof(miscInfoBuffer), "%d %d", shapeIndexB, shapeIndexA );
+
             // Yes, so does it handle the collision callback?
             if ( pSceneObjectB->isMethod("onEndCollision") )            
             {

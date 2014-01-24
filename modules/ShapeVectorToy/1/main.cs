@@ -122,14 +122,14 @@ function ShapeVectorToy::generateShape( %this )
     // Create the shape vector
     %shape = new /*ShapeVector*/Scene_Object_3D();
     %shape.setPosition("0 0");
-    %shape.setSize(5);
+    %shape.setSize(1);
     %shape.setLineColor(%this.lineColor);
     %shape.setFillColor(%this.fillColor);
     %shape.setFillMode(%this.fillMode);
 
     %shape.setPolyCustom(3,"0 5 -5 -5 5 -5");
 
-    %shape.setPolyPrimitiveZ(3,"-5 0 -5 0 -5 0");
+    %shape.setPolyPrimitiveZ(3,"-1 0 -1 0 -1 0");
 
     schedule(1000,0,"ShapeVectorToy::Rotate_Shape",%this,%shape);
 
