@@ -129,7 +129,7 @@ function MoveToToy::createSight( %this )
     %mountedobj.Animation = "ToyAssets:TD_Barbarian_WalkSouth";
     %mountedobj.Size = 30;
     SandboxScene.add(%mountedobj);
-    %mountedobj.mount(%object,"-20 0",0,true,-1)
+    %mountedobj.mount(%object,"-20 0",0,true,-1);
 
 }
 

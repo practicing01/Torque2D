@@ -1,5 +1,5 @@
 <ParticleAsset
-    AssetName="ParticleAsset_2">
+    AssetName="ParticleAsset_1">
     <ParticleAssetEmitter
         EmitterName="MovingBubbles"
         Image="@asset=ToyAssets:Particles5"

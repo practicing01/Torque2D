@@ -58,6 +58,9 @@ function ShapeVectorToy::create( %this )
 
 function ShapeVectorToy::destroy( %this )
 {
+
+cancel(%this.Schedule_Rotate_Shape);
+
 }
 
 //-----------------------------------------------------------------------------
@@ -113,7 +116,7 @@ function ShapeVectorToy::Rotate_Shape( %this , %Shape)
 
 %Shape.setPolyPrimitiveRotation(%Vector_3D_Rotation);
 
-schedule(25,0,"ShapeVectorToy::Rotate_Shape",%this,%Shape);
+%this.Schedule_Rotate_Shape=schedule(25,0,"ShapeVectorToy::Rotate_Shape",%this,%Shape);
 
 }
 
@@ -131,7 +134,7 @@ function ShapeVectorToy::generateShape( %this )
 
     %shape.setPolyPrimitiveZ(3,"-1 0 -1 0 -1 0");
 
-    schedule(1000,0,"ShapeVectorToy::Rotate_Shape",%this,%shape);
+    %this.Schedule_Rotate_Shape=schedule(1000,0,"ShapeVectorToy::Rotate_Shape",%this,%shape);
 
     // Check if circle, if not make an equiangular convex polygon with n number of sides
     /*if (%this.circle)
