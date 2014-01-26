@@ -164,6 +164,8 @@ bool initializeLibraries()
     // Initialize the particle system.
     ParticleSystem::Init();
     
+    Struct_Module_Banana_Main_This=Machine_Banana_Create();
+
 #if defined(TORQUE_OS_IOS) && defined(_USE_STORE_KIT)
     storeInit();
 #endif // TORQUE_OS_IOS && _USE_STORE_KIT
@@ -204,6 +206,8 @@ void shutdownLibraries()
 
     // Destroy the particle system.
     ParticleSystem::destroy();
+
+    Machine_Banana_Destroy(Struct_Module_Banana_Main_This);
   
 #ifdef _USE_STORE_KIT
     storeCleanup();
@@ -479,6 +483,8 @@ void DefaultGame::mainLoop( void )
     Game->processEvents(); // process all non-sim posted events.
          PROFILE_END();
          PROFILE_END();
+
+         Machine_Banana_Process(Struct_Module_Banana_Main_This);
     
 #ifdef TORQUE_OS_IOS_PROFILE
     iPhoneProfilerEnd("MAIN_LOOP");
