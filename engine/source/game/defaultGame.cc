@@ -58,6 +58,7 @@
 #include "platform/nativeDialogs/msgBox.h"
 #include "platform/nativeDialogs/fileDialog.h"
 #include "memory/safeDelete.h"
+#include "Banana_Modifications/Module_Banana_Main/Module_Banana_Main.h"
 
 #include <stdio.h>
 
