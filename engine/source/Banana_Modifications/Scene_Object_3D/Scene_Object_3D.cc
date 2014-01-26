@@ -124,7 +124,12 @@ void Scene_Object_3D::sceneRender( const SceneRenderState* pSceneRenderState, co
         return;
 
     // Disable Texturing.
-    glDisable       ( GL_TEXTURE_2D );
+    glDisable( GL_TEXTURE_2D );
+
+    glMatrixMode(GL_PROJECTION);
+    glPushMatrix();
+
+    glOrtho(-1.0,1.0,-1.0,1.0,1.0,20.0);
 
     // Save Model-view.
     glMatrixMode(GL_MODELVIEW);
@@ -145,6 +150,7 @@ void Scene_Object_3D::sceneRender( const SceneRenderState* pSceneRenderState, co
     glColor4f( 1,1,1,1 );
 
     // Restore Matrix.
+    glPopMatrix();
     glPopMatrix();
 }
 
@@ -216,14 +222,6 @@ void Scene_Object_3D::renderPolygonShape(U32 vertexCount)
         // Set Fill color.
         glColor4fv( (GLfloat*)&mFillColor );
 
-        // Draw Object.
-        /*glBegin( GL_POLYGON );
-            for ( U32 n = 0; n < vertexCount; n++ )
-            {
-                glVertex2fv ( (GLfloat*)&(mPolygonLocalList[n]) );
-            }
-        glEnd();*/
-
         F32 Vector_3D_Vertices[3];
 
         glRotatef(mVector_3D_Rotation[0],1,0,0);
@@ -241,18 +239,6 @@ void Scene_Object_3D::renderPolygonShape(U32 vertexCount)
             }
         glEnd();
     }
-
-    // Set Line color.
-    /*glColor4fv( (GLfloat*)&mLineColor );
-
-    // Draw Object.
-    glBegin(GL_LINES);
-        for ( U32 n = 1; n <= vertexCount; n++ )
-        {
-            glVertex2fv ( (GLfloat*)&(mPolygonLocalList[n - 1]) );
-            glVertex2fv ( (GLfloat*)&(mPolygonLocalList[n == vertexCount ? 0 : n]) );
-        }
-    glEnd();*/
 
 #endif
 }
