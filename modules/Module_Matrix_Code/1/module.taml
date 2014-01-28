@@ -1,0 +1,11 @@
+<ModuleDefinition
+	ModuleId="Module_Matrix_Code"
+	VersionId="1"
+	Description="Matrix Code"
+	Dependencies="ToyAssets=1"
+	Type="toy"
+	ToyCategoryIndex="3"
+	ScriptFile="main.cs"
+	CreateFunction="create"
+	DestroyFunction="destroy"/>
+
