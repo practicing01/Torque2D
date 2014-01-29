@@ -269,6 +269,7 @@
     <ClCompile Include="..\..\source\2d\gui\SceneWindow.cc" />
     <ClCompile Include="..\..\source\2d\sceneobject\CompositeSprite.cc" />
     <ClCompile Include="..\..\source\2d\sceneobject\ImageFont.cc" />
+    <ClCompile Include="..\..\source\2d\sceneobject\LiquidFunObject.cc" />
     <ClCompile Include="..\..\source\2d\sceneobject\ParticlePlayer.cc" />
     <ClCompile Include="..\..\source\2d\sceneobject\SceneObject.cc" />
     <ClCompile Include="..\..\source\2d\sceneobject\SceneObjectList.cc" />
@@ -339,6 +340,10 @@
     <ClCompile Include="..\..\source\box2d\Dynamics\Joints\b2RopeJoint.cpp" />
     <ClCompile Include="..\..\source\box2d\Dynamics\Joints\b2WeldJoint.cpp" />
     <ClCompile Include="..\..\source\box2d\Dynamics\Joints\b2WheelJoint.cpp" />
+    <ClCompile Include="..\..\source\box2d\Particle\b2Particle.cpp" />
+    <ClCompile Include="..\..\source\box2d\Particle\b2ParticleGroup.cpp" />
+    <ClCompile Include="..\..\source\box2d\Particle\b2ParticleSystem.cpp" />
+    <ClCompile Include="..\..\source\box2d\Particle\b2VoronoiDiagram.cpp" />
     <ClCompile Include="..\..\source\box2d\Rope\b2Rope.cpp" />
     <ClCompile Include="..\..\source\collection\bitTables.cc" />
     <ClCompile Include="..\..\source\collection\hashTable.cc" />
@@ -676,6 +681,8 @@
     <ClInclude Include="..\..\source\2d\sceneobject\CompositeSprite_ScriptBinding.h" />
     <ClInclude Include="..\..\source\2d\sceneobject\ImageFont.h" />
     <ClInclude Include="..\..\source\2d\sceneobject\ImageFont_ScriptBinding.h" />
+    <ClInclude Include="..\..\source\2d\sceneobject\LiquidFunObject.h" />
+    <ClInclude Include="..\..\source\2d\sceneobject\LiquidFunObject_ScriptBinding.h" />
     <ClInclude Include="..\..\source\2d\sceneobject\ParticlePlayer.h" />
     <ClInclude Include="..\..\source\2d\sceneobject\ParticlePlayer_ScriptBinding.h" />
     <ClInclude Include="..\..\source\2d\sceneobject\SceneObject.h" />
@@ -775,6 +782,11 @@
     <ClInclude Include="..\..\source\box2d\Dynamics\Joints\b2RopeJoint.h" />
     <ClInclude Include="..\..\source\box2d\Dynamics\Joints\b2WeldJoint.h" />
     <ClInclude Include="..\..\source\box2d\Dynamics\Joints\b2WheelJoint.h" />
+    <ClInclude Include="..\..\source\box2d\Particle\b2Particle.h" />
+    <ClInclude Include="..\..\source\box2d\Particle\b2ParticleGroup.h" />
+    <ClInclude Include="..\..\source\box2d\Particle\b2ParticleSystem.h" />
+    <ClInclude Include="..\..\source\box2d\Particle\b2StackQueue.h" />
+    <ClInclude Include="..\..\source\box2d\Particle\b2VoronoiDiagram.h" />
     <ClInclude Include="..\..\source\box2d\Rope\b2Rope.h" />
     <ClInclude Include="..\..\source\collection\bitMatrix.h" />
     <ClInclude Include="..\..\source\collection\bitSet.h" />

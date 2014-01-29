@@ -167,6 +167,7 @@ class Scene :
 {
 public:
     typedef HashMap<S32, b2Joint*>              typeJointHash;
+    typedef HashMap<S32, b2ParticleGroup*>      typeLiquidParticleHash;
     typedef HashMap<U32, S32>                   typeReverseJointHash;
     typedef Vector<tDeleteRequest>              typeDeleteVector;
     typedef Vector<TickContact>                 typeContactVector;
@@ -227,6 +228,10 @@ private:
     typeJointHash               mJoints;
     typeReverseJointHash        mReverseJoints;
     S32                         mJointMasterId;
+
+    /// Particle access.
+    typeLiquidParticleHash      mLiquidParticles;
+    S32                         mLiquidParticleMasterId;
 
     /// Scene controllers.
     SimObjectPtr<SimSet>	    mControllers;

@@ -196,6 +196,9 @@
     <Filter Include="input\leapMotion">
       <UniqueIdentifier>{addcb993-5059-42bf-a1ea-871f700c67c3}</UniqueIdentifier>
     </Filter>
+    <Filter Include="box2d\Particle">
+      <UniqueIdentifier>{9d9caf7f-33d4-41ca-b421-3dd9d9265af9}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\source\audio\audio.cc">
@@ -1349,6 +1352,21 @@
     </ClCompile>
     <ClCompile Include="..\..\source\math\mPoint.cpp">
       <Filter>math</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\source\box2d\Particle\b2Particle.cpp">
+      <Filter>box2d\Particle</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\source\box2d\Particle\b2ParticleGroup.cpp">
+      <Filter>box2d\Particle</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\source\box2d\Particle\b2ParticleSystem.cpp">
+      <Filter>box2d\Particle</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\source\box2d\Particle\b2VoronoiDiagram.cpp">
+      <Filter>box2d\Particle</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\source\2d\sceneobject\LiquidFunObject.cc">
+      <Filter>2d\sceneobject</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -3002,6 +3020,27 @@
     </ClInclude>
     <ClInclude Include="..\..\source\input\leapMotion\leapMotionUtil.h">
       <Filter>input\leapMotion</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\source\box2d\Particle\b2Particle.h">
+      <Filter>box2d\Particle</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\source\box2d\Particle\b2ParticleGroup.h">
+      <Filter>box2d\Particle</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\source\box2d\Particle\b2ParticleSystem.h">
+      <Filter>box2d\Particle</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\source\box2d\Particle\b2StackQueue.h">
+      <Filter>box2d\Particle</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\source\box2d\Particle\b2VoronoiDiagram.h">
+      <Filter>box2d\Particle</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\source\2d\sceneobject\LiquidFunObject.h">
+      <Filter>2d\sceneobject</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\source\2d\sceneobject\LiquidFunObject_ScriptBinding.h">
+      <Filter>2d\sceneobject</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

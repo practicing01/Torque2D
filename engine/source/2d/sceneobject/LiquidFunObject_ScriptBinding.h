@@ -20,20 +20,42 @@
 // IN THE SOFTWARE.
 //-----------------------------------------------------------------------------
 
-// Sandbox.
-$pref::Sandbox::defaultToyId           = "TumblerToy";
-$pref::Sandbox::defaultToyVersionId    = 1;
-$pref::Sandbox::defaultBackgroundColor = "Black";
-$pref::Sandbox::metricsOption   = false;
-$pref::Sandbox::fpsmetricsOption = true;
-$pref::Sandbox::controllersOption = false;
-$pref::Sandbox::jointsOption    = false;
-$pref::Sandbox::wireframeOption = false;
-$pref::Sandbox::aabbOption      = false;
-$pref::Sandbox::oobbOption      = false;
-$pref::Sandbox::sleepOption     = false;
-$pref::Sandbox::collisionOption = false;
-$pref::Sandbox::positionOption  = false;
-$pref::Sandbox::sortOption      = false;
-$pref::Sandbox::cameraMouseZoomRate = 0.1;
-$pref::Sandbox::cameraTouchZoomRate = 0.001;
+ConsoleMethodGroupBeginWithDocs(LiquidFunObject, SceneObject)
+
+
+ConsoleMethodWithDocs(LiquidFunObject, setPolygonShape, ConsoleVoid, 3, 4, (float width, float height))
+{
+    F32 width, height;
+
+    const U32 elementCount = Utility::mGetStringElementCount(argv[2]);
+
+    // ("width height")
+    if ((elementCount == 2) && (argc == 3))
+    {
+        width = dAtof(Utility::mGetStringElement(argv[2], 0));
+        height = dAtof(Utility::mGetStringElement(argv[2], 1));
+    }
+
+    // (width, [height])
+    else if (elementCount == 1)
+    {
+        width = dAtof(argv[2]);
+
+        if (argc > 3)
+            height = dAtof(argv[3]);
+        else
+            height = width;
+    }
+
+    // Invalid
+    else
+    {
+        Con::warnf("LiquidFunObject::setSize() - Invalid number of parameters!");
+        return;
+    }
+
+    // Set Size.
+    object->setPolygonShape(width, height);
+}
+
+ConsoleMethodGroupEndWithDocs(LiquidFunObject)
