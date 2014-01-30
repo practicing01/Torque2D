@@ -478,6 +478,7 @@
 		86A9A3FE16AEC836003F01E6 /* OpenAL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 86A9A3E416AEC817003F01E6 /* OpenAL.framework */; };
 		86A9A3FF16AEC836003F01E6 /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 86A9A3E516AEC817003F01E6 /* OpenGLES.framework */; };
 		86A9A40016AEC836003F01E6 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 86A9A3E616AEC817003F01E6 /* QuartzCore.framework */; };
+		86EDE667189AAFCC00D392BB /* LiquidFunObject.cc in Sources */ = {isa = PBXBuildFile; fileRef = 86EDE665189AAFCC00D392BB /* LiquidFunObject.cc */; };
 		B350D17C174F053800033EBB /* audio_ScriptBinding.cc in Sources */ = {isa = PBXBuildFile; fileRef = B350D17B174F053800033EBB /* audio_ScriptBinding.cc */; };
 		B350D189174F057E00033EBB /* metaScripting_ScriptBinding.cc in Sources */ = {isa = PBXBuildFile; fileRef = B350D186174F057E00033EBB /* metaScripting_ScriptBinding.cc */; };
 		B350D19B174F060700033EBB /* fileSystem_ScriptBinding.cc in Sources */ = {isa = PBXBuildFile; fileRef = B350D199174F060700033EBB /* fileSystem_ScriptBinding.cc */; };
@@ -1442,6 +1443,9 @@
 		86A9A3E416AEC817003F01E6 /* OpenAL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenAL.framework; path = System/Library/Frameworks/OpenAL.framework; sourceTree = SDKROOT; };
 		86A9A3E516AEC817003F01E6 /* OpenGLES.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGLES.framework; path = System/Library/Frameworks/OpenGLES.framework; sourceTree = SDKROOT; };
 		86A9A3E616AEC817003F01E6 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
+		86EDE664189AAFCC00D392BB /* LiquidFunObject_ScriptBinding.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LiquidFunObject_ScriptBinding.h; sourceTree = "<group>"; };
+		86EDE665189AAFCC00D392BB /* LiquidFunObject.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = LiquidFunObject.cc; sourceTree = "<group>"; };
+		86EDE666189AAFCC00D392BB /* LiquidFunObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LiquidFunObject.h; sourceTree = "<group>"; };
 		B350D179174F04F300033EBB /* Utility_ScriptBinding.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Utility_ScriptBinding.h; sourceTree = "<group>"; };
 		B350D17B174F053800033EBB /* audio_ScriptBinding.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = audio_ScriptBinding.cc; sourceTree = "<group>"; };
 		B350D17D174F054300033EBB /* undo_ScriptBinding.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = undo_ScriptBinding.h; sourceTree = "<group>"; };
@@ -1856,6 +1860,9 @@
 		867BAD4516AEC9050033868F /* sceneobject */ = {
 			isa = PBXGroup;
 			children = (
+				86EDE664189AAFCC00D392BB /* LiquidFunObject_ScriptBinding.h */,
+				86EDE665189AAFCC00D392BB /* LiquidFunObject.cc */,
+				86EDE666189AAFCC00D392BB /* LiquidFunObject.h */,
 				2AA6866516D69968003CEF0A /* SceneObjectList.cc */,
 				2AA6866616D69968003CEF0A /* SceneObjectList.h */,
 				2AA6866716D69968003CEF0A /* SceneObjectSet_ScriptBinding.h */,
@@ -3477,6 +3484,7 @@
 				867BB0DE16AEC9050033868F /* netTest.cc in Sources */,
 				867BB0DF16AEC9050033868F /* networkProcessList.cc in Sources */,
 				867BB0E016AEC9050033868F /* RemoteCommandEvent.cc in Sources */,
+				86EDE667189AAFCC00D392BB /* LiquidFunObject.cc in Sources */,
 				867BB0E116AEC9050033868F /* serverQuery.cc in Sources */,
 				867BB0E216AEC9050033868F /* tcpObject.cc in Sources */,
 				867BB0E316AEC9050033868F /* telnetConsole.cc in Sources */,

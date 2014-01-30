@@ -181,6 +181,10 @@
 		866381E51655615200C8C551 /* osxInput.mm in Sources */ = {isa = PBXBuildFile; fileRef = 866381E41655615200C8C551 /* osxInput.mm */; };
 		866381E91655674B00C8C551 /* osxTime.mm in Sources */ = {isa = PBXBuildFile; fileRef = 866381E81655674B00C8C551 /* osxTime.mm */; };
 		866CB55E189AAD350055E6AD /* LiquidFunObject.cc in Sources */ = {isa = PBXBuildFile; fileRef = 866CB55C189AAD350055E6AD /* LiquidFunObject.cc */; };
+		866CB569189AAD440055E6AD /* b2Particle.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 866CB560189AAD440055E6AD /* b2Particle.cpp */; };
+		866CB56A189AAD440055E6AD /* b2ParticleGroup.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 866CB562189AAD440055E6AD /* b2ParticleGroup.cpp */; };
+		866CB56B189AAD440055E6AD /* b2ParticleSystem.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 866CB564189AAD440055E6AD /* b2ParticleSystem.cpp */; };
+		866CB56C189AAD440055E6AD /* b2VoronoiDiagram.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 866CB567189AAD440055E6AD /* b2VoronoiDiagram.cpp */; };
 		867492F5188727FF00CF0136 /* libLeap.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 867492F4188727FF00CF0136 /* libLeap.dylib */; };
 		86854E341663AAE6009FAFB2 /* osxOpenGLDevice.mm in Sources */ = {isa = PBXBuildFile; fileRef = 86854E331663AAE6009FAFB2 /* osxOpenGLDevice.mm */; };
 		8694ADC81656B06B0080ABAC /* osxEvents.mm in Sources */ = {isa = PBXBuildFile; fileRef = 8694ADC51656B06B0080ABAC /* osxEvents.mm */; };
@@ -773,6 +777,15 @@
 		866CB55B189AAD350055E6AD /* LiquidFunObject_ScriptBinding.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LiquidFunObject_ScriptBinding.h; sourceTree = "<group>"; };
 		866CB55C189AAD350055E6AD /* LiquidFunObject.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = LiquidFunObject.cc; sourceTree = "<group>"; };
 		866CB55D189AAD350055E6AD /* LiquidFunObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LiquidFunObject.h; sourceTree = "<group>"; };
+		866CB560189AAD440055E6AD /* b2Particle.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = b2Particle.cpp; sourceTree = "<group>"; };
+		866CB561189AAD440055E6AD /* b2Particle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = b2Particle.h; sourceTree = "<group>"; };
+		866CB562189AAD440055E6AD /* b2ParticleGroup.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = b2ParticleGroup.cpp; sourceTree = "<group>"; };
+		866CB563189AAD440055E6AD /* b2ParticleGroup.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = b2ParticleGroup.h; sourceTree = "<group>"; };
+		866CB564189AAD440055E6AD /* b2ParticleSystem.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = b2ParticleSystem.cpp; sourceTree = "<group>"; };
+		866CB565189AAD440055E6AD /* b2ParticleSystem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = b2ParticleSystem.h; sourceTree = "<group>"; };
+		866CB566189AAD440055E6AD /* b2StackQueue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = b2StackQueue.h; sourceTree = "<group>"; };
+		866CB567189AAD440055E6AD /* b2VoronoiDiagram.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = b2VoronoiDiagram.cpp; sourceTree = "<group>"; };
+		866CB568189AAD440055E6AD /* b2VoronoiDiagram.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = b2VoronoiDiagram.h; sourceTree = "<group>"; };
 		867492F4188727FF00CF0136 /* libLeap.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libLeap.dylib; path = "../../lib/LeapSDK/lib/libc++/libLeap.dylib"; sourceTree = "<group>"; };
 		86854E321663AAE6009FAFB2 /* osxOpenGLDevice.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = osxOpenGLDevice.h; sourceTree = "<group>"; };
 		86854E331663AAE6009FAFB2 /* osxOpenGLDevice.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = osxOpenGLDevice.mm; sourceTree = "<group>"; };
@@ -1666,6 +1679,7 @@
 		865A21E8165187B600527C44 /* box2d */ = {
 			isa = PBXGroup;
 			children = (
+				866CB55F189AAD440055E6AD /* Particle */,
 				865A21E9165187B600527C44 /* Box2D.h */,
 				865A21EA165187B600527C44 /* Collision */,
 				865A2202165187B600527C44 /* Common */,
@@ -1940,6 +1954,22 @@
 			);
 			name = platformOSX;
 			path = ../../source/platformOSX;
+			sourceTree = "<group>";
+		};
+		866CB55F189AAD440055E6AD /* Particle */ = {
+			isa = PBXGroup;
+			children = (
+				866CB560189AAD440055E6AD /* b2Particle.cpp */,
+				866CB561189AAD440055E6AD /* b2Particle.h */,
+				866CB562189AAD440055E6AD /* b2ParticleGroup.cpp */,
+				866CB563189AAD440055E6AD /* b2ParticleGroup.h */,
+				866CB564189AAD440055E6AD /* b2ParticleSystem.cpp */,
+				866CB565189AAD440055E6AD /* b2ParticleSystem.h */,
+				866CB566189AAD440055E6AD /* b2StackQueue.h */,
+				866CB567189AAD440055E6AD /* b2VoronoiDiagram.cpp */,
+				866CB568189AAD440055E6AD /* b2VoronoiDiagram.h */,
+			);
+			path = Particle;
 			sourceTree = "<group>";
 		};
 		869FF8AD1651518C002FE082 = {
@@ -3203,6 +3233,7 @@
 				86D770AB1656873C0046D71F /* scriptObject.cc in Sources */,
 				86D770AC1656873C0046D71F /* simBase.cc in Sources */,
 				86D770AD1656873C0046D71F /* simConsoleEvent.cc in Sources */,
+				866CB569189AAD440055E6AD /* b2Particle.cpp in Sources */,
 				86D770AE1656873C0046D71F /* simConsoleThreadExecEvent.cc in Sources */,
 				86D770AF1656873C0046D71F /* simDatablock.cc in Sources */,
 				86D770B01656873C0046D71F /* simDictionary.cc in Sources */,
@@ -3327,6 +3358,7 @@
 				86D7701C165687060046D71F /* guiArrayCtrl.cc in Sources */,
 				86D7701D165687060046D71F /* guiBackgroundCtrl.cc in Sources */,
 				86D7701E165687060046D71F /* guiBitmapBorderCtrl.cc in Sources */,
+				866CB56A189AAD440055E6AD /* b2ParticleGroup.cpp in Sources */,
 				86D7701F165687060046D71F /* guiBitmapCtrl.cc in Sources */,
 				86D77020165687060046D71F /* guiBubbleTextCtrl.cc in Sources */,
 				86D77021165687060046D71F /* guiCanvas.cc in Sources */,
@@ -3414,6 +3446,7 @@
 				865A2284165187B600527C44 /* b2CircleShape.cpp in Sources */,
 				865A2285165187B600527C44 /* b2EdgeShape.cpp in Sources */,
 				865A2286165187B600527C44 /* b2PolygonShape.cpp in Sources */,
+				866CB56C189AAD440055E6AD /* b2VoronoiDiagram.cpp in Sources */,
 				865A2287165187B600527C44 /* b2BlockAllocator.cpp in Sources */,
 				865A2288165187B600527C44 /* b2Draw.cpp in Sources */,
 				865A2289165187B600527C44 /* b2Math.cpp in Sources */,
@@ -3482,6 +3515,7 @@
 				865A2322165187FF00527C44 /* jdphuff.c in Sources */,
 				865A2323165187FF00527C44 /* jdpostct.c in Sources */,
 				865A2324165187FF00527C44 /* jdsample.c in Sources */,
+				866CB56B189AAD440055E6AD /* b2ParticleSystem.cpp in Sources */,
 				865A2325165187FF00527C44 /* jdtrans.c in Sources */,
 				865A2326165187FF00527C44 /* jerror.c in Sources */,
 				865A2327165187FF00527C44 /* jfdctflt.c in Sources */,
