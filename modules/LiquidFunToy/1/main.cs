@@ -24,20 +24,43 @@ function LiquidFunToy::create( %this )
 {
     // Set the sandbox drag mode availability.
     Sandbox.allowManipulation( pan );
+    Sandbox.allowManipulation( pull );
     
     // Set the manipulation mode.
-    Sandbox.useManipulation( pan );
+    Sandbox.useManipulation( pull );
     
+    // Toy properties
     LiquidFunToy.Shape = "Polygon";
     LiquidFunToy.ParticleRadius = 0.15;
-    LiquidFunToy.VolumeSize = 3;
+    LiquidFunToy.VolumeSize = 6;
+    LiquidFunToy.Solid = false;
+    LiquidFunToy.LiquidType = "WaterParticle";
+    LiquidFunToy.maxDebris = 0;
     
+    // Add configuration option.
     addSelectionOption("Circle,Polygon", "Set Shape", 2, "setShape", true, "Initial fluid area shape");
     addSelectionOption("Sand,Snow,Pebble", "Set size", 3, "setSize", true, "Set fluid particle size");
-    addNumericOption("Volume", 3, 10, 1, "setVolume", 3, true, "Set the amount of particles by volume");
+    addNumericOption("Volume", 3, 10, 1, "setVolume", 6, true, "Set the amount of particles by volume");
+    addFlagOption("Solid Liquid", "setSolidLiquid", false, true, "Prevents other bodies from penetrating the particle group." );
+    addSelectionOption("WaterParticle,ZombieParticle,WallParticle,SpringParticle,ElasticParticle,ViscousParticle,PowderParticle,TensileParticle", "Set liquid type", 3, "setLiquidType", true, "Set fluid type");    
+    addNumericOption("Amount of Debris", 0, 30, 1, "setMaxDebris", LiquidFunToy.maxDebris, true, "Sets the amount of debris created.");
     
     // Reset the toy.
     LiquidFunToy.reset();    
+}
+
+//-----------------------------------------------------------------------------
+
+function LiquidFunToy::setSolidLiquid(%this, %value)
+{
+    LiquidFunToy.Solid = %value;
+}
+
+//-----------------------------------------------------------------------------
+
+function LiquidFunToy::setLiquidType(%this, %value)
+{
+    LiquidFunToy.LiquidType = %value;    
 }
 
 //-----------------------------------------------------------------------------
@@ -82,7 +105,7 @@ function LiquidFunToy::reset( %this )
     // Clear the scene.
     SandboxScene.clear();
 
-    //SandboxWindow.setCameraSize( 50, 37.5 );
+    SandboxWindow.setCameraSize( 50, 37.5 );
     
     SandboxScene.setGravity( 0, -9.8 );
 
@@ -92,7 +115,40 @@ function LiquidFunToy::reset( %this )
     // Create background.
     %this.createBackground();
     
+    // Create liquid
     %this.createLiquidFun();
+    
+    // Create debris
+    %this.schedule(3000, createDebris);
+}
+
+//-----------------------------------------------------------------------------
+
+function LiquidFunToy::setMaxDebris(%this, %value)
+{
+    %this.maxDebris = %value;
+}
+
+//-----------------------------------------------------------------------------
+
+function LiquidFunToy::createDebris(%this)
+{
+    for (%image = 0; %i < LiquidFunToy.maxDebris; %i++)
+    {
+        %randomPosition = getRandom(-10, 10) SPC getRandom(2, 8);
+        
+        %obj = new Sprite();   
+        
+        %obj.setImage("ToyAssets:crate");
+        %obj.setPosition(%randomPosition);
+        %obj.setSize(1.5, 1.5);
+        %obj.setDefaultFriction(1.0);
+        %obj.setDefaultDensity(1);
+        %obj.createPolygonBoxCollisionShape(1.4, 1.4);
+        %obj.setBullet( true );
+        
+        SandboxScene.add(%obj);
+    }
 }
 
 //-----------------------------------------------------------------------------
@@ -100,12 +156,34 @@ function LiquidFunToy::reset( %this )
 function LiquidFunToy::createGround( %this )
 {
     // Create the ground
-    %ground = new SceneObject();
+    %ground = new Scroller();
     %ground.setBodyType("static");
+    %ground.Image = "ToyAssets:woodGround";
     %ground.setPosition(0, -16);
-    %ground.setSize(150, 6);
-    %ground.createEdgeCollisionShape(150/-2, 3, 150/2, 3);
-    SandboxScene.add(%ground);  
+    %ground.setSize(80, 6);
+    %ground.createEdgeCollisionShape(80/-2, 3, 80/2, 3);
+    %ground.setRepeatX(80 / 30);    
+    SandboxScene.add(%ground);
+        
+    %wall = new Scroller();
+    %wall.setBodyType("static");
+    %wall.Image = "ToyAssets:tiles";
+    %wall.Frame = "12";
+    %wall.setPosition(-15, -0.5);
+    %wall.setSize(6, 25);
+    %wall.createEdgeCollisionShape(3, 25/-2, 3, 25/2);
+    %wall.setRepeatY(3); 
+    SandboxScene.add(%wall);  
+    
+    %wall = new Scroller();
+    %wall.setBodyType("static");
+    %wall.Image = "ToyAssets:tiles";
+    %wall.Frame = "12";
+    %wall.setPosition(15, -0.5);
+    %wall.setSize(6, 25);    
+    %wall.createEdgeCollisionShape(-3, 25/-2, -3, 25/2);
+    %wall.setRepeatY(3); 
+    SandboxScene.add(%wall);  
 }
 
 //-----------------------------------------------------------------------------
@@ -153,6 +231,8 @@ function LiquidFunToy::createLiquidFun( %this )
             ShapeType = LiquidFunToy.Shape;
             PolygonSize = LiquidFunToy.VolumeSize;
             Size = LiquidFunToy.VolumeSize;
+            Solid = LiquidFunToy.Solid;
+            LiquidType = LiquidFunToy.LiquidType;
         };
     }
     else
@@ -163,6 +243,8 @@ function LiquidFunToy::createLiquidFun( %this )
             ShapeType = LiquidFunToy.Shape;
             CircleRadius = LiquidFunToy.VolumeSize;
             Size = LiquidFunToy.VolumeSize;
+            Solid = LiquidFunToy.Solid;
+            LiquidType = LiquidFunToy.LiquidType;
         };
     }
         

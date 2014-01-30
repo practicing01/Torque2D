@@ -33,7 +33,9 @@ IMPLEMENT_CONOBJECT(LiquidFunObject);
 
 LiquidFunObject::LiquidFunObject()
 {        
-    
+    mSolid = false;
+    mParticleRadius = 1.0f;
+    mLiquidType = b2_waterParticle;
 }
 
 //------------------------------------------------------------------------------
@@ -51,6 +53,90 @@ static EnumTable::Enums shapeTypeEnum[] =
 };
 static EnumTable shapeTypeTable(2, &shapeTypeEnum[0]);
 
+
+S32 LiquidFunObject::getShapeTypeEnum(const char* label)
+{
+    // Search for Mnemonic.
+    for (U32 i = 0; i < (sizeof(shapeTypeEnum) / sizeof(EnumTable::Enums)); i++)
+    {
+        if( dStricmp(shapeTypeEnum[i].label, label) == 0)
+            return (S32)shapeTypeEnum[i].index;
+    }
+
+    // Warn.
+    Con::warnf("LiquidFunObject::shapeTypeEnum() - Invalid shape type of '%s'", label );
+
+    return (S32)-1;
+}
+
+//-----------------------------------------------------------------------------
+
+const char* LiquidFunObject::getShapeTypeDescription(S32 shapeType)
+{
+    // Search for Mnemonic.
+    for (U32 i = 0; i < (sizeof(shapeTypeEnum) / sizeof(EnumTable::Enums)); i++)
+    {
+        if( shapeTypeEnum[i].index == shapeType )
+            return shapeTypeEnum[i].label;
+    }
+
+    // Warn.
+    Con::warnf( "LiquidFunObject::getShapeTypeDescription() - Invalid shape type." );
+
+    return StringTable->EmptyString;
+}
+
+//-----------------------------------------------------------------------------
+
+static EnumTable::Enums liquidParticleTypes[] =
+{
+    { b2ParticleFlag::b2_waterParticle, "WaterParticle" },
+    { b2ParticleFlag::b2_zombieParticle, "ZombieParticle" },
+    { b2ParticleFlag::b2_wallParticle, "WallParticle" },
+    { b2ParticleFlag::b2_springParticle, "SpringParticle" },
+    { b2ParticleFlag::b2_elasticParticle, "ElasticParticle" },
+    { b2ParticleFlag::b2_viscousParticle, "ViscousParticle" },
+    { b2ParticleFlag::b2_powderParticle, "PowderParticle" },
+    { b2ParticleFlag::b2_tensileParticle, "TensileParticle" },
+    { b2ParticleFlag::b2_colorMixingParticle, "ColorMixingParticle" },
+    { b2ParticleFlag::b2_destructionListener, "DestructionListenerParticle" }
+};
+static EnumTable liquidParticleTable(10, &liquidParticleTypes[0]);
+
+//-----------------------------------------------------------------------------
+
+S32 LiquidFunObject::getLiquidTypeEnum(const char* label)
+{
+    // Search for Mnemonic.
+    for (U32 i = 0; i < (sizeof(liquidParticleTypes) / sizeof(EnumTable::Enums)); i++)
+    {
+        if( dStricmp(liquidParticleTypes[i].label, label) == 0)
+            return (S32)liquidParticleTypes[i].index;
+    }
+
+    // Warn.
+    Con::warnf("LiquidFunObject::getLiquidTypeEnum() - Invalid shape type of '%s'", label );
+
+    return (S32)-1;
+}
+
+//-----------------------------------------------------------------------------
+
+const char* LiquidFunObject::getLiquidTypeDescription(S32 shapeType)
+{
+    // Search for Mnemonic.
+    for (U32 i = 0; i < (sizeof(liquidParticleTypes) / sizeof(EnumTable::Enums)); i++)
+    {
+        if( liquidParticleTypes[i].index == shapeType )
+            return liquidParticleTypes[i].label;
+    }
+
+    // Warn.
+    Con::warnf( "LiquidFunObject::getLiquidTypeDescription() - Invalid shape type." );
+
+    return StringTable->EmptyString;
+}
+
 //-----------------------------------------------------------------------------
 
 void LiquidFunObject::initPersistFields()
@@ -58,7 +144,9 @@ void LiquidFunObject::initPersistFields()
     // Call parent.
     Parent::initPersistFields();    
 
-    addProtectedField("ShapeType", TypeEnum, NULL, &setShapeType, &getShapeType, &writeShapeType, 1, &shapeTypeTable, "" );    
+    addProtectedField("ShapeType", TypeEnum, NULL, &setShapeType, &getShapeType, &writeShapeType, 1, &shapeTypeTable, "" );
+    addProtectedField("LiquidType", TypeEnum, NULL, &setLiquidType, &getLiquidType, &writeLiquidType, 1, &liquidParticleTable, "" );    
+    addProtectedField("Solid", TypeBool, NULL, &setSolid, &getSolid, &writeSolid, "");
     addField("CircleRadius", TypeF32, Offset(mCircleRadius, LiquidFunObject), &writeCircleRadius, "");
     addField("ParticleRadius", TypeF32, Offset(mParticleRadius, LiquidFunObject), &writeParticleRadius, "");
     addField("PolygonSize", TypeVector2, Offset(mPolygonSize, LiquidFunObject), &writePolygonSize, "");
@@ -82,6 +170,8 @@ void LiquidFunObject::copyTo(SimObject* object)
        pLiquidFunObject->setCircleRadius( getCircleRadius() );
 
    pLiquidFunObject->setParticleRadius( getParticleRadius() );
+   pLiquidFunObject->setSolid( getSolid() );
+   pLiquidFunObject->setLiquidType( getLiquidType() );
 
    // Copy parent.
    Parent::copyTo( object );   
@@ -120,9 +210,15 @@ void LiquidFunObject::OnRegisterScene( Scene* pScene )
         mParticleGroupDef.shape = &circleShape;
     }
     
+    mParticleGroupDef.flags = getLiquidType();
+
+    if (getSolid())
+        mParticleGroupDef.groupFlags = b2_solidParticleGroup;
+
     //mParticleGroupDef.flags = b2_powderParticle;
     pScene->getWorld()->SetParticleRadius( getParticleRadius() );
     pScene->getWorld()->SetParticleDamping(0.2f);
+    pScene->getWorld()->SetParticleGravityScale(0.5f);
     mParticleGroup = pScene->getWorld()->CreateParticleGroup(mParticleGroupDef);
 }
 
@@ -402,38 +498,6 @@ void LiquidFunObject::sceneRender( const SceneRenderState* pSceneRenderState, co
 }
 
 //-----------------------------------------------------------------------------
-
-S32 LiquidFunObject::getShapeTypeEnum(const char* label)
-{
-    // Search for Mnemonic.
-    for (U32 i = 0; i < (sizeof(shapeTypeEnum) / sizeof(EnumTable::Enums)); i++)
-    {
-        if( dStricmp(shapeTypeEnum[i].label, label) == 0)
-            return (S32)shapeTypeEnum[i].index;
-    }
-
-    // Warn.
-    Con::warnf("LiquidFunObject::shapeTypeEnum() - Invalid shape type of '%s'", label );
-
-    return (S32)-1;
-}
-
-//-----------------------------------------------------------------------------
-
-const char* LiquidFunObject::getShapeTypeDescription(S32 shapeType)
-{
-    // Search for Mnemonic.
-    for (U32 i = 0; i < (sizeof(shapeTypeEnum) / sizeof(EnumTable::Enums)); i++)
-    {
-        if( shapeTypeEnum[i].index == shapeType )
-            return shapeTypeEnum[i].label;
-    }
-
-    // Warn.
-    Con::warnf( "LiquidFunObject::getShapeTypeDescription() - Invalid shape type." );
-
-    return StringTable->EmptyString;
-}
 
 void LiquidFunObject::setCircleShape(F32 radius)
 {

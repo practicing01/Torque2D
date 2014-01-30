@@ -36,9 +36,11 @@ private:
     b2ParticleGroupDef mParticleGroupDef;
     b2ParticleGroup* mParticleGroup;
     S32 mShapeType;
+    S32 mLiquidType;
     F32 mCircleRadius;
     F32 mParticleRadius;
     Vector2 mPolygonSize;
+    bool mSolid;
 
 public:
 
@@ -61,9 +63,13 @@ public:
 
     void setShapeType(const S32 shapeType) { mShapeType = shapeType; }
     inline S32 getShapeType() const { return mShapeType; }
-    
     static const char* getShapeTypeDescription(const S32 shapeType);
     static S32 getShapeTypeEnum(const char* label);
+
+    void setLiquidType(const S32 LiquidType) { mLiquidType = LiquidType; }
+    inline S32 getLiquidType() const { return mLiquidType; }    
+    static const char* getLiquidTypeDescription(const S32 LiquidType);
+    static S32 getLiquidTypeEnum(const char* label);
 
     inline const Vector2& getPolygonSize() const { return mPolygonSize; }
     void setPolygonSize( const Vector2& size );
@@ -74,6 +80,9 @@ public:
     inline F32 getParticleRadius() const { return mParticleRadius; }
     void setParticleRadius( const F32 radius );
 
+    virtual void setSolid( const bool solid )           { mSolid = solid; }
+    inline bool getSolid(void) const                   { return mSolid; }
+
     /// Declare Console Object.
     DECLARE_CONOBJECT(LiquidFunObject);
 
@@ -81,19 +90,31 @@ protected:
     virtual void OnRegisterScene( Scene* pScene );
     virtual void OnUnregisterScene( Scene* pScene );    
 
-    static bool setShapeType(void* obj, const char* data)
+    static const char* getShapeType(void* obj, const char* data) { return getShapeTypeDescription( static_cast<LiquidFunObject*>(obj)->getShapeType() ); }
+    static bool        writeShapeType( void* obj, StringTableEntry pFieldName ) { return true; }
+    static bool        setShapeType(void* obj, const char* data)
     {
         LiquidFunObject* pObject = static_cast<LiquidFunObject*>(obj);
         pObject->setShapeType(getShapeTypeEnum(data));
         return false;
     }
 
-    static const char* getShapeType(void* obj, const char* data) { return getShapeTypeDescription( static_cast<LiquidFunObject*>(obj)->getShapeType() ); }
-    static bool        writeShapeType( void* obj, StringTableEntry pFieldName ) { return true; }
+    static const char* getLiquidType(void* obj, const char* data) { return getLiquidTypeDescription( static_cast<LiquidFunObject*>(obj)->getLiquidType() ); }
+    static bool        writeLiquidType( void* obj, StringTableEntry pFieldName ) { return true; }
+    static bool        setLiquidType(void* obj, const char* data)
+    {
+        LiquidFunObject* pObject = static_cast<LiquidFunObject*>(obj);
+        pObject->setLiquidType(getLiquidTypeEnum(data));
+        return false;
+    }
 
     static bool        writePolygonSize( void* obj, StringTableEntry pFieldName ) { return (static_cast<LiquidFunObject*>(obj)->getPolygonSize().notZero() && static_cast<LiquidFunObject*>(obj)->getShapeType() == shapeOptions::polygon); }
     static bool        writeCircleRadius( void* obj, StringTableEntry pFieldName ) { return (static_cast<LiquidFunObject*>(obj)->getCircleRadius() > 0.0f && static_cast<LiquidFunObject*>(obj)->getShapeType() == shapeOptions::circle); }
     static bool        writeParticleRadius( void* obj, StringTableEntry pFieldName ) { return static_cast<LiquidFunObject*>(obj)->getParticleRadius() > 0.0f; }
+
+    static bool             setSolid(void* obj, const char* data)  { static_cast<LiquidFunObject*>(obj)->setSolid(dAtob(data)); return false; }
+    static const char*      getSolid(void* obj, const char* data)  { return Con::getBoolArg( static_cast<LiquidFunObject*>(obj)->getSolid() ); }
+    static bool             writeSolid( void* obj, StringTableEntry pFieldName ) { return static_cast<LiquidFunObject*>(obj)->getSolid() == true; }
 };
 
 #endif // _LIQUID_FUN_OBJECT_H_
