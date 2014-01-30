@@ -479,6 +479,10 @@
 		86A9A3FF16AEC836003F01E6 /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 86A9A3E516AEC817003F01E6 /* OpenGLES.framework */; };
 		86A9A40016AEC836003F01E6 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 86A9A3E616AEC817003F01E6 /* QuartzCore.framework */; };
 		86EDE667189AAFCC00D392BB /* LiquidFunObject.cc in Sources */ = {isa = PBXBuildFile; fileRef = 86EDE665189AAFCC00D392BB /* LiquidFunObject.cc */; };
+		86EDE672189AAFE500D392BB /* b2Particle.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 86EDE669189AAFE500D392BB /* b2Particle.cpp */; };
+		86EDE673189AAFE500D392BB /* b2ParticleGroup.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 86EDE66B189AAFE500D392BB /* b2ParticleGroup.cpp */; };
+		86EDE674189AAFE500D392BB /* b2ParticleSystem.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 86EDE66D189AAFE500D392BB /* b2ParticleSystem.cpp */; };
+		86EDE675189AAFE500D392BB /* b2VoronoiDiagram.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 86EDE670189AAFE500D392BB /* b2VoronoiDiagram.cpp */; };
 		B350D17C174F053800033EBB /* audio_ScriptBinding.cc in Sources */ = {isa = PBXBuildFile; fileRef = B350D17B174F053800033EBB /* audio_ScriptBinding.cc */; };
 		B350D189174F057E00033EBB /* metaScripting_ScriptBinding.cc in Sources */ = {isa = PBXBuildFile; fileRef = B350D186174F057E00033EBB /* metaScripting_ScriptBinding.cc */; };
 		B350D19B174F060700033EBB /* fileSystem_ScriptBinding.cc in Sources */ = {isa = PBXBuildFile; fileRef = B350D199174F060700033EBB /* fileSystem_ScriptBinding.cc */; };
@@ -1446,6 +1450,15 @@
 		86EDE664189AAFCC00D392BB /* LiquidFunObject_ScriptBinding.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LiquidFunObject_ScriptBinding.h; sourceTree = "<group>"; };
 		86EDE665189AAFCC00D392BB /* LiquidFunObject.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = LiquidFunObject.cc; sourceTree = "<group>"; };
 		86EDE666189AAFCC00D392BB /* LiquidFunObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LiquidFunObject.h; sourceTree = "<group>"; };
+		86EDE669189AAFE500D392BB /* b2Particle.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = b2Particle.cpp; sourceTree = "<group>"; };
+		86EDE66A189AAFE500D392BB /* b2Particle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = b2Particle.h; sourceTree = "<group>"; };
+		86EDE66B189AAFE500D392BB /* b2ParticleGroup.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = b2ParticleGroup.cpp; sourceTree = "<group>"; };
+		86EDE66C189AAFE500D392BB /* b2ParticleGroup.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = b2ParticleGroup.h; sourceTree = "<group>"; };
+		86EDE66D189AAFE500D392BB /* b2ParticleSystem.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = b2ParticleSystem.cpp; sourceTree = "<group>"; };
+		86EDE66E189AAFE500D392BB /* b2ParticleSystem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = b2ParticleSystem.h; sourceTree = "<group>"; };
+		86EDE66F189AAFE500D392BB /* b2StackQueue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = b2StackQueue.h; sourceTree = "<group>"; };
+		86EDE670189AAFE500D392BB /* b2VoronoiDiagram.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = b2VoronoiDiagram.cpp; sourceTree = "<group>"; };
+		86EDE671189AAFE500D392BB /* b2VoronoiDiagram.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = b2VoronoiDiagram.h; sourceTree = "<group>"; };
 		B350D179174F04F300033EBB /* Utility_ScriptBinding.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Utility_ScriptBinding.h; sourceTree = "<group>"; };
 		B350D17B174F053800033EBB /* audio_ScriptBinding.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = audio_ScriptBinding.cc; sourceTree = "<group>"; };
 		B350D17D174F054300033EBB /* undo_ScriptBinding.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = undo_ScriptBinding.h; sourceTree = "<group>"; };
@@ -2886,6 +2899,7 @@
 		867BB11C16AEC9FC0033868F /* box2d */ = {
 			isa = PBXGroup;
 			children = (
+				86EDE668189AAFE500D392BB /* Particle */,
 				867BB11D16AEC9FC0033868F /* Box2D.h */,
 				867BB11E16AEC9FC0033868F /* Collision */,
 				867BB13616AEC9FC0033868F /* Common */,
@@ -3147,6 +3161,22 @@
 			);
 			name = "Supporting Files";
 			path = Torque2D;
+			sourceTree = "<group>";
+		};
+		86EDE668189AAFE500D392BB /* Particle */ = {
+			isa = PBXGroup;
+			children = (
+				86EDE669189AAFE500D392BB /* b2Particle.cpp */,
+				86EDE66A189AAFE500D392BB /* b2Particle.h */,
+				86EDE66B189AAFE500D392BB /* b2ParticleGroup.cpp */,
+				86EDE66C189AAFE500D392BB /* b2ParticleGroup.h */,
+				86EDE66D189AAFE500D392BB /* b2ParticleSystem.cpp */,
+				86EDE66E189AAFE500D392BB /* b2ParticleSystem.h */,
+				86EDE66F189AAFE500D392BB /* b2StackQueue.h */,
+				86EDE670189AAFE500D392BB /* b2VoronoiDiagram.cpp */,
+				86EDE671189AAFE500D392BB /* b2VoronoiDiagram.h */,
+			);
+			path = Particle;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -3412,6 +3442,7 @@
 				867BB08D16AEC9050033868F /* guiProgressCtrl.cc in Sources */,
 				867BB08E16AEC9050033868F /* guiScriptNotifyControl.cc in Sources */,
 				867BB09016AEC9050033868F /* guiTabPageCtrl.cc in Sources */,
+				86EDE675189AAFE500D392BB /* b2VoronoiDiagram.cpp in Sources */,
 				867BB09116AEC9050033868F /* guiTextCtrl.cc in Sources */,
 				867BB09216AEC9050033868F /* guiTextEditCtrl.cc in Sources */,
 				867BB09316AEC9050033868F /* guiTextEditSliderCtrl.cc in Sources */,
@@ -3459,6 +3490,7 @@
 				867BB0C416AEC9050033868F /* mQuadPatch.cc in Sources */,
 				867BB0C516AEC9050033868F /* mQuat.cc in Sources */,
 				867BB0C616AEC9050033868F /* mRandom.cc in Sources */,
+				86EDE673189AAFE500D392BB /* b2ParticleGroup.cpp in Sources */,
 				867BB0C716AEC9050033868F /* mSolver.cc in Sources */,
 				867BB0C816AEC9050033868F /* mSplinePatch.cc in Sources */,
 				867BB0C916AEC9050033868F /* rectClipper.cpp in Sources */,
@@ -3494,6 +3526,7 @@
 				867BB0ED16AEC9050033868F /* tinystr.cpp in Sources */,
 				867BB0EE16AEC9050033868F /* tinyxml.cpp in Sources */,
 				867BB0EF16AEC9050033868F /* tinyxmlerror.cpp in Sources */,
+				86EDE672189AAFE500D392BB /* b2Particle.cpp in Sources */,
 				867BB0F016AEC9050033868F /* tinyxmlparser.cpp in Sources */,
 				867BB0F116AEC9050033868F /* CursorManager.cc in Sources */,
 				867BB0F216AEC9050033868F /* popupMenu.cc in Sources */,
@@ -3544,6 +3577,7 @@
 				867BB1BC16AEC9FC0033868F /* b2Draw.cpp in Sources */,
 				867BB1BD16AEC9FC0033868F /* b2Math.cpp in Sources */,
 				867BB1BE16AEC9FC0033868F /* b2Settings.cpp in Sources */,
+				86EDE674189AAFE500D392BB /* b2ParticleSystem.cpp in Sources */,
 				867BB1BF16AEC9FC0033868F /* b2StackAllocator.cpp in Sources */,
 				867BB1C016AEC9FC0033868F /* b2Timer.cpp in Sources */,
 				867BB1C116AEC9FC0033868F /* b2Body.cpp in Sources */,
