@@ -180,6 +180,7 @@
 		866381DC165556AD00C8C551 /* osxMath.mm in Sources */ = {isa = PBXBuildFile; fileRef = 866381DB165556AD00C8C551 /* osxMath.mm */; };
 		866381E51655615200C8C551 /* osxInput.mm in Sources */ = {isa = PBXBuildFile; fileRef = 866381E41655615200C8C551 /* osxInput.mm */; };
 		866381E91655674B00C8C551 /* osxTime.mm in Sources */ = {isa = PBXBuildFile; fileRef = 866381E81655674B00C8C551 /* osxTime.mm */; };
+		866CB55E189AAD350055E6AD /* LiquidFunObject.cc in Sources */ = {isa = PBXBuildFile; fileRef = 866CB55C189AAD350055E6AD /* LiquidFunObject.cc */; };
 		867492F5188727FF00CF0136 /* libLeap.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 867492F4188727FF00CF0136 /* libLeap.dylib */; };
 		86854E341663AAE6009FAFB2 /* osxOpenGLDevice.mm in Sources */ = {isa = PBXBuildFile; fileRef = 86854E331663AAE6009FAFB2 /* osxOpenGLDevice.mm */; };
 		8694ADC81656B06B0080ABAC /* osxEvents.mm in Sources */ = {isa = PBXBuildFile; fileRef = 8694ADC51656B06B0080ABAC /* osxEvents.mm */; };
@@ -769,6 +770,9 @@
 		866381DB165556AD00C8C551 /* osxMath.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = osxMath.mm; sourceTree = "<group>"; };
 		866381E41655615200C8C551 /* osxInput.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = osxInput.mm; sourceTree = "<group>"; };
 		866381E81655674B00C8C551 /* osxTime.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = osxTime.mm; sourceTree = "<group>"; };
+		866CB55B189AAD350055E6AD /* LiquidFunObject_ScriptBinding.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LiquidFunObject_ScriptBinding.h; sourceTree = "<group>"; };
+		866CB55C189AAD350055E6AD /* LiquidFunObject.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = LiquidFunObject.cc; sourceTree = "<group>"; };
+		866CB55D189AAD350055E6AD /* LiquidFunObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LiquidFunObject.h; sourceTree = "<group>"; };
 		867492F4188727FF00CF0136 /* libLeap.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libLeap.dylib; path = "../../lib/LeapSDK/lib/libc++/libLeap.dylib"; sourceTree = "<group>"; };
 		86854E321663AAE6009FAFB2 /* osxOpenGLDevice.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = osxOpenGLDevice.h; sourceTree = "<group>"; };
 		86854E331663AAE6009FAFB2 /* osxOpenGLDevice.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = osxOpenGLDevice.mm; sourceTree = "<group>"; };
@@ -2144,6 +2148,9 @@
 		86BC7EB716518D4600D96ADF /* sceneobject */ = {
 			isa = PBXGroup;
 			children = (
+				866CB55B189AAD350055E6AD /* LiquidFunObject_ScriptBinding.h */,
+				866CB55C189AAD350055E6AD /* LiquidFunObject.cc */,
+				866CB55D189AAD350055E6AD /* LiquidFunObject.h */,
 				2AA6865A16D69943003CEF0A /* SceneObjectList.cc */,
 				2AA6865B16D69943003CEF0A /* SceneObjectList.h */,
 				2AA6865C16D69943003CEF0A /* SceneObjectSet_ScriptBinding.h */,
@@ -3463,6 +3470,7 @@
 				865A2317165187FF00527C44 /* jdatadst.c in Sources */,
 				865A2318165187FF00527C44 /* jdatasrc.c in Sources */,
 				865A2319165187FF00527C44 /* jdcoefct.c in Sources */,
+				866CB55E189AAD350055E6AD /* LiquidFunObject.cc in Sources */,
 				865A231A165187FF00527C44 /* jdcolor.c in Sources */,
 				865A231B165187FF00527C44 /* jddctmgr.c in Sources */,
 				865A231C165187FF00527C44 /* jdhuff.c in Sources */,
