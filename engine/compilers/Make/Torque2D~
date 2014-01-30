@@ -436,7 +436,7 @@ SOURCES := ../../lib/ljpeg/jcapimin.c \
 	../../source/gui/editor/guiMenuBar.cc \
 	../../source/gui/editor/guiSeparatorCtrl.cc \
 	../../source/Banana_Modifications/Scene_Object_3D/Scene_Object_3D.cc \
-	../../source/Banana_Modifications/Banana_Module_Main/Banana_Module_Main.cc  
+	../../source/Banana_Modifications/Module_Banana_Main/Module_Banana_Main.cc  
 
 LDFLAGS := -g -m32
 LDLIBS := -lstdc++ -lm -ldl -lpthread -lrt -lX11 -lXft -lSDL -lopenal

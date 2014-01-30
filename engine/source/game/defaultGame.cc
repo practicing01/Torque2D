@@ -58,7 +58,8 @@
 #include "platform/nativeDialogs/msgBox.h"
 #include "platform/nativeDialogs/fileDialog.h"
 #include "memory/safeDelete.h"
-#include "Banana_Modifications/Module_Banana_Main/Module_Banana_Main.h"
+//#include "Banana_Modifications/Module_Banana/Module_Banana.h"
+#include "Banana_Modifications/Struct_Module/Struct_Module.h"
 
 #include <stdio.h>
 
@@ -165,7 +166,22 @@ bool initializeLibraries()
     // Initialize the particle system.
     ParticleSystem::Init();
     
-    //Struct_Module_Banana_Main_This=Machine_Banana_Create();
+    //Struct_Module_Banana_This=Machine_Banana_Create();
+
+    Pointer_Struct_Module_Main=Struct_Module_Main_Create();
+
+    Con::printf("Struct_Module %d\n",Pointer_Struct_Module_Main);
+
+    Struct_Module_Main_Initialize(Pointer_Struct_Module_Main);
+
+    struct Struct_Module *Pointer_Struct_Module_Child=
+    Pointer_Struct_Module_Main->Pointer_Function_Create();
+
+    Con::printf("Struct_Module %d\n",Pointer_Struct_Module_Child);
+
+    Pointer_Struct_Module_Main->Pointer_Function_Initialize(Pointer_Struct_Module_Child);
+
+    Pointer_Struct_Module_Main->Pointer_Function_Link(Pointer_Struct_Module_Main,Pointer_Struct_Module_Child);
 
 #if defined(TORQUE_OS_IOS) && defined(_USE_STORE_KIT)
     storeInit();
@@ -208,7 +224,9 @@ void shutdownLibraries()
     // Destroy the particle system.
     ParticleSystem::destroy();
 
-    //Machine_Banana_Destroy(Struct_Module_Banana_Main_This);
+    //Machine_Banana_Destroy(Struct_Module_Banana_This);
+
+    Struct_Module_Main_Destroy(Pointer_Struct_Module_Main);
   
 #ifdef _USE_STORE_KIT
     storeCleanup();
@@ -485,7 +503,9 @@ void DefaultGame::mainLoop( void )
          PROFILE_END();
          PROFILE_END();
 
-         //Machine_Banana_Process(Struct_Module_Banana_Main_This);
+         //Machine_Banana_Process(Struct_Module_Banana_This);
+
+         Pointer_Struct_Module_Main->Pointer_Function_Loop(Pointer_Struct_Module_Main);
     
 #ifdef TORQUE_OS_IOS_PROFILE
     iPhoneProfilerEnd("MAIN_LOOP");
