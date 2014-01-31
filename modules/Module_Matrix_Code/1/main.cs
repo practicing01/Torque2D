@@ -22,6 +22,9 @@
 
 function Module_Matrix_Code::create( %this )
 {
+
+%this.Ass_Image_Font=AssetDatabase.acquireAsset("ToyAssets:Font");
+
     // Reset the toy.    
     Module_Matrix_Code.reset();
 }
@@ -30,6 +33,9 @@ function Module_Matrix_Code::create( %this )
 
 function Module_Matrix_Code::destroy( %this )
 {
+
+AssetDatabase.releaseAsset(%this.Ass_Image_Font.getAssetId());
+
 }
 
 //-----------------------------------------------------------------------------
