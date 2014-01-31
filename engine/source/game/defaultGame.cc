@@ -59,7 +59,7 @@
 #include "platform/nativeDialogs/fileDialog.h"
 #include "memory/safeDelete.h"
 //#include "Banana_Modifications/Module_Banana/Module_Banana.h"
-#include "Banana_Modifications/Struct_Module/Struct_Module.h"
+//#include "Banana_Modifications/Struct_Module/Struct_Module.h"
 #include "Banana_Modifications/Struct_Module_Assimp/Struct_Module_Assimp.h"
 
 #include <stdio.h>
@@ -173,18 +173,18 @@ bool initializeLibraries()
 
     Function_Struct_Module_Main_Initialize(Pointer_Struct_Module_Main);
 
-    struct Struct_Module *Pointer_Struct_Module_Child=
+    /*struct Struct_Module *Pointer_Struct_Module_Child=
     Pointer_Struct_Module_Main->Pointer_Function_Create();
 
     Pointer_Struct_Module_Main->Pointer_Function_Initialize(Pointer_Struct_Module_Child);
 
     Pointer_Struct_Module_Main->Pointer_Function_Link(Pointer_Struct_Module_Main,Pointer_Struct_Module_Child);
-
+	*/
     Pointer_Struct_Module_Assimp=Function_Struct_Module_Assimp_Create();
 
-    Pointer_Struct_Module_Assimp=Function_Struct_Module_Assimp_Initialize();
+    Function_Struct_Module_Assimp_Initialize(Pointer_Struct_Module_Assimp);
 
-    Pointer_Struct_Module_Assimp=Pointer_Function_Link(Pointer_Struct_Module_Main,Pointer_Struct_Module_Assimp);
+    Pointer_Struct_Module_Assimp->Pointer_Function_Link(Pointer_Struct_Module_Main,Pointer_Struct_Module_Assimp);
 
 #if defined(TORQUE_OS_IOS) && defined(_USE_STORE_KIT)
     storeInit();

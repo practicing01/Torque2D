@@ -190,6 +190,8 @@ Pointer_Struct_Module->Int_Counter);
 
 Pointer_Struct_Module->Int_Counter++;
 
+if (Pointer_Struct_Module->Int_Counter<100){return;}
+
 if (*(Pointer_Struct_Module->Pointer_Struct_Module_Linked_List_Children)==NULL)
 {
 
