@@ -9,7 +9,7 @@
 
 struct Struct_Module *Pointer_Struct_Module_Main=NULL;
 
-struct Struct_Module* Struct_Module_Main_Create()
+struct Struct_Module*  Function_Struct_Module_Main_Create()
 {
 
 struct Struct_Module *Struct_Module_Node=(struct Struct_Module*)malloc(sizeof(struct Struct_Module));
@@ -18,8 +18,60 @@ return Struct_Module_Node;
 
 }
 
-void Struct_Module_Main_Destroy(struct Struct_Module *Pointer_Struct_Module)
+void Function_Struct_Module_Main_Destroy(struct Struct_Module *Pointer_Struct_Module)
 {
+
+if (*(Pointer_Struct_Module->Pointer_Struct_Module_Linked_List_Parents)!=NULL)
+{
+
+unsigned int *Pointer_Struct_Module_Linked_List_Node=
+(unsigned int*)(*(Pointer_Struct_Module->Pointer_Struct_Module_Linked_List_Parents));
+
+unsigned int *Pointer_Struct_Module_Linked_List_Node_Next;
+
+do
+{
+
+Pointer_Struct_Module_Linked_List_Node_Next=(unsigned int*)(*(Pointer_Struct_Module_Linked_List_Node+1));
+
+free(Pointer_Struct_Module_Linked_List_Node);
+
+Pointer_Struct_Module_Linked_List_Node=Pointer_Struct_Module_Linked_List_Node_Next;
+
+}
+while(Pointer_Struct_Module_Linked_List_Node!=(unsigned int*)(*(Pointer_Struct_Module_Linked_List_Node+1)));
+
+}
+
+/******************************************************************************/
+
+if (*(Pointer_Struct_Module->Pointer_Struct_Module_Linked_List_Children)!=NULL)
+{
+
+unsigned int *Pointer_Struct_Module_Linked_List_Node=
+(unsigned int*)(*(Pointer_Struct_Module->Pointer_Struct_Module_Linked_List_Children));
+
+unsigned int *Pointer_Struct_Module_Linked_List_Node_Next;
+
+do
+{
+
+Pointer_Struct_Module_Linked_List_Node_Next=(unsigned int*)(*(Pointer_Struct_Module_Linked_List_Node+1));
+
+free(Pointer_Struct_Module_Linked_List_Node);
+
+Pointer_Struct_Module_Linked_List_Node=Pointer_Struct_Module_Linked_List_Node_Next;
+
+}
+while(Pointer_Struct_Module_Linked_List_Node!=(unsigned int*)(*(Pointer_Struct_Module_Linked_List_Node+1)));
+
+}
+
+/******************************************************************************/
+
+free(Pointer_Struct_Module->Pointer_Struct_Module_Linked_List_Parents);
+
+free(Pointer_Struct_Module->Pointer_Struct_Module_Linked_List_Children);
 
 free(Pointer_Struct_Module->Pointer_Char_Array_Identifier);
 
@@ -163,7 +215,7 @@ while(Pointer_Struct_Module_Linked_List_Node!=(unsigned int*)(*(Pointer_Struct_M
 
 }
 
-void Struct_Module_Main_Initialize(struct Struct_Module *Pointer_Struct_Module)
+void Function_Struct_Module_Main_Initialize(struct Struct_Module *Pointer_Struct_Module)
 {
 
 Pointer_Struct_Module->Int_Counter=0;
@@ -182,11 +234,11 @@ Pointer_Struct_Module->Pointer_Char_Array_Identifier=Pointer_Char_Array_Identifi
 
 Pointer_Struct_Module->Int_Size_Identifier=sizeof(Char_Array_Identifier);
 
-Pointer_Struct_Module->Pointer_Function_Create=Struct_Module_Main_Create;
+Pointer_Struct_Module->Pointer_Function_Create=Function_Struct_Module_Main_Create;
 
-Pointer_Struct_Module->Pointer_Function_Initialize=Struct_Module_Main_Initialize;
+Pointer_Struct_Module->Pointer_Function_Initialize=Function_Struct_Module_Main_Initialize;
 
-Pointer_Struct_Module->Pointer_Function_Destroy=Struct_Module_Main_Destroy;
+Pointer_Struct_Module->Pointer_Function_Destroy=Function_Struct_Module_Main_Destroy;
 
 Pointer_Struct_Module->Pointer_Function_Link=Function_Struct_Module_Main_Link;
 

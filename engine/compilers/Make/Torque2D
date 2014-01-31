@@ -437,10 +437,11 @@ SOURCES := ../../lib/ljpeg/jcapimin.c \
 	../../source/gui/editor/guiSeparatorCtrl.cc \
 	../../source/Banana_Modifications/Scene_Object_3D/Scene_Object_3D.cc \
 	../../source/Banana_Modifications/Module_Banana/Module_Banana.cc \
-	../../source/Banana_Modifications/Struct_Module/Struct_Module.cc  
+	../../source/Banana_Modifications/Struct_Module/Struct_Module.cc \
+	../../source/Banana_Modifications/Struct_Module_Assimp/Struct_Module_Assimp.cc    
 
 LDFLAGS := -g -m32
-LDLIBS := -lstdc++ -lm -ldl -lpthread -lrt -lX11 -lXft -lSDL -lopenal
+LDLIBS := -lstdc++ -lm -ldl -lpthread -lrt -lX11 -lXft -lSDL -lopenal -lassimp -lglut -lGLU -lGL
 
 CFLAGS := -MMD -I. -Wfatal-errors -Wunused -m32 -msse -march=i686 -pipe
 

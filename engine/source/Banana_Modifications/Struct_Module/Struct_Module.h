@@ -18,6 +18,9 @@ unsigned int *Pointer_Struct_Module_Linked_List_Parents;
 //Linked list of modules that this module will process.
 unsigned int *Pointer_Struct_Module_Linked_List_Children;
 
+//Linked list of this modules custom structures.
+unsigned int *Pointer_Linked_List_Struct_Data;
+
 //Create() dynamically allocates a Struct_Model linked list node.
 struct Struct_Module *(*Pointer_Function_Create)();
 
@@ -40,12 +43,12 @@ void (*Pointer_Function_Loop)(struct Struct_Module *Pointer_Struct_Module);
 //The main module.
 extern struct Struct_Module *Pointer_Struct_Module_Main;
 
-struct Struct_Module* Struct_Module_Main_Create();
+struct Struct_Module* Function_Struct_Module_Main_Create();
 
-void Struct_Module_Main_Destroy(struct Struct_Module *);
+void Function_Struct_Module_Main_Destroy(struct Struct_Module *);
 
 void Function_Struct_Module_Main_Link(struct Struct_Module *,struct Struct_Module *);
 
 void Function_Struct_Module_Main_Loop(struct Struct_Module *);
 
-void Struct_Module_Main_Initialize(struct Struct_Module *);
+void Function_Struct_Module_Main_Initialize(struct Struct_Module *);
