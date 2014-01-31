@@ -441,7 +441,7 @@ SOURCES := ../../lib/ljpeg/jcapimin.c \
 	../../source/Banana_Modifications/Struct_Module_Assimp/Struct_Module_Assimp.cc    
 
 LDFLAGS := -g -m32
-LDLIBS := -lstdc++ -lm -ldl -lpthread -lrt -lX11 -lXft -lSDL -lopenal -lassimp -lglut -lGLU
+LDLIBS := -lstdc++ -lm -ldl -lpthread -lrt -lX11 -lXft -lSDL -lopenal -lglut -lGLU -lassimp
 
 CFLAGS := -MMD -I. -Wfatal-errors -Wunused -m32 -msse -march=i686 -pipe
 
