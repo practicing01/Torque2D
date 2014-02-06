@@ -32,7 +32,7 @@ Sandbox.ManipulationPullMaxForce = 1000;
 // Reset the touch events.
 Sandbox.InputController = new ScriptObject()
 {
-    class = SandboxInputController;
+    class = "SandboxInputController";
     TouchEventCount = 0;
     TouchEventActive[0] = false;
     TouchEventActive[1] = false;

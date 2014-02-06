@@ -1,3 +1,5 @@
+//Modular Structure by practicing01
+
 struct Struct_Module
 {
 
@@ -35,6 +37,9 @@ void (*Pointer_Function_Link)
 (struct Struct_Module *Pointer_Struct_Module_Parent,
 struct Struct_Module *Pointer_Struct_Module_Child);
 
+//Node_Data_Add() adds an unsigned int pointer, to the data list.
+void (*Pointer_Function_Node_Data_Add)(struct Struct_Module *Pointer_Struct_Module);
+
 //Loop() processes this module's stuffs.
 void (*Pointer_Function_Loop)(struct Struct_Module *Pointer_Struct_Module);
 
@@ -50,5 +55,7 @@ void Function_Struct_Module_Main_Destroy(struct Struct_Module *);
 void Function_Struct_Module_Main_Link(struct Struct_Module *,struct Struct_Module *);
 
 void Function_Struct_Module_Main_Loop(struct Struct_Module *);
+
+void Function_Struct_Module_Main_Node_Data_Add(struct Struct_Module *);
 
 void Function_Struct_Module_Main_Initialize(struct Struct_Module *);
