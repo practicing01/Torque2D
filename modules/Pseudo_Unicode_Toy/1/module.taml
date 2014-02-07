@@ -1,0 +1,10 @@
+<ModuleDefinition
+	ModuleId="Pseudo_Unicode_Toy"
+	VersionId="1"
+	Description="Pseudo_Unicode_Toy"
+	Dependencies="ToyAssets=1"
+	Type="toy"
+	ToyCategoryIndex="3"
+	ScriptFile="main.cs"
+	CreateFunction="create"
+	DestroyFunction="destroy"/>
