@@ -52,7 +52,7 @@ Frame=0;
 
 %String_Line=%FileObject_File.readLine();
 
-echo("readLine():" SPC %String_Line);
+//echo("readLine():" SPC %String_Line);
 
 %Int_Counter=1;
 
@@ -204,10 +204,10 @@ if (%Word!$="")
 
 %this.Simset_Map_Hiragana.add(%ScriptObject_Char);
 
-echo("Added" SPC %ScriptObject_Char.ID_Unicode SPC %ScriptObject_Char.Vector_2D_Texture_Position SPC %ScriptObject_Char.Vector_2D_Size);
+//echo("Added" SPC %ScriptObject_Char.ID_Unicode SPC %ScriptObject_Char.Vector_2D_Texture_Position SPC %ScriptObject_Char.Vector_2D_Size);
 
 /***********************************************/
-
+/*
 %Sprite_Object=new Sprite()
 {
 
@@ -219,7 +219,7 @@ Frame=%ScriptObject_Char.Frame;
 };
 
 SandboxScene.add(%Sprite_Object);
-
+*/
 /***********************************************/
 
 }
@@ -277,7 +277,7 @@ Frame=0;
 
 %String_Line=%FileObject_File.readLine();
 
-echo("readLine():" SPC %String_Line);
+//echo("readLine():" SPC %String_Line);
 
 %Int_Counter=1;
 
@@ -429,10 +429,10 @@ if (%Word!$="")
 
 %this.Simset_Map_Katakana.add(%ScriptObject_Char);
 
-echo("Added" SPC %ScriptObject_Char.ID_Unicode SPC %ScriptObject_Char.Vector_2D_Texture_Position SPC %ScriptObject_Char.Vector_2D_Size);
+//echo("Added" SPC %ScriptObject_Char.ID_Unicode SPC %ScriptObject_Char.Vector_2D_Texture_Position SPC %ScriptObject_Char.Vector_2D_Size);
 
 /***********************************************/
-
+/*
 %Sprite_Object=new Sprite()
 {
 
@@ -444,12 +444,64 @@ Frame=%ScriptObject_Char.Frame;
 };
 
 SandboxScene.add(%Sprite_Object);
-
+*/
 }
 
 %FileObject_File.close();
 
 /*********************************************************************/
+
+%FileObject_File=new FileObject();
+
+echo("openForRead():" SPC %FileObject_File.openForRead("./Hiragana_Uni.txt"));
+
+%Int_Index=0;
+
+while (!%FileObject_File.isEOF())
+{
+
+%String_Line=%FileObject_File.readLine();
+
+%ScriptObject_Char=%this.Simset_Map_Hiragana.getObject(%Int_Index);
+
+//Naughty to not declare Unicode_Character :>.
+%ScriptObject_Char.Unicode_Character=%String_Line;
+
+//echo(%ScriptObject_Char.Unicode_Character);
+
+%Int_Index++;
+
+}
+
+%FileObject_File.close();
+
+/*******************************************************/
+
+%FileObject_File=new FileObject();
+
+echo("openForRead():" SPC %FileObject_File.openForRead("./Katakana_Uni.txt"));
+
+%Int_Index=0;
+
+while (!%FileObject_File.isEOF())
+{
+
+%String_Line=%FileObject_File.readLine();
+
+%ScriptObject_Char=%this.Simset_Map_Katakana.getObject(%Int_Index);
+
+//Naughty to not declare Unicode_Character :>.
+%ScriptObject_Char.Unicode_Character=%String_Line;
+
+//echo(%ScriptObject_Char.Unicode_Character);
+
+%Int_Index++;
+
+}
+
+%FileObject_File.close();
+
+/*******************************************************/
 
 //Don't load Kanji, shit's huge! It'll choke t2d.  You can load the bitmaps and the
 //script objects but you have to add/clear the explicit cells in chunks.
@@ -535,7 +587,7 @@ Frame=0;
 
 %String_Line=%FileObject_File.readLine();
 
-echo("readLine():" SPC %String_Line);
+//echo("readLine():" SPC %String_Line);
 
 %Int_Counter=1;
 
@@ -756,7 +808,7 @@ else if (%Int_Page==2)
 
 %this.Simset_Map_Kanji.add(%ScriptObject_Char);
 
-echo("Added" SPC %ScriptObject_Char.ID_Unicode SPC %ScriptObject_Char.Vector_2D_Texture_Position SPC %ScriptObject_Char.Vector_2D_Size);
+//echo("Added" SPC %ScriptObject_Char.ID_Unicode SPC %ScriptObject_Char.Vector_2D_Texture_Position SPC %ScriptObject_Char.Vector_2D_Size);
 
 }
 

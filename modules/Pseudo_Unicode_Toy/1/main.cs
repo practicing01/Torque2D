@@ -43,8 +43,84 @@ function Pseudo_Unicode_Toy::reset( %this )
 
 SandboxScene.clear();
         
-//%this.Function_Load_Characters();
+%this.Function_Load_Characters();
 
 %this.Function_Load_Dictionary();
+
+/*********************************************/
+
+%ScriptObject_Char=%this.Simset_Dictionary.getObject(0);
+
+echo(%ScriptObject_Char.String_Kanji_Or_Kana);
+
+echo(%ScriptObject_Char.String_Kana);
+
+echo(%ScriptObject_Char.String_Definition);
+
+%FileObject_Temp=new FileObject();
+
+%FileObject_Temp.openForWrite("./test.txt");
+
+echo("kana strlen" SPC strlen(%ScriptObject_Char.String_Kana));
+
+for (%x=0;%x<strlen(%ScriptObject_Char.String_Kana);%x+=3)
+{
+
+echo(getSubStr(%ScriptObject_Char.String_Kana,%x,3));
+
+%FileObject_Temp.writeLine(getSubStr(%ScriptObject_Char.String_Kana,%x,1));
+
+}
+
+%FileObject_Temp.close();
+
+/*
+%Sprite_Object=new Sprite()
+{
+
+Position=getRandom(-50,50) SPC getRandom(-50,50);
+Size="5 5";
+Image=%ScriptObject_Char.Image_Asset;
+Frame=%ScriptObject_Char.Frame;
+
+};
+
+SandboxScene.add(%Sprite_Object);
+*/
+/*********************************************/
+
+/*
+%FileObject_Temp=new FileObject();
+
+%FileObject_Temp.openForWrite("./Hiragana.txt");
+
+for (%x=0;%x<%this.Simset_Map_Hiragana.getCount();%x++)
+{
+
+%ScriptObject_Character=%this.Simset_Map_Hiragana.getObject(%x);
+
+%FileObject_Temp.writeLine(%ScriptObject_Character.ID_Unicode);
+
+}
+
+%FileObject_Temp.close();
+*/
+
+/*
+%FileObject_Temp=new FileObject();
+
+%FileObject_Temp.openForWrite("./Katakana.txt");
+
+for (%x=0;%x<%this.Simset_Map_Hiragana.getCount();%x++)
+{
+
+%ScriptObject_Character=%this.Simset_Map_Katakana.getObject(%x);
+
+%FileObject_Temp.writeLine(%ScriptObject_Character.ID_Unicode);
+
+}
+
+%FileObject_Temp.close();
+*/
 
 }
