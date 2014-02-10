@@ -57,36 +57,81 @@ echo(%ScriptObject_Char.String_Kana);
 
 echo(%ScriptObject_Char.String_Definition);
 
-%FileObject_Temp=new FileObject();
+//%FileObject_Temp=new FileObject();
 
-%FileObject_Temp.openForWrite("./test.txt");
+//%FileObject_Temp.openForWrite("./test.txt");
 
 echo("kana strlen" SPC strlen(%ScriptObject_Char.String_Kana));
 
 for (%x=0;%x<strlen(%ScriptObject_Char.String_Kana);%x+=3)
 {
 
-echo(getSubStr(%ScriptObject_Char.String_Kana,%x,3));
+%Individual_Char=getSubStr(%ScriptObject_Char.String_Kana,%x,3);
 
-%FileObject_Temp.writeLine(getSubStr(%ScriptObject_Char.String_Kana,%x,1));
+echo(%Individual_Char);
+
+%Bool_Found_Hiragana=false;
+
+%Kana_Char=0;
+
+%Bool_Found_Katakana=false;
+
+for (%y=0;%y<%this.Simset_Map_Hiragana.getCount();%y++)
+{
+
+%Kana_Char=%this.Simset_Map_Hiragana.getObject(%y);
+
+if (%Kana_Char.Unicode_Character$=%Individual_Char)
+{
+
+%Bool_Found_Hiragana=true;
+
+break;
 
 }
 
-%FileObject_Temp.close();
+}
 
-/*
+if (!%Bool_Found_Hiragana)
+{
+
+for (%y=0;%y<%this.Simset_Map_Katakana.getCount();%y++)
+{
+
+%Kana_Char=%this.Simset_Map_Katakana.getObject(%y);
+
+if (%Kana_Char.Unicode_Character$=%Individual_Char)
+{
+
+%Bool_Found_Katakana=true;
+
+break;
+
+}
+
+}
+
+}
+
 %Sprite_Object=new Sprite()
 {
 
 Position=getRandom(-50,50) SPC getRandom(-50,50);
 Size="5 5";
-Image=%ScriptObject_Char.Image_Asset;
-Frame=%ScriptObject_Char.Frame;
+Image=%Kana_Char.Image_Asset;
+Frame=%Kana_Char.Frame;
 
 };
 
 SandboxScene.add(%Sprite_Object);
-*/
+
+
+//%FileObject_Temp.writeLine(getSubStr(%ScriptObject_Char.String_Kana,%x,3));
+
+}
+
+//%FileObject_Temp.close();
+
 /*********************************************/
 
 /*
