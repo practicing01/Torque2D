@@ -193,7 +193,8 @@ if (%Word!$="")
 %ScriptObject_Char.Vector_2D_Texture_Position.X,
 %ScriptObject_Char.Vector_2D_Texture_Position.Y,
 %ScriptObject_Char.Vector_2D_Size.X,
-%ScriptObject_Char.Vector_2D_Size.Y
+%ScriptObject_Char.Vector_2D_Size.Y,
+""
 );
 
 %ScriptObject_Char.Frame=%Int_Frame_Counter;
@@ -418,7 +419,8 @@ if (%Word!$="")
 %ScriptObject_Char.Vector_2D_Texture_Position.X,
 %ScriptObject_Char.Vector_2D_Texture_Position.Y,
 %ScriptObject_Char.Vector_2D_Size.X,
-%ScriptObject_Char.Vector_2D_Size.Y
+%ScriptObject_Char.Vector_2D_Size.Y,
+""
 );
 
 %ScriptObject_Char.Frame=%Int_Frame_Counter;
