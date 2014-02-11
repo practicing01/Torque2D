@@ -61,12 +61,27 @@ echo(%ScriptObject_Char.String_Definition);
 
 //%FileObject_Temp.openForWrite("./test.txt");
 
-echo("kana strlen" SPC strlen(%ScriptObject_Char.String_Kana));
+%Kana_Temp=0;
 
-for (%x=0;%x<strlen(%ScriptObject_Char.String_Kana);%x+=3)
+if (%ScriptObject_Char.String_Kana!$="")
 {
 
-%Individual_Char=getSubStr(%ScriptObject_Char.String_Kana,%x,3);
+%Kana_Temp=%ScriptObject_Char.String_Kana;
+
+}
+else
+{
+
+%Kana_Temp=%ScriptObject_Char.String_Kanji_Or_Kana;
+
+}
+
+echo("kana strlen" SPC strlen(%Kana_Temp));
+
+for (%x=0;%x<strlen(%Kana_Temp);%x+=3)
+{
+
+%Individual_Char=getSubStr(%Kana_Temp,%x,3);
 
 echo(%Individual_Char);
 
