@@ -253,8 +253,6 @@ ConsoleMethodWithDocs(ImageAsset, getCellWidth, ConsoleInt, 2, 2, ())
     return object->getCellWidth();
 }
 
-<<<<<<< HEAD
-=======
 //-----------------------------------------------------------------------------
 
 /*! Gets the CELL width in Explicit Mode.
@@ -281,7 +279,6 @@ ConsoleMethodWithDocs(ImageAsset, getExplicitCellHeight, ConsoleInt, 3,3, (CellI
     return(object->getExplicitCellHeight(cellIndex));
 }
 
->>>>>>> refs/remotes/camporter/linuxsupport
 //-----------------------------------------------------------------------------
 
 /*! Sets the CELL height.

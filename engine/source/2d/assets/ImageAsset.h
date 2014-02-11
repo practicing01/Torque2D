@@ -229,12 +229,10 @@ public:
 
     void                    setCellHeight( const S32 cellheight );
     S32                     getCellHeight( void) const						{ return mCellHeight; }
-<<<<<<< HEAD
-=======
+
     S32                     getExplicitCellHeight(const S32 cellIndex);
     
     bool                    containsNamedRegion(const char* regionName);
->>>>>>> refs/remotes/camporter/linuxsupport
 
     inline TextureHandle&   getImageTexture( void )                         { return mImageTextureHandle; }
     inline S32              getImageWidth( void ) const                     { return mImageTextureHandle.getWidth(); }
