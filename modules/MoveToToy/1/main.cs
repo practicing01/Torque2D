@@ -177,6 +177,9 @@ function MoveToToy::setTrackMouse( %this, %value )
 
 function MoveToToy::onTouchDown(%this, %touchID, %worldPosition)
 {
+
+    echo(%touchID);
+
     // Set the target to the touched position.
     MoveToToy.TargetObject.Position = %worldPosition;
     

@@ -131,8 +131,6 @@ function MoveToToy::createSight( %this )
     SandboxScene.add(%mountedobj);
     %mountedobj.mount(%object,"-20 0",0,true,-1);
 
-
-
 }
 
 //-----------------------------------------------------------------------------
