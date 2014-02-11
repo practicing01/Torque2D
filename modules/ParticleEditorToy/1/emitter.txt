@@ -1,7 +1,6 @@
 <ParticleAssetEmitter
     EmitterName="MovingBubbles"
-    Image="@asset=ToyAssets:Particles5"
-    Frame="1">
+    Image="@asset=ToyAssets:Particles5">
     <ParticleAssetEmitter.Fields>
         <Key
             Time="0"
