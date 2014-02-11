@@ -49,7 +49,7 @@ SandboxScene.clear();
 
 /*********************************************/
 
-%ScriptObject_Char=%this.Simset_Dictionary.getObject(0);
+%ScriptObject_Char=%this.Simset_Dictionary.getObject(getRandom(0,%this.Simset_Dictionary.getCount()-1));
 
 echo(%ScriptObject_Char.String_Kanji_Or_Kana);
 

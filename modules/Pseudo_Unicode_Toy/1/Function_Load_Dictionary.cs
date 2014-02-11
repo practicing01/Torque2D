@@ -21,9 +21,9 @@ function Pseudo_Unicode_Toy::Function_Load_Dictionary( %this )
 
 echo("openForRead():" SPC %Bool_Open_Result);
 
-//%Int_Random_Position=getRandom(0,%FileObject_File.getStreamSize()-1);
+%Int_Random_Position=getRandom(0,%FileObject_File.getStreamSize()-1);
 
-//%FileObject_File.setPosition(%Int_Random_Position);
+%FileObject_File.setPosition(%Int_Random_Position);
 
 %Char_Phase_Search=-1;//Search for <entry> first.
 
