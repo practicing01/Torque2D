@@ -1,0 +1,3 @@
+find . -type d > tree.txt
+find -type f \( ! -iname "*~" \) -printf '%p\n'
+

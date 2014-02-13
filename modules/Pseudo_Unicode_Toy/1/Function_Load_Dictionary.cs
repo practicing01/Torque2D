@@ -13,7 +13,7 @@ function Pseudo_Unicode_Toy::Function_Load_Dictionary( %this )
 
 %Int_File_Counter=0;
 
-%Int_File_Counter2=0;
+//%Int_File_Counter2=0;
 
 //%Bool_Open_Result=%FileObject_File_Out.openForWrite("./kana_out/kana_out_" @ %Int_File_Counter @ ".txt");
 
@@ -252,11 +252,11 @@ else
 %FileObject_File_Out.writeLine(%ScriptObject_Char.String_Kanji_Or_Kana);
 
 }
-
+*/
 //%FileObject_File_Out.writeLine(%ScriptObject_Char.String_Definition);
 
 %Int_File_Counter++;
-
+/*
 if (%Int_File_Counter>1000)
 {
 
@@ -270,6 +270,9 @@ if (%Int_File_Counter>1000)
 
 }
 */
+//%FileObject_File_Out.close();
+//%Bool_Open_Result=%FileObject_File_Out.openForWrite("./kana_out/kana_out_" @ %Int_File_Counter @ ".txt");
+
 break;//Just read one entry.
 
 %ScriptObject_Char=new ScriptObject()
