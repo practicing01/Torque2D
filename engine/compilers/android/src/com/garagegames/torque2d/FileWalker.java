@@ -1,6 +1,9 @@
 package com.garagegames.torque2d;
 
+import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.util.Hashtable;
 import java.util.Vector;
 
@@ -203,6 +206,126 @@ public class FileWalker
 		return retStringArray;
 	}
 	
+   /* public static String[] DumpPath(Context context, String dirPath, boolean depth)
+    {
+            double time = System.currentTimeMillis();
+            dumpPathVec.clear();
+            dumpDirVec.clear();
+            dumpDirList.clear();
+           
+            if (!precachedLists(context))
+            {
+                    String dir = dirPath;
+                   
+                    //remove any ./ from path since the apk code chokes on it
+                    while (dir.contains("./"))
+                            dir = dir.replace("./", "");
+                   
+                    //remove any ../ from path since the apk code chokes on it
+                    String search = "/../";
+                    while (dir.contains(search))
+                    {
+                            int pos = dir.indexOf(search);
+                            int posStart = dir.lastIndexOf("/", pos-1);
+                            dir = dir.substring(0, posStart+1) + dir.substring(pos+4);
+                    }
+                   
+                    if (dir.startsWith("/"))
+                    dir = dir.substring(1);
+                   
+                    if (dir.endsWith("/"))
+                    dir = dir.substring(0,dir.length()-1);
+               
+                    //Log.i("torque2d","path start: " + dir);
+                    DumpDir(context, dir);
+                   
+                    while (depth && dumpDirVec.size() > 0)
+                    {
+                            String newdir = dumpDirVec.remove(0);
+                            //Log.i("torque2d","newpath " + newdir);
+                            DumpDir(context,newdir);
+                    }
+            }
+           
+            int size = dumpPathVec.size();
+            if (size > 500)
+                    size = 500;
+            //Log.i("torque2d","size " + size);
+            String[] retStringArray = new String[size];
+            int cnt = 0;
+            for(cnt = 0; cnt < size; cnt++)
+            {
+                    String s = dumpPathVec.remove(0);
+                    //Log.i("torque2d","file " + s);
+                    retStringArray[cnt] = "/" + s;
+            }
+            Log.i("torque2d", "time in java: " + (System.currentTimeMillis() - time) );
+            return retStringArray;
+    } */       
+
+
+    //Checks if cache files exist and if so reads them into the cache
+    private static boolean precachedLists(Context context)
+    {
+            String fileTxt = "precachedFileList.txt";
+            String dirTxt = "precachedDirList.txt";
+            boolean foundFileList = false;
+            boolean foundDirList = false;
+           
+            //Check if we have the files
+            AssetManager assetMgr = context.getAssets();
+            try {
+                    String[] assets = assetMgr.list("");
+                    for (String asset : assets)
+                    {
+                            if (asset.equals(".") || asset.equals(".."))
+                                    continue;
+                           
+                            if (asset.contains(fileTxt))
+                            {
+                                    foundFileList = true;
+                            }
+                            else if (asset.contains(dirTxt))
+                            {
+                                    foundDirList = true;
+                            }
+                           
+                            if (foundFileList == true && foundDirList == true)
+                                    break;
+                    }
+                   
+                    if (foundFileList != true || foundDirList != true)
+                            return false;
+                   
+                    //populate cache from file list in txt file
+                    InputStream inputStream = assetMgr.open(fileTxt);
+                    InputStreamReader inputStreamReader = new InputStreamReader(inputStream);
+                    BufferedReader bufferedReader = new BufferedReader(inputStreamReader);
+                   
+                    String path = null;
+                    while ((path = bufferedReader.readLine()) != null)
+                    {
+                            dumpPathVec.add(path);
+                    }
+                   
+                    //populate cache from directory list in txt file
+                    inputStream = assetMgr.open(dirTxt);
+                    inputStreamReader = new InputStreamReader(inputStream);
+                    bufferedReader = new BufferedReader(inputStreamReader);
+                   
+                    path = null;
+                    while ((path = bufferedReader.readLine()) != null)
+                    {
+                            dumpDirList.add(path);
+                    }
+                   
+                    return true;
+                           
+            } catch (IOException e) {
+                    return false;
+            }
+    }
+
 	public static String[] getRestOfDump()
 	{
 		int size = dumpPathVec.size();

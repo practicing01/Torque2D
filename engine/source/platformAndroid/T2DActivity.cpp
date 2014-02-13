@@ -614,7 +614,7 @@ char* _AndroidLoadFile(const char* fn, U32 *size) {
 		strcpy(fileName, filepath.c_str());
 		fileName[filepath.size()] = '\0';
 	}
-
+//adprintf("Loading File: %s", fileName);
 	AAsset *asset;
 	uint8_t buf[1024];
 	char* buffer = NULL;
