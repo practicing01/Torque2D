@@ -24,6 +24,10 @@ exec("./Function_Load_Characters.cs");
 
 exec("./Function_Load_Dictionary.cs");
 
+exec("./Function_Load_Pronunciations.cs");
+
+exec("./Function_Pronunciate.cs");
+
 function Pseudo_Unicode_Toy::create( %this )
 {
     // Reset the toy.    
@@ -38,16 +42,8 @@ function Pseudo_Unicode_Toy::destroy( %this )
 
 //-----------------------------------------------------------------------------
 
-function Pseudo_Unicode_Toy::reset( %this )
+function Pseudo_Unicode_Toy::Get_Random_Char( %this )
 {
-
-SandboxScene.clear();
-        
-%this.Function_Load_Characters();
-
-%this.Function_Load_Dictionary();
-
-/*********************************************/
 
 %ScriptObject_Char=%this.Simset_Dictionary.getObject(getRandom(0,%this.Simset_Dictionary.getCount()-1));
 
@@ -78,7 +74,9 @@ else
 
 echo("kana strlen" SPC strlen(%Kana_Temp));
 
-for (%x=0;%x<strlen(%Kana_Temp);%x+=3)
+%this.Function_Pronunciate(%Kana_Temp);
+
+/*for (%x=0;%x<strlen(%Kana_Temp);%x+=3)
 {
 
 %Individual_Char=getSubStr(%Kana_Temp,%x,3);
@@ -143,7 +141,7 @@ SandboxScene.add(%Sprite_Object);
 
 //%FileObject_Temp.writeLine(getSubStr(%ScriptObject_Char.String_Kana,%x,3));
 
-}
+}*/
 
 //%FileObject_Temp.close();
 
@@ -182,5 +180,25 @@ for (%x=0;%x<%this.Simset_Map_Hiragana.getCount();%x++)
 
 %FileObject_Temp.close();
 */
+
+}
+
+function Pseudo_Unicode_Toy::reset( %this )
+{
+
+GlobalActionMap.bindCmd(keyboard,"g",
+"Pseudo_Unicode_Toy.Get_Random_Char();","");
+
+SandboxScene.clear();
+        
+%this.Function_Load_Characters();
+
+%this.Function_Load_Dictionary();
+
+%this.Function_Load_Pronunciations();
+
+/*********************************************/
+
+%this.Get_Random_Char();
 
 }

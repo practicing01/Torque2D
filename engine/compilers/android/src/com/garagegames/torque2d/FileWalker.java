@@ -206,7 +206,7 @@ public class FileWalker
 		return retStringArray;
 	}
 	
-   /* public static String[] DumpPath(Context context, String dirPath, boolean depth)
+    /*public static String[] DumpPath(Context context, String dirPath, boolean depth)
     {
             double time = System.currentTimeMillis();
             dumpPathVec.clear();
@@ -261,7 +261,7 @@ public class FileWalker
             }
             Log.i("torque2d", "time in java: " + (System.currentTimeMillis() - time) );
             return retStringArray;
-    } */       
+    } */    
 
 
     //Checks if cache files exist and if so reads them into the cache

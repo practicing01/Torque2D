@@ -3,6 +3,77 @@ function Pseudo_Unicode_Toy::Function_Load_Dictionary( %this )
 
 %this.Simset_Dictionary=new SimSet();
 
+//%FileObject_File=new FileObject();
+
+%FileObject_File=new FileStreamObject();
+
+//%Bool_Open_Result=%FileObject_File.openForRead("./Kana_Dictionary.txt");
+
+%Bool_Open_Result=%FileObject_File.open("./Kana_Dictionary.txt","Read");
+
+//%Int_Random_Position=getRandom(0,%FileObject_File.getStreamSize()-1);
+
+//%FileObject_File.setPosition(%Int_Random_Position);
+
+//%String_Line=%FileObject_File.readLine();//Get line so the next one is complete.
+
+/***********************************************/
+
+%ScriptObject_Char=new ScriptObject()
+{
+
+String_Kanji_Or_Kana="";
+
+String_Definition="";
+
+String_Kana="";
+
+};
+
+/************************************************/
+
+while (1)//!%FileObject_File.isEOF())
+{
+
+%String_Line=%FileObject_File.readLine();
+
+if (%FileObject_File.isEOF()){return;}
+
+%ScriptObject_Char.String_Kana=%String_Line;
+
+echo("readLine():" SPC %String_Line);
+
+%String_Line=%FileObject_File.readLine();
+
+%ScriptObject_Char.String_Definition=%String_Line;
+
+echo("readLine():" SPC %String_Line);
+
+%this.Simset_Dictionary.add(%ScriptObject_Char);
+
+//break;//Get just one.
+
+%ScriptObject_Char=new ScriptObject()
+{
+
+String_Kanji_Or_Kana="";
+
+String_Definition="";
+
+String_Kana="";
+
+};
+
+}
+
+/************************************************/
+
+%FileObject_File.close();
+
+return;
+
+/************************************************/
+
 //%FileObject_File_Out=new FileObject();
 
 //%FileObject_File=new FileObject();
