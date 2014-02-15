@@ -32,12 +32,10 @@ String_Kana="";
 
 /************************************************/
 
-while (1)//!%FileObject_File.isEOF())
+while (1)
 {
 
 %String_Line=%FileObject_File.readLine();
-
-if (%FileObject_File.isEOF()){return;}
 
 %ScriptObject_Char.String_Kana=%String_Line;
 
@@ -52,6 +50,8 @@ echo("readLine():" SPC %String_Line);
 %this.Simset_Dictionary.add(%ScriptObject_Char);
 
 //break;//Get just one.
+
+if (%FileObject_File.isEOF()){break;}
 
 %ScriptObject_Char=new ScriptObject()
 {
@@ -74,27 +74,25 @@ return;
 
 /************************************************/
 
-//%FileObject_File_Out=new FileObject();
+%FileObject_File_Out=new FileObject();
 
 //%FileObject_File=new FileObject();
 
-%FileObject_File=new FileStreamObject();
+//%FileObject_File=new FileStreamObject();
 
 //%Bool_Open_Result=%FileObject_File.openForRead("./JMdict_e");
 
-%Int_File_Counter=0;
+//%Int_File_Counter=0;
 
 //%Int_File_Counter2=0;
 
-//%Bool_Open_Result=%FileObject_File_Out.openForWrite("./kana_out/kana_out_" @ %Int_File_Counter @ ".txt");
+%Bool_Open_Result=%FileObject_File_Out.openForWrite("./Kana_Dictionary.txt");
 
 %Bool_Open_Result=%FileObject_File.open("./JMdict_e","Read");
 
-echo("openForRead():" SPC %Bool_Open_Result);
+//%Int_Random_Position=getRandom(0,%FileObject_File.getStreamSize()-1);
 
-%Int_Random_Position=getRandom(0,%FileObject_File.getStreamSize()-1);
-
-%FileObject_File.setPosition(%Int_Random_Position);
+//%FileObject_File.setPosition(%Int_Random_Position);
 
 %Char_Phase_Search=-1;//Search for <entry> first.
 
@@ -109,7 +107,7 @@ String_Kana="";
 
 };
 
-while (!%FileObject_File.isEOF())
+while (1)
 {
 
 %String_Line=%FileObject_File.readLine();
@@ -179,6 +177,15 @@ if (strstr(%Word,"</keb>")!=-1||strstr(%Word,"</reb>")!=-1)
 
 %Word=strreplace(%Word,"</reb>","");
 
+/*while (getSubStr(%Word,0,1)$="")
+{
+
+%Word=trim(%Word);
+
+}
+
+%ScriptObject_Char.String_Kanji_Or_Kana=%ScriptObject_Char.String_Kanji_Or_Kana SPC %Word;
+*/
 %ScriptObject_Char.String_Kanji_Or_Kana=trim(%ScriptObject_Char.String_Kanji_Or_Kana SPC %Word);
 
 break;
@@ -310,24 +317,24 @@ echo("Added:");
 echo(%ScriptObject_Char.String_Kanji_Or_Kana);
 echo(%ScriptObject_Char.String_Kana);
 echo(%ScriptObject_Char.String_Definition);
-/*
+
 if (%ScriptObject_Char.String_Kana!$="")
 {
 
-%FileObject_File_Out.writeLine(%ScriptObject_Char.String_Kana);
+%FileObject_File_Out.writeLine(trim(%ScriptObject_Char.String_Kana));
 
 }
 else
 {
 
-%FileObject_File_Out.writeLine(%ScriptObject_Char.String_Kanji_Or_Kana);
+%FileObject_File_Out.writeLine(trim(%ScriptObject_Char.String_Kanji_Or_Kana));
 
 }
-*/
-//%FileObject_File_Out.writeLine(%ScriptObject_Char.String_Definition);
 
-%Int_File_Counter++;
-/*
+%FileObject_File_Out.writeLine(trim(%ScriptObject_Char.String_Definition));
+
+/*%Int_File_Counter++;
+
 if (%Int_File_Counter>1000)
 {
 
@@ -344,7 +351,7 @@ if (%Int_File_Counter>1000)
 //%FileObject_File_Out.close();
 //%Bool_Open_Result=%FileObject_File_Out.openForWrite("./kana_out/kana_out_" @ %Int_File_Counter @ ".txt");
 
-break;//Just read one entry.
+//break;//Just read one entry.
 
 %ScriptObject_Char=new ScriptObject()
 {
@@ -359,11 +366,13 @@ String_Kana="";
 
 }
 
+if (%FileObject_File.isEOF()){break;}
+
 }
 
 %FileObject_File.close();
 
-//%FileObject_File_Out.close();
+%FileObject_File_Out.close();
 
 echo("Finished loading dictionary into memory.");
 

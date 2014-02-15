@@ -201,4 +201,6 @@ SandboxScene.clear();
 
 %this.Get_Random_Char();
 
+echo(%this.Simset_Dictionary.getCount());
+
 }
