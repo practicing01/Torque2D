@@ -506,7 +506,7 @@ S32 GuiListBoxCtrl::insertItem( S32 index, StringTableEntry text, void *itemData
    }
 
    // Assign item data
-   newItem->itemText    = StringTable->insert(text);
+   newItem->itemText    = StringTable->insert(text,true);
    newItem->itemData    = itemData;
    newItem->isSelected  = false;
    newItem->hasColor    = false;
