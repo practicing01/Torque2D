@@ -5,11 +5,11 @@ function Pseudo_Unicode_Toy::Function_Load_Dictionary( %this )
 
 //%FileObject_File=new FileObject();
 
-%FileObject_File=new FileStreamObject();
+//enable%FileObject_File=new FileStreamObject();
 
 //%Bool_Open_Result=%FileObject_File.openForRead("./Kana_Dictionary.txt");
 
-%Bool_Open_Result=%FileObject_File.open("./Kana_Dictionary.txt","Read");
+//enable%Bool_Open_Result=%FileObject_File.open("./Kana_Dictionary.txt","Read");
 
 //%Int_Random_Position=getRandom(0,%FileObject_File.getStreamSize()-1);
 
@@ -19,7 +19,7 @@ function Pseudo_Unicode_Toy::Function_Load_Dictionary( %this )
 
 /***********************************************/
 
-%ScriptObject_Char=new ScriptObject()
+/*enable%ScriptObject_Char=new ScriptObject()
 {
 
 String_Kanji_Or_Kana="";
@@ -28,11 +28,11 @@ String_Definition="";
 
 String_Kana="";
 
-};
+};*/
 
 /************************************************/
 
-while (1)
+/*enablewhile (1)
 {
 
 %String_Line=%FileObject_File.readLine();
@@ -64,13 +64,13 @@ String_Kana="";
 
 };
 
-}
+}*/
 
 /************************************************/
 
-%FileObject_File.close();
+//enable%FileObject_File.close();
 
-return;
+//enablereturn;
 
 /************************************************/
 
@@ -78,7 +78,7 @@ return;
 
 //%FileObject_File=new FileObject();
 
-//%FileObject_File=new FileStreamObject();
+%FileObject_File=new FileStreamObject();
 
 //%Bool_Open_Result=%FileObject_File.openForRead("./JMdict_e");
 
@@ -321,13 +321,13 @@ echo(%ScriptObject_Char.String_Definition);
 if (%ScriptObject_Char.String_Kana!$="")
 {
 
-%FileObject_File_Out.writeLine(trim(%ScriptObject_Char.String_Kana));
+%FileObject_File_Out.writeLine(trim("<entry>" @ %ScriptObject_Char.String_Kana));
 
 }
 else
 {
 
-%FileObject_File_Out.writeLine(trim(%ScriptObject_Char.String_Kanji_Or_Kana));
+%FileObject_File_Out.writeLine("<entry>" @ trim(%ScriptObject_Char.String_Kanji_Or_Kana));
 
 }
 
