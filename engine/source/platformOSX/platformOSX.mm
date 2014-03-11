@@ -225,7 +225,7 @@ static osxPlatState * tempSharedPlatState = nil;
 
 //-----------------------------------------------------------------------------
 
-- (unsigned)retainCount
+- (NSUInteger)retainCount
 {
     // Denotes an object that cannot be released
     return UINT_MAX;
