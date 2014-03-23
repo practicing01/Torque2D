@@ -1,2 +1,2 @@
 <ParticlePlayer
-    Particle="@asset=ParticleAsset_4" />
+    Particle="@asset=ParticleAsset_2" />

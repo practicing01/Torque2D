@@ -20,10 +20,10 @@
 // IN THE SOFTWARE.
 //-----------------------------------------------------------------------------
 
-#include "2d/sceneobject/liquidFunObject.h"
+#include "2d/sceneobject/LiquidFunObject.h"
 
 // Script bindings.
-#include "2d/sceneobject/liquidFunObject_ScriptBinding.h"
+#include "2d/sceneobject/LiquidFunObject_ScriptBinding.h"
 
 //------------------------------------------------------------------------------
 

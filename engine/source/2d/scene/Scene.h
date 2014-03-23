@@ -168,7 +168,7 @@ class Scene :
 public:
     typedef HashMap<S32, b2Joint*>              typeJointHash;
     typedef HashMap<S32, b2ParticleGroup*>      typeLiquidParticleHash;
-    typedef HashMap<U32, S32>                   typeReverseJointHash;
+    typedef HashMap<b2Joint*, S32>              typeReverseJointHash;
     typedef Vector<tDeleteRequest>              typeDeleteVector;
     typedef Vector<TickContact>                 typeContactVector;
     typedef HashMap<b2Contact*, TickContact>    typeContactHash;

@@ -31,6 +31,7 @@ SOURCES := ../../source/2d/assets/AnimationAsset.cc \
 	../../source/2d/gui/SceneWindow.cc \
 	../../source/2d/sceneobject/CompositeSprite.cc \
 	../../source/2d/sceneobject/ImageFont.cc \
+	../../source/2d/sceneobject/LiquidFunObject.cc \
 	../../source/2d/sceneobject/ParticlePlayer.cc \
 	../../source/2d/sceneobject/SceneObject.cc \
 	../../source/2d/sceneobject/SceneObjectList.cc \
@@ -101,6 +102,10 @@ SOURCES := ../../source/2d/assets/AnimationAsset.cc \
 	../../source/Box2D/Dynamics/Joints/b2RopeJoint.cpp \
 	../../source/Box2D/Dynamics/Joints/b2WeldJoint.cpp \
 	../../source/Box2D/Dynamics/Joints/b2WheelJoint.cpp \
+	../../source/Box2D/Particle/b2Particle.cpp \
+	../../source/Box2D/Particle/b2ParticleGroup.cpp \
+	../../source/Box2D/Particle/b2ParticleSystem.cpp \
+	../../source/Box2D/Particle/b2VoronoiDiagram.cpp \
 	../../source/Box2D/Rope/b2Rope.cpp \
 	../../source/collection/bitTables.cc \
 	../../source/collection/hashTable.cc \
