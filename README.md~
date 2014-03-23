@@ -19,5 +19,5 @@ Linux building:
     libopenal-dev
     nasm
 
-make -j2 release
+make -f Torque2D.makefile debug
 
