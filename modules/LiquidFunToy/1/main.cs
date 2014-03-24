@@ -38,11 +38,15 @@ function LiquidFunToy::create( %this )
     LiquidFunToy.maxDebris = 0;
     
     // Add configuration option.
+    %particleTypes = "WaterParticle,ZombieParticle,WallParticle,SpringParticle,ElasticParticle,";
+    %particleTypes = %particleTypes @ "ViscousParticle,PowderParticle,TensileParticle,BarrierParticle,";
+    %particleTypes = %particleTypes @ "ReactiveParticle,StaticPressureParticle,RepulsiveParticle";
+    
     addSelectionOption("Circle,Polygon", "Set Shape", 2, "setShape", true, "Initial fluid area shape");
     addSelectionOption("Sand,Snow,Pebble", "Set size", 3, "setSize", true, "Set fluid particle size");
     addNumericOption("Volume", 3, 10, 1, "setVolume", 6, true, "Set the amount of particles by volume");
     addFlagOption("Solid Liquid", "setSolidLiquid", false, true, "Prevents other bodies from penetrating the particle group." );
-    addSelectionOption("WaterParticle,ZombieParticle,WallParticle,SpringParticle,ElasticParticle,ViscousParticle,PowderParticle,TensileParticle", "Set liquid type", 3, "setLiquidType", true, "Set fluid type");    
+    addSelectionOption(%particleTypes, "Set liquid type", 3, "setLiquidType", true, "Set fluid type");    
     addNumericOption("Amount of Debris", 0, 30, 1, "setMaxDebris", LiquidFunToy.maxDebris, true, "Sets the amount of debris created.");
     
     // Reset the toy.

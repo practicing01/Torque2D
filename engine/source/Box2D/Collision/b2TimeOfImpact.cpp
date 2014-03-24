@@ -23,8 +23,7 @@
 #include <Box2D/Collision/Shapes/b2PolygonShape.h>
 #include <Box2D/Common/b2Timer.h>
 
-#include <cstdio>
-using namespace std;
+#include <stdio.h>
 
 float32 b2_toiTime, b2_toiMaxTime;
 int32 b2_toiCalls, b2_toiIters, b2_toiMaxIters;
@@ -68,6 +67,7 @@ struct b2SeparationFunction
 			b2Vec2 pointB = b2Mul(xfB, localPointB);
 			m_axis = pointB - pointA;
 			float32 s = m_axis.Normalize();
+			m_localPoint = b2Vec2_zero;
 			return s;
 		}
 		else if (cache->indexA[0] == cache->indexA[1])
@@ -422,6 +422,9 @@ void b2TimeOfImpact(b2TOIOutput* output, const b2TOIInput* input)
 					t = 0.5f * (a1 + a2);
 				}
 
+				++rootIterCount;
+				++b2_toiRootIters;
+
 				float32 s = fcn.Evaluate(indexA, indexB, t);
 
 				if (b2Abs(s - target) < tolerance)
@@ -442,10 +445,7 @@ void b2TimeOfImpact(b2TOIOutput* output, const b2TOIInput* input)
 					a2 = t;
 					s2 = s;
 				}
-
-				++rootIterCount;
-				++b2_toiRootIters;
-
+				
 				if (rootIterCount == 50)
 				{
 					break;

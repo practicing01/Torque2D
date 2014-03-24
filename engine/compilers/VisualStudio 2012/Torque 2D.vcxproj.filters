@@ -1368,6 +1368,15 @@
     <ClCompile Include="..\..\source\2d\sceneobject\LiquidFunObject.cc">
       <Filter>2d\sceneobject</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\source\box2d\Common\b2FreeList.cpp">
+      <Filter>box2d\Common</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\source\box2d\Common\b2Stat.cpp">
+      <Filter>box2d\Common</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\source\box2d\Common\b2TrackedBlock.cpp">
+      <Filter>box2d\Common</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\source\audio\audio.h">
@@ -3041,6 +3050,21 @@
     </ClInclude>
     <ClInclude Include="..\..\source\2d\sceneobject\LiquidFunObject_ScriptBinding.h">
       <Filter>2d\sceneobject</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\source\box2d\Common\b2FreeList.h">
+      <Filter>box2d\Common</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\source\box2d\Common\b2IntrusiveList.h">
+      <Filter>box2d\Common</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\source\box2d\Common\b2SlabAllocator.h">
+      <Filter>box2d\Common</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\source\box2d\Common\b2Stat.h">
+      <Filter>box2d\Common</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\source\box2d\Common\b2TrackedBlock.h">
+      <Filter>box2d\Common</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
