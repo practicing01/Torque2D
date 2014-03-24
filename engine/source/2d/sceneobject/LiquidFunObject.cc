@@ -90,16 +90,16 @@ const char* LiquidFunObject::getShapeTypeDescription(S32 shapeType)
 
 static EnumTable::Enums liquidParticleTypes[] =
 {
-    { b2ParticleFlag::b2_waterParticle, "WaterParticle" },
-    { b2ParticleFlag::b2_zombieParticle, "ZombieParticle" },
-    { b2ParticleFlag::b2_wallParticle, "WallParticle" },
-    { b2ParticleFlag::b2_springParticle, "SpringParticle" },
-    { b2ParticleFlag::b2_elasticParticle, "ElasticParticle" },
-    { b2ParticleFlag::b2_viscousParticle, "ViscousParticle" },
-    { b2ParticleFlag::b2_powderParticle, "PowderParticle" },
-    { b2ParticleFlag::b2_tensileParticle, "TensileParticle" },
-    { b2ParticleFlag::b2_colorMixingParticle, "ColorMixingParticle" },
-    { b2ParticleFlag::b2_destructionListener, "DestructionListenerParticle" }
+    { b2_waterParticle, "WaterParticle" },
+    { b2_zombieParticle, "ZombieParticle" },
+    { b2_wallParticle, "WallParticle" },
+    { b2_springParticle, "SpringParticle" },
+    { b2_elasticParticle, "ElasticParticle" },
+    { b2_viscousParticle, "ViscousParticle" },
+    { b2_powderParticle, "PowderParticle" },
+    { b2_tensileParticle, "TensileParticle" },
+    { b2_colorMixingParticle, "ColorMixingParticle" },
+    { b2_destructionListener, "DestructionListenerParticle" }
 };
 static EnumTable liquidParticleTable(10, &liquidParticleTypes[0]);
 
@@ -164,9 +164,9 @@ void LiquidFunObject::copyTo(SimObject* object)
 
    pLiquidFunObject->setShapeType( getShapeType() );
 
-   if (getShapeType() == shapeOptions::polygon)
+   if (getShapeType() == LiquidFunObject::polygon)
        pLiquidFunObject->setPolygonSize( getPolygonSize() );
-   else if (getShapeType() == shapeOptions::circle)
+   else if (getShapeType() == LiquidFunObject::circle)
        pLiquidFunObject->setCircleRadius( getCircleRadius() );
 
    pLiquidFunObject->setParticleRadius( getParticleRadius() );
@@ -198,12 +198,12 @@ void LiquidFunObject::OnRegisterScene( Scene* pScene )
     b2PolygonShape polygonShape;
     b2CircleShape circleShape;
     b2Vec2 pos(getPosition().x, getPosition().y);
-    if (mShapeType == shapeOptions::polygon)
+    if (mShapeType == LiquidFunObject::polygon)
     {        
         polygonShape.SetAsBox(mPolygonSize.x, mPolygonSize.y, pos, getAngle());       
         mParticleGroupDef.shape = &polygonShape;
     }
-    else if (mShapeType == shapeOptions::circle)
+    else if (mShapeType == LiquidFunObject::circle)
     {        
         circleShape.m_radius = mCircleRadius;
         circleShape.m_p = pos;
@@ -523,7 +523,7 @@ void LiquidFunObject::setPolygonSize( const Vector2& size )
     PROFILE_SCOPE(LiquidFunObject_SetPolygonSize);
 
     mPolygonSize = size;
-    mShapeType = shapeOptions::polygon;
+    mShapeType = LiquidFunObject::polygon;
 }
 
 //-----------------------------------------------------------------------------
@@ -534,7 +534,7 @@ void LiquidFunObject::setCircleRadius( const F32 radius )
     PROFILE_SCOPE(LiquidFunObject_SetCircleRadius);
 
     mCircleRadius = radius;
-    mShapeType = shapeOptions::circle;
+    mShapeType = LiquidFunObject::circle;
 }
 
 //-----------------------------------------------------------------------------

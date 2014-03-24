@@ -409,7 +409,7 @@ SOURCES := ../../source/2d/assets/AnimationAsset.cc \
 LDFLAGS := -g -m32
 LDLIBS := -lstdc++ -lm -ldl -lpthread -lrt -lX11 -lXft -lSDL -lopenal
 
-CFLAGS := -MMD -I. -Wfatal-errors -Wunused -m32 -msse -march=i686 -pipe -std=c++0x
+CFLAGS := -std=c++0x -MMD -I. -Wfatal-errors -Wunused -m32 -msse -march=i686 -pipe
 
 CFLAGS += -I/usr/include
 CFLAGS += -I/usr/include/freetype2
