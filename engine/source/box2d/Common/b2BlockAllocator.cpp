@@ -18,13 +18,13 @@
 */
 
 #include <Box2D/Common/b2BlockAllocator.h>
-#include <cstdlib>
-#include <climits>
-#include <cstring>
-#include <memory>
-using namespace std;
+#include <limits.h>
+#include <memory.h>
+#include <stddef.h>
+#include <string.h>
+#include <new> // For placement new
 
-int32 b2BlockAllocator::s_blockSizes[b2_blockSizes] = 
+int32 b2BlockAllocator::s_blockSizes[b2_blockSizes] =
 {
 	16,		// 0
 	32,		// 1
@@ -57,12 +57,12 @@ struct b2Block
 
 b2BlockAllocator::b2BlockAllocator()
 {
-	b2Assert(b2_blockSizes < UCHAR_MAX);
+	b2Assert((uint32)b2_blockSizes < UCHAR_MAX);
 
 	m_chunkSpace = b2_chunkArrayIncrement;
 	m_chunkCount = 0;
 	m_chunks = (b2Chunk*)b2Alloc(m_chunkSpace * sizeof(b2Chunk));
-	
+
 	memset(m_chunks, 0, m_chunkSpace * sizeof(b2Chunk));
 	memset(m_freeLists, 0, sizeof(m_freeLists));
 
@@ -97,6 +97,11 @@ b2BlockAllocator::~b2BlockAllocator()
 	b2Free(m_chunks);
 }
 
+uint32 b2BlockAllocator::GetNumGiantAllocations() const
+{
+	return m_giants.GetList().GetLength();
+}
+
 void* b2BlockAllocator::Allocate(int32 size)
 {
 	if (size == 0)
@@ -106,7 +111,7 @@ void* b2BlockAllocator::Allocate(int32 size)
 
 	if (size > b2_maxBlockSize)
 	{
-		return b2Alloc(size);
+		return m_giants.Allocate(size);
 	}
 
 	int32 index = s_blockSizeLookup[size];
@@ -132,7 +137,7 @@ void* b2BlockAllocator::Allocate(int32 size)
 
 		b2Chunk* chunk = m_chunks + m_chunkCount;
 		chunk->blocks = (b2Block*)b2Alloc(b2_chunkSize);
-#if defined(_DEBUG)
+#if DEBUG
 		memset(chunk->blocks, 0xcd, b2_chunkSize);
 #endif
 		int32 blockSize = s_blockSizes[index];
@@ -166,14 +171,14 @@ void b2BlockAllocator::Free(void* p, int32 size)
 
 	if (size > b2_maxBlockSize)
 	{
-		b2Free(p);
+		m_giants.Free(p);
 		return;
 	}
 
 	int32 index = s_blockSizeLookup[size];
 	b2Assert(0 <= index && index < b2_blockSizes);
 
-#ifdef _DEBUG
+#if DEBUG
 	// Verify the memory address and size is valid.
 	int32 blockSize = s_blockSizes[index];
 	bool found = false;

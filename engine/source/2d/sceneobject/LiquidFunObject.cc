@@ -99,9 +99,13 @@ static EnumTable::Enums liquidParticleTypes[] =
     { b2ParticleFlag::b2_powderParticle, "PowderParticle" },
     { b2ParticleFlag::b2_tensileParticle, "TensileParticle" },
     { b2ParticleFlag::b2_colorMixingParticle, "ColorMixingParticle" },
-    { b2ParticleFlag::b2_destructionListener, "DestructionListenerParticle" }
+    { b2ParticleFlag::b2_destructionListenerParticle, "DestructionListenerParticle" },
+    { b2ParticleFlag::b2_barrierParticle, "BarrierParticle" },
+    { b2ParticleFlag::b2_staticPressureParticle, "StaticPressureParticle" },
+    { b2ParticleFlag::b2_reactiveParticle, "ReactiveParticle" },
+    { b2ParticleFlag::b2_repulsiveParticle, "RepulsiveParticle" }
 };
-static EnumTable liquidParticleTable(10, &liquidParticleTypes[0]);
+static EnumTable liquidParticleTable(14, &liquidParticleTypes[0]);
 
 //-----------------------------------------------------------------------------
 
@@ -216,10 +220,12 @@ void LiquidFunObject::OnRegisterScene( Scene* pScene )
         mParticleGroupDef.groupFlags = b2_solidParticleGroup;
 
     //mParticleGroupDef.flags = b2_powderParticle;
-    pScene->getWorld()->SetParticleRadius( getParticleRadius() );
-    pScene->getWorld()->SetParticleDamping(0.2f);
-    pScene->getWorld()->SetParticleGravityScale(0.5f);
-    mParticleGroup = pScene->getWorld()->CreateParticleGroup(mParticleGroupDef);
+    const b2ParticleSystemDef particleSystemDef;
+    b2ParticleSystem* pSystem = pScene->getWorld()->CreateParticleSystem(&particleSystemDef);
+    pSystem->SetRadius(getParticleRadius());    
+    pSystem->SetDamping(0.2f);
+    pSystem->SetGravityScale(0.5f);
+    mParticleGroup = pSystem->CreateParticleGroup(mParticleGroupDef);
 }
 
 //-----------------------------------------------------------------------------
@@ -227,7 +233,7 @@ void LiquidFunObject::OnRegisterScene( Scene* pScene )
 void LiquidFunObject::OnUnregisterScene( Scene* pScene )
 {
     // Stop
-    pScene->getWorld()->DestroyParticlesInGroup(mParticleGroup);
+    pScene->getWorld()->DestroyParticleSystem(pScene->getWorld()->GetParticleSystemList());
 
     // Remove always in scope.
     pScene->getWorldQuery()->removeAlwaysInScope( this );
@@ -241,7 +247,7 @@ float smoothstep(float x) { return x * x * (3 - 2 * x); }
 void LiquidFunObject::sceneRender( const SceneRenderState* pSceneRenderState, const SceneRenderRequest* pSceneRenderRequest, BatchRender* pBatchRenderer )
 {
     // Finish if we can't render.
-    S32 particleCount = mpScene->getWorld()->GetParticleCount();
+    S32 particleCount = mpScene->getWorld()->GetParticleSystemList()->GetParticleCount();
 
     if (!particleCount)
         return;
@@ -250,9 +256,9 @@ void LiquidFunObject::sceneRender( const SceneRenderState* pSceneRenderState, co
     pBatchRenderer->flush( getScene()->getDebugStats().batchIsolatedFlush );
 
     F32 currentscale = 1.0;
-    F32 radius = getScene()->getWorld()->GetParticleRadius();
-    b2Vec2* centers = getScene()->getWorld()->GetParticlePositionBuffer();
-    S32 count = getScene()->getWorld()->GetParticleCount();
+    F32 radius = getScene()->getWorld()->GetParticleSystemList()->GetRadius();
+    b2Vec2* centers = getScene()->getWorld()->GetParticleSystemList()->GetPositionBuffer();
+    S32 count = getScene()->getWorld()->GetParticleSystemList()->GetParticleCount();
     static unsigned int particle_texture = 0;
 
 	if (!particle_texture || !glIsTexture(particle_texture)) // Android deletes textures upon sleep etc.
