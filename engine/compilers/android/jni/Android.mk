@@ -67,6 +67,7 @@ $(LOCAL_PATH)/../../../source/Box2D/Common \
 $(LOCAL_PATH)/../../../source/Box2D/Dynamics \
 $(LOCAL_PATH)/../../../source/Box2D/Dynamics/Contacts \
 $(LOCAL_PATH)/../../../source/Box2D/Dynamics/Joints \
+$(LOCAL_PATH)/../../../source/Box2D/Particle \
 $(LOCAL_PATH)/../../../source/Box2D/Rope \
      $(LOCAL_PATH)/../../../source/collection \
      $(LOCAL_PATH)/../../../source/component \
@@ -197,6 +198,7 @@ LOCAL_SRC_FILES := ../../../lib/ljpeg/jcapimin.c \
 ../../../source/2d/gui/SceneWindow.cc \
 ../../../source/2d/sceneobject/CompositeSprite.cc \
 ../../../source/2d/sceneobject/ImageFont.cc \
+../../../source/2d/sceneobject/LiquidFunObject.cc \
 ../../../source/2d/sceneobject/ParticlePlayer.cc \
 ../../../source/2d/sceneobject/SceneObject.cc \
 ../../../source/2d/sceneobject/SceneObjectList.cc \
@@ -235,10 +237,13 @@ LOCAL_SRC_FILES := ../../../lib/ljpeg/jcapimin.c \
 ../../../source/Box2D/Collision/Shapes/b2PolygonShape.cpp \
 ../../../source/Box2D/Common/b2BlockAllocator.cpp \
 ../../../source/Box2D/Common/b2Draw.cpp \
+../../../source/Box2D/Common/b2FreeList.cpp \
 ../../../source/Box2D/Common/b2Math.cpp \
 ../../../source/Box2D/Common/b2Settings.cpp \
 ../../../source/Box2D/Common/b2StackAllocator.cpp \
+../../../source/Box2D/Common/b2Stat.cpp \
 ../../../source/Box2D/Common/b2Timer.cpp \
+../../../source/Box2D/Common/b2TrackedBlock.cpp \
 ../../../source/Box2D/Dynamics/b2Body.cpp \
 ../../../source/Box2D/Dynamics/b2ContactManager.cpp \
 ../../../source/Box2D/Dynamics/b2Fixture.cpp \
@@ -266,6 +271,10 @@ LOCAL_SRC_FILES := ../../../lib/ljpeg/jcapimin.c \
 ../../../source/Box2D/Dynamics/Joints/b2RopeJoint.cpp \
 ../../../source/Box2D/Dynamics/Joints/b2WeldJoint.cpp \
 ../../../source/Box2D/Dynamics/Joints/b2WheelJoint.cpp \
+../../../source/Box2D/Particle/b2Particle.cpp \
+../../../source/Box2D/Particle/b2ParticleGroup.cpp \
+../../../source/Box2D/Particle/b2ParticleSystem.cpp \
+../../../source/Box2D/Particle/b2VoronoiDiagram.cpp \
 ../../../source/Box2D/Rope/b2Rope.cpp \
 ../../../source/collection/bitTables.cc \
 ../../../source/collection/hashTable.cc \

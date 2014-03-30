@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<manifest package="org.mds.phx"
+<manifest package="org.mds.rtd"
     android:versionCode="1"
     android:versionName="1" xmlns:android="http://schemas.android.com/apk/res/android">
     
