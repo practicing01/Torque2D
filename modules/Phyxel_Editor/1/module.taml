@@ -1,0 +1,14 @@
+<ModuleDefinition
+	ModuleId="Phyxel_Editor"
+	VersionId="1"
+	Description="Phyxel_Editor"
+	Type="toy"
+	ToyCategoryIndex="3"
+	ScriptFile="main.cs"
+	CreateFunction="create"
+    DestroyFunction="destroy">
+        <DeclaredAssets
+            Path="assets"
+            Extension="asset.taml"
+            Recurse="true"/>		
+</ModuleDefinition>
