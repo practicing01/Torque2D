@@ -1226,10 +1226,10 @@ ConsoleMethodWithDocs(CompositeSprite, pickArea, ConsoleString, 4, 6, (startx/y,
     aabb.upperBound.x = getMax( v1.x, v2.x );
     aabb.upperBound.y = getMax( v1.y, v2.y );
 
-<<<<<<< HEAD
+
     // Rotate the AABB into local space.
     //CoreMath::mRotateAABB( aabb, -renderTransform.q.GetAngle(), aabb );
-=======
+
     // Calculate local OOBB.
     b2Vec2 localOOBB[4];
     CoreMath::mAABBtoOOBB( aabb, localOOBB );
@@ -1242,7 +1242,7 @@ ConsoleMethodWithDocs(CompositeSprite, pickArea, ConsoleString, 4, 6, (startx/y,
     // Convert OOBB to a PolygonShape
     b2PolygonShape oobb_polygon;
     oobb_polygon.Set(localOOBB, 4);
->>>>>>> refs/remotes/gg/development
+
 
     // Perform query.
     pSpriteBatchQuery->queryArea( aabb, false );

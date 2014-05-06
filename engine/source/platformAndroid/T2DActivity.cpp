@@ -346,11 +346,7 @@ void androidKeyboardEvent(int keyval, bool make) {
    event.action     = make ? SI_MAKE : SI_BREAK;
    event.modifier   = 0;
    event.ascii      = keyCode;
-<<<<<<< HEAD
-   event.fValues[0]     = make ? 1.0f : 0.0f;
-=======
    event.fValues[0]  = make ? 1.0f : 0.0f;
->>>>>>> refs/remotes/gg/development
 
    Game->postEvent(event);
 }

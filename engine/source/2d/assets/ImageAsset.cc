@@ -573,11 +573,11 @@ Vector2 ImageAsset::getExplicitCellOffset(const S32 cellIndex)
 
 S32 ImageAsset::getExplicitCellWidth(const S32 cellIndex)
 {
-<<<<<<< HEAD
+
 if ( !getExplicitMode() )
-=======
+
     if ( !getExplicitMode() )
->>>>>>> refs/remotes/gg/development
+
     {
         // No, so warn.
         Con::warnf( "ImageAsset() - Cannot perform explicit cell operation when not in explicit mode." );
@@ -593,22 +593,21 @@ if ( !getExplicitMode() )
 
 S32 ImageAsset::getExplicitCellHeight(const S32 cellIndex)
 {
-<<<<<<< HEAD
-if ( !getExplicitMode() )
-=======
+
+
     if ( !getExplicitMode() )
->>>>>>> refs/remotes/gg/development
+
     {
         // No, so warn.
         Con::warnf( "ImageAsset() - Cannot perform explicit cell operation when not in explicit mode." );
         return (0);
-<<<<<<< HEAD
-}
 
-=======
     }
+
+
+
     
->>>>>>> refs/remotes/gg/development
+
     ImageAsset::FrameArea::PixelArea thisCell = mExplicitFrames.at(cellIndex);
     return(thisCell.mPixelHeight);
 

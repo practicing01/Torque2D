@@ -255,35 +255,7 @@ ConsoleMethodWithDocs(ImageAsset, getCellWidth, ConsoleInt, 2, 2, ())
 
 //-----------------------------------------------------------------------------
 
-<<<<<<< HEAD
-/*! Gets the CELL width in Explicit Mode.
-@return the specified CELL width.
-*/
-ConsoleMethodWithDocs(ImageAsset, getExplicitCellWidth, ConsoleInt, 3,3, (CellIndex))
-{
-    // Fetch cell index.
-    const S32 cellIndex = dAtoi( argv[2] );
 
-    return(object->getExplicitCellWidth(cellIndex));
-}
-
-//-----------------------------------------------------------------------------
-
-/*! Gets the CELL height in Explicit Mode.
-@return the specified CELL height.
-*/
-ConsoleMethodWithDocs(ImageAsset, getExplicitCellHeight, ConsoleInt, 3,3, (CellIndex))
-{
-    // Fetch cell index.
-    const S32 cellIndex = dAtoi( argv[2] );
-
-    return(object->getExplicitCellHeight(cellIndex));
-}
-
-//-----------------------------------------------------------------------------
-
-=======
->>>>>>> refs/remotes/gg/development
 /*! Sets the CELL height.
 @return No return value.
 */
@@ -473,16 +445,6 @@ ConsoleMethodWithDocs(ImageAsset, removeExplicitCell, ConsoleBool, 7, 7, (int ce
 //-----------------------------------------------------------------------------
 
 /*! Set an explicit cell at the specified index.
-<<<<<<< HEAD
-@param cellIndex The zero-based index to insert the cell. This will work when no cells are present. If the index is beyond the cell count then the cell is simply added.
-@param cellOffsetX The offset in the X axis to the top-left of the cell.
-@param cellOffsetY The offset in the Y axis to the top-left of the cell.
-@param cellWidth The width of the cell.
-@param cellHeight The height of the cell.
-@param cellName The name of the cell's region.
-The image asset must be in explicit mode for this operation to succeed.
-@return Whether the operation was successful or not.
-=======
     @param cellIndex The zero-based index to set the cell.
     @param cellOffsetX The offset in the X axis to the top-left of the cell.
     @param cellOffsetY The offset in the Y axis to the top-left of the cell.
@@ -491,7 +453,6 @@ The image asset must be in explicit mode for this operation to succeed.
     @param cellName The name of the cell's region.
     The image asset must be in explicit mode for this operation to succeed.
     @return Whether the operation was successful or not.
->>>>>>> refs/remotes/gg/development
 */
 ConsoleMethodWithDocs(ImageAsset, setExplicitCell, ConsoleBool, 8, 8, (int cellIndex, int cellOffsetX, int cellOffsetY, int cellWidth, int cellHeight, string cellName))
 {
