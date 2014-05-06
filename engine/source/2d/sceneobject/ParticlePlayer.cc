@@ -404,7 +404,11 @@ void ParticlePlayer::integrateObject( const F32 totalTime, const F32 elapsedTime
     // Are we waiting for particles and there are non left?
     if ( mWaitingForParticles )
     {
+<<<<<<< HEAD
 // Yes, so are there any particles left?
+=======
+        // Yes, so are there any particles left?
+>>>>>>> refs/remotes/gg/development
         if ( activeParticleCount == 0 )
         {
             // No, so stop the player immediately.
@@ -414,7 +418,11 @@ void ParticlePlayer::integrateObject( const F32 totalTime, const F32 elapsedTime
         return;
     }
 
+<<<<<<< HEAD
 // Finish if the particle player is in "infinite" mode.
+=======
+    // Finish if the particle player is in "infinite" mode.
+>>>>>>> refs/remotes/gg/development
     if ( lifeMode == ParticleAsset::INFINITE )
         return;
 
@@ -793,7 +801,11 @@ bool ParticlePlayer::play( const bool resetParticles )
     {
         // Fetch the emitter node.
         EmitterNode* pEmitterNode = *emitterItr;
+<<<<<<< HEAD
 pEmitterNode->setPaused(false);
+=======
+        pEmitterNode->setPaused(false);
+>>>>>>> refs/remotes/gg/development
         
         // Reset the time since last generation.
         pEmitterNode->setTimeSinceLastGeneration( 0.0f );
@@ -1274,7 +1286,7 @@ void ParticlePlayer::configureParticle( EmitterNode* pEmitterNode, ParticleSyste
         {
             // No, so set the emitter image frame.
             if (pParticleAssetEmitter->isUsingNamedImageFrame())
-                frameProvider.setImageFrameByName( pParticleAssetEmitter->getImageFrameName() );
+                frameProvider.setNamedImageFrame( pParticleAssetEmitter->getNamedImageFrame() );
             else
                 frameProvider.setImageFrame( pParticleAssetEmitter->getImageFrame() );
         }

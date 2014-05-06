@@ -7,6 +7,33 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+<<<<<<< HEAD
+=======
+		27908DFA18A3F8CB002D41BD /* Animation.c in Sources */ = {isa = PBXBuildFile; fileRef = 27908DCD18A3F8CB002D41BD /* Animation.c */; };
+		27908DFB18A3F8CB002D41BD /* AnimationState.c in Sources */ = {isa = PBXBuildFile; fileRef = 27908DCF18A3F8CB002D41BD /* AnimationState.c */; };
+		27908DFC18A3F8CB002D41BD /* AnimationStateData.c in Sources */ = {isa = PBXBuildFile; fileRef = 27908DD118A3F8CB002D41BD /* AnimationStateData.c */; };
+		27908DFD18A3F8CB002D41BD /* Atlas.c in Sources */ = {isa = PBXBuildFile; fileRef = 27908DD318A3F8CB002D41BD /* Atlas.c */; };
+		27908DFE18A3F8CB002D41BD /* AtlasAttachmentLoader.c in Sources */ = {isa = PBXBuildFile; fileRef = 27908DD518A3F8CB002D41BD /* AtlasAttachmentLoader.c */; };
+		27908DFF18A3F8CB002D41BD /* Attachment.c in Sources */ = {isa = PBXBuildFile; fileRef = 27908DD718A3F8CB002D41BD /* Attachment.c */; };
+		27908E0018A3F8CB002D41BD /* AttachmentLoader.c in Sources */ = {isa = PBXBuildFile; fileRef = 27908DD918A3F8CB002D41BD /* AttachmentLoader.c */; };
+		27908E0118A3F8CB002D41BD /* Bone.c in Sources */ = {isa = PBXBuildFile; fileRef = 27908DDB18A3F8CB002D41BD /* Bone.c */; };
+		27908E0218A3F8CB002D41BD /* BoneData.c in Sources */ = {isa = PBXBuildFile; fileRef = 27908DDD18A3F8CB002D41BD /* BoneData.c */; };
+		27908E0318A3F8CB002D41BD /* BoundingBoxAttachment.c in Sources */ = {isa = PBXBuildFile; fileRef = 27908DDF18A3F8CB002D41BD /* BoundingBoxAttachment.c */; };
+		27908E0418A3F8CB002D41BD /* Event.c in Sources */ = {isa = PBXBuildFile; fileRef = 27908DE118A3F8CB002D41BD /* Event.c */; };
+		27908E0518A3F8CB002D41BD /* EventData.c in Sources */ = {isa = PBXBuildFile; fileRef = 27908DE318A3F8CB002D41BD /* EventData.c */; };
+		27908E0618A3F8CB002D41BD /* extension.c in Sources */ = {isa = PBXBuildFile; fileRef = 27908DE518A3F8CB002D41BD /* extension.c */; };
+		27908E0718A3F8CB002D41BD /* Json.c in Sources */ = {isa = PBXBuildFile; fileRef = 27908DE718A3F8CB002D41BD /* Json.c */; };
+		27908E0818A3F8CB002D41BD /* RegionAttachment.c in Sources */ = {isa = PBXBuildFile; fileRef = 27908DE918A3F8CB002D41BD /* RegionAttachment.c */; };
+		27908E0918A3F8CB002D41BD /* Skeleton.c in Sources */ = {isa = PBXBuildFile; fileRef = 27908DEB18A3F8CB002D41BD /* Skeleton.c */; };
+		27908E0A18A3F8CB002D41BD /* SkeletonBounds.c in Sources */ = {isa = PBXBuildFile; fileRef = 27908DED18A3F8CB002D41BD /* SkeletonBounds.c */; };
+		27908E0B18A3F8CB002D41BD /* SkeletonData.c in Sources */ = {isa = PBXBuildFile; fileRef = 27908DEF18A3F8CB002D41BD /* SkeletonData.c */; };
+		27908E0C18A3F8CB002D41BD /* SkeletonJson.c in Sources */ = {isa = PBXBuildFile; fileRef = 27908DF118A3F8CB002D41BD /* SkeletonJson.c */; };
+		27908E0D18A3F8CB002D41BD /* Skin.c in Sources */ = {isa = PBXBuildFile; fileRef = 27908DF318A3F8CB002D41BD /* Skin.c */; };
+		27908E0E18A3F8CB002D41BD /* Slot.c in Sources */ = {isa = PBXBuildFile; fileRef = 27908DF518A3F8CB002D41BD /* Slot.c */; };
+		27908E0F18A3F8CB002D41BD /* SlotData.c in Sources */ = {isa = PBXBuildFile; fileRef = 27908DF718A3F8CB002D41BD /* SlotData.c */; };
+		27908E1318A3F904002D41BD /* SkeletonAsset.cc in Sources */ = {isa = PBXBuildFile; fileRef = 27908E1118A3F904002D41BD /* SkeletonAsset.cc */; };
+		27908E1718A3F91F002D41BD /* SkeletonObject.cc in Sources */ = {isa = PBXBuildFile; fileRef = 27908E1518A3F91F002D41BD /* SkeletonObject.cc */; };
+>>>>>>> refs/remotes/gg/development
 		2A03300D165D1D2100E9CD70 /* unitTesting.cc in Sources */ = {isa = PBXBuildFile; fileRef = 2A03300B165D1D2100E9CD70 /* unitTesting.cc */; };
 		2A033011165D1D4100E9CD70 /* platformFileIoTests.cc in Sources */ = {isa = PBXBuildFile; fileRef = 2A033010165D1D4100E9CD70 /* platformFileIoTests.cc */; };
 		2A25739016A48DAC00363C6F /* ParticlePlayer.cc in Sources */ = {isa = PBXBuildFile; fileRef = 2A25738E16A48DAC00363C6F /* ParticlePlayer.cc */; };
@@ -477,7 +504,61 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+<<<<<<< HEAD
 		04CC626B1795512500F9C119 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = ../../../../../../../System/Library/Frameworks/AVFoundation.framework; sourceTree = "<group>"; };
+=======
+		27908DCD18A3F8CB002D41BD /* Animation.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = Animation.c; path = ../../../source/spine/Animation.c; sourceTree = "<group>"; };
+		27908DCE18A3F8CB002D41BD /* Animation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Animation.h; path = ../../../source/spine/Animation.h; sourceTree = "<group>"; };
+		27908DCF18A3F8CB002D41BD /* AnimationState.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = AnimationState.c; path = ../../../source/spine/AnimationState.c; sourceTree = "<group>"; };
+		27908DD018A3F8CB002D41BD /* AnimationState.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AnimationState.h; path = ../../../source/spine/AnimationState.h; sourceTree = "<group>"; };
+		27908DD118A3F8CB002D41BD /* AnimationStateData.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = AnimationStateData.c; path = ../../../source/spine/AnimationStateData.c; sourceTree = "<group>"; };
+		27908DD218A3F8CB002D41BD /* AnimationStateData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AnimationStateData.h; path = ../../../source/spine/AnimationStateData.h; sourceTree = "<group>"; };
+		27908DD318A3F8CB002D41BD /* Atlas.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = Atlas.c; path = ../../../source/spine/Atlas.c; sourceTree = "<group>"; };
+		27908DD418A3F8CB002D41BD /* Atlas.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Atlas.h; path = ../../../source/spine/Atlas.h; sourceTree = "<group>"; };
+		27908DD518A3F8CB002D41BD /* AtlasAttachmentLoader.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = AtlasAttachmentLoader.c; path = ../../../source/spine/AtlasAttachmentLoader.c; sourceTree = "<group>"; };
+		27908DD618A3F8CB002D41BD /* AtlasAttachmentLoader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AtlasAttachmentLoader.h; path = ../../../source/spine/AtlasAttachmentLoader.h; sourceTree = "<group>"; };
+		27908DD718A3F8CB002D41BD /* Attachment.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = Attachment.c; path = ../../../source/spine/Attachment.c; sourceTree = "<group>"; };
+		27908DD818A3F8CB002D41BD /* Attachment.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Attachment.h; path = ../../../source/spine/Attachment.h; sourceTree = "<group>"; };
+		27908DD918A3F8CB002D41BD /* AttachmentLoader.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = AttachmentLoader.c; path = ../../../source/spine/AttachmentLoader.c; sourceTree = "<group>"; };
+		27908DDA18A3F8CB002D41BD /* AttachmentLoader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AttachmentLoader.h; path = ../../../source/spine/AttachmentLoader.h; sourceTree = "<group>"; };
+		27908DDB18A3F8CB002D41BD /* Bone.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = Bone.c; path = ../../../source/spine/Bone.c; sourceTree = "<group>"; };
+		27908DDC18A3F8CB002D41BD /* Bone.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Bone.h; path = ../../../source/spine/Bone.h; sourceTree = "<group>"; };
+		27908DDD18A3F8CB002D41BD /* BoneData.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = BoneData.c; path = ../../../source/spine/BoneData.c; sourceTree = "<group>"; };
+		27908DDE18A3F8CB002D41BD /* BoneData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BoneData.h; path = ../../../source/spine/BoneData.h; sourceTree = "<group>"; };
+		27908DDF18A3F8CB002D41BD /* BoundingBoxAttachment.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = BoundingBoxAttachment.c; path = ../../../source/spine/BoundingBoxAttachment.c; sourceTree = "<group>"; };
+		27908DE018A3F8CB002D41BD /* BoundingBoxAttachment.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BoundingBoxAttachment.h; path = ../../../source/spine/BoundingBoxAttachment.h; sourceTree = "<group>"; };
+		27908DE118A3F8CB002D41BD /* Event.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = Event.c; path = ../../../source/spine/Event.c; sourceTree = "<group>"; };
+		27908DE218A3F8CB002D41BD /* Event.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Event.h; path = ../../../source/spine/Event.h; sourceTree = "<group>"; };
+		27908DE318A3F8CB002D41BD /* EventData.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = EventData.c; path = ../../../source/spine/EventData.c; sourceTree = "<group>"; };
+		27908DE418A3F8CB002D41BD /* EventData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = EventData.h; path = ../../../source/spine/EventData.h; sourceTree = "<group>"; };
+		27908DE518A3F8CB002D41BD /* extension.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = extension.c; path = ../../../source/spine/extension.c; sourceTree = "<group>"; };
+		27908DE618A3F8CB002D41BD /* extension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = extension.h; path = ../../../source/spine/extension.h; sourceTree = "<group>"; };
+		27908DE718A3F8CB002D41BD /* Json.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = Json.c; path = ../../../source/spine/Json.c; sourceTree = "<group>"; };
+		27908DE818A3F8CB002D41BD /* Json.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Json.h; path = ../../../source/spine/Json.h; sourceTree = "<group>"; };
+		27908DE918A3F8CB002D41BD /* RegionAttachment.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = RegionAttachment.c; path = ../../../source/spine/RegionAttachment.c; sourceTree = "<group>"; };
+		27908DEA18A3F8CB002D41BD /* RegionAttachment.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RegionAttachment.h; path = ../../../source/spine/RegionAttachment.h; sourceTree = "<group>"; };
+		27908DEB18A3F8CB002D41BD /* Skeleton.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = Skeleton.c; path = ../../../source/spine/Skeleton.c; sourceTree = "<group>"; };
+		27908DEC18A3F8CB002D41BD /* Skeleton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Skeleton.h; path = ../../../source/spine/Skeleton.h; sourceTree = "<group>"; };
+		27908DED18A3F8CB002D41BD /* SkeletonBounds.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = SkeletonBounds.c; path = ../../../source/spine/SkeletonBounds.c; sourceTree = "<group>"; };
+		27908DEE18A3F8CB002D41BD /* SkeletonBounds.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SkeletonBounds.h; path = ../../../source/spine/SkeletonBounds.h; sourceTree = "<group>"; };
+		27908DEF18A3F8CB002D41BD /* SkeletonData.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = SkeletonData.c; path = ../../../source/spine/SkeletonData.c; sourceTree = "<group>"; };
+		27908DF018A3F8CB002D41BD /* SkeletonData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SkeletonData.h; path = ../../../source/spine/SkeletonData.h; sourceTree = "<group>"; };
+		27908DF118A3F8CB002D41BD /* SkeletonJson.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = SkeletonJson.c; path = ../../../source/spine/SkeletonJson.c; sourceTree = "<group>"; };
+		27908DF218A3F8CB002D41BD /* SkeletonJson.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SkeletonJson.h; path = ../../../source/spine/SkeletonJson.h; sourceTree = "<group>"; };
+		27908DF318A3F8CB002D41BD /* Skin.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = Skin.c; path = ../../../source/spine/Skin.c; sourceTree = "<group>"; };
+		27908DF418A3F8CB002D41BD /* Skin.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Skin.h; path = ../../../source/spine/Skin.h; sourceTree = "<group>"; };
+		27908DF518A3F8CB002D41BD /* Slot.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = Slot.c; path = ../../../source/spine/Slot.c; sourceTree = "<group>"; };
+		27908DF618A3F8CB002D41BD /* Slot.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Slot.h; path = ../../../source/spine/Slot.h; sourceTree = "<group>"; };
+		27908DF718A3F8CB002D41BD /* SlotData.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = SlotData.c; path = ../../../source/spine/SlotData.c; sourceTree = "<group>"; };
+		27908DF818A3F8CB002D41BD /* SlotData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SlotData.h; path = ../../../source/spine/SlotData.h; sourceTree = "<group>"; };
+		27908DF918A3F8CB002D41BD /* spine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = spine.h; path = ../../../source/spine/spine.h; sourceTree = "<group>"; };
+		27908E1018A3F904002D41BD /* SkeletonAsset_ScriptBinding.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SkeletonAsset_ScriptBinding.h; sourceTree = "<group>"; };
+		27908E1118A3F904002D41BD /* SkeletonAsset.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = SkeletonAsset.cc; sourceTree = "<group>"; };
+		27908E1218A3F904002D41BD /* SkeletonAsset.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SkeletonAsset.h; sourceTree = "<group>"; };
+		27908E1418A3F91F002D41BD /* SkeletonObject_ScriptBinding.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SkeletonObject_ScriptBinding.h; sourceTree = "<group>"; };
+		27908E1518A3F91F002D41BD /* SkeletonObject.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = SkeletonObject.cc; sourceTree = "<group>"; };
+		27908E1618A3F91F002D41BD /* SkeletonObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SkeletonObject.h; sourceTree = "<group>"; };
+>>>>>>> refs/remotes/gg/development
 		2797C9E117F4E12500625B51 /* eaxtypes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = eaxtypes.h; sourceTree = "<group>"; };
 		2A03300B165D1D2100E9CD70 /* unitTesting.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = unitTesting.cc; path = ../../../source/testing/unitTesting.cc; sourceTree = "<group>"; };
 		2A03300C165D1D2100E9CD70 /* unitTesting.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = unitTesting.h; path = ../../../source/testing/unitTesting.h; sourceTree = "<group>"; };
@@ -2206,6 +2287,12 @@
 				86BC7ED116518D4600D96ADF /* ShapeVector.cc */,
 				86BC7ED216518D4600D96ADF /* ShapeVector.h */,
 				86BC7ED316518D4600D96ADF /* ShapeVector_ScriptBinding.h */,
+<<<<<<< HEAD
+=======
+				27908E1518A3F91F002D41BD /* SkeletonObject.cc */,
+				27908E1618A3F91F002D41BD /* SkeletonObject.h */,
+				27908E1418A3F91F002D41BD /* SkeletonObject_ScriptBinding.h */,
+>>>>>>> refs/remotes/gg/development
 				86BC7ED416518D4600D96ADF /* Sprite.cc */,
 				86BC7ED516518D4600D96ADF /* Sprite.h */,
 				86BC7ED616518D4600D96ADF /* Sprite_ScriptBinding.h */,
@@ -3259,6 +3346,10 @@
 				86D77046165687220046D71F /* memStream.cc in Sources */,
 				86D77047165687220046D71F /* nStream.cc in Sources */,
 				86D77048165687220046D71F /* resizeStream.cc in Sources */,
+<<<<<<< HEAD
+=======
+				27908E1718A3F91F002D41BD /* SkeletonObject.cc in Sources */,
+>>>>>>> refs/remotes/gg/development
 				86D77049165687220046D71F /* resourceDictionary.cc in Sources */,
 				86D7704A165687220046D71F /* resourceManager.cc in Sources */,
 				86D7704B165687220046D71F /* streamObject.cc in Sources */,

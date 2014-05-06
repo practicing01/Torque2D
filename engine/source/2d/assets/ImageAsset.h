@@ -162,6 +162,7 @@ private:
     typedef Vector<FrameArea::PixelArea> typeExplicitFrameAreaVector;
 
     /// Configuration.
+<<<<<<< HEAD
     StringTableEntry mImageFile;
     bool	mForce16Bit;
     TextureFilterMode mLocalFilterMode;
@@ -175,6 +176,21 @@ private:
     S32 mCellHeight;
     S32 mCellCountX;
     S32 mCellCountY;
+=======
+    StringTableEntry            mImageFile;
+    bool                        mForce16Bit;
+    TextureFilterMode           mLocalFilterMode;
+    bool                        mExplicitMode;
+    bool                        mCellRowOrder;
+    S32                         mCellOffsetX;
+    S32                         mCellOffsetY;
+    S32                         mCellStrideX;
+    S32                         mCellStrideY;
+    S32                         mCellWidth;
+    S32                         mCellHeight;
+    S32                         mCellCountX;
+    S32                         mCellCountY;
+>>>>>>> refs/remotes/gg/development
 
     /// Imagery.
     typeFrameAreaVector mFrames;
@@ -224,6 +240,7 @@ public:
     void setCellCountY( const S32 cellCountY );
     inline S32 getCellCountY( void ) const { return mCellCountY; }
 
+<<<<<<< HEAD
     void setCellWidth( const S32 cellWidth );
     inline S32 getCellWidth( void ) const	{ return mCellWidth; }
     S32 getExplicitCellWidth(const S32 cellIndex);
@@ -231,6 +248,19 @@ public:
     void setCellHeight( const S32 cellheight );
     S32 getCellHeight( void) const	{ return mCellHeight; }
     S32 getExplicitCellHeight(const S32 cellIndex);
+=======
+    void                    setCellWidth( const S32 cellWidth );
+    inline S32              getCellWidth( void ) const                      { return mCellWidth; }
+
+    void                    setCellHeight( const S32 cellheight );
+    inline S32              getCellHeight( void) const                      { return mCellHeight; }
+    
+    Vector2                 getExplicitCellOffset(const S32 cellIndex);
+    S32                     getExplicitCellWidth(const S32 cellIndex);
+    S32                     getExplicitCellHeight(const S32 cellIndex);
+    StringTableEntry        getExplicitCellName(const S32 cellIndex);
+    S32                     getExplicitCellIndex(const char* regionName);
+>>>>>>> refs/remotes/gg/development
     
     bool containsNamedRegion(const char* regionName);
 
