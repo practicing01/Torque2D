@@ -59,6 +59,7 @@ function SpineToy::reset(%this)
 
     %this.createBackground();
     %this.createGoblin();
+    %this.createSpineBoy();
 }
 
 //-----------------------------------------------------------------------------
@@ -108,6 +109,8 @@ function SpineToy::createGoblin(%this)
 
     // Add it to the scene
     SandboxScene.add(%goblin);
+
+%this.Skeleton_Goblin=%goblin;
 }
 
 //-----------------------------------------------------------------------------
@@ -130,6 +133,9 @@ function SpineToy::createSpineBoy(%this)
     %object.setMix("jump", "walk", 0.4);
 
     SandboxScene.add(%object);
+
+%object.mount(%this.Skeleton_Goblin,"0 5",0,true,0);
+
 
     %object.schedule(4000, "doJump");
 }

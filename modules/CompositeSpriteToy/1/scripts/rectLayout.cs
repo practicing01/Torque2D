@@ -31,7 +31,7 @@ function CompositeSpriteToy::createRectLayout( %this )
     // Set the default sprite stride.
     // This is used in rectilinear layout mode to scale the specified logical position arguments.	
     %composite.setDefaultSpriteStride( 8, 8 );
-    
+
     // Set the default sprite size used to a little less than the stride so we get a "gap"
     // in between the sprites.
     %composite.setDefaultSpriteSize( 6, 6 );

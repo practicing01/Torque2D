@@ -110,6 +110,7 @@ function SpriteToy::createStaticSprite( %this )
         
     // Add the sprite to the scene.
     SandboxScene.add( %object );    
+
 }
 
 //-----------------------------------------------------------------------------
