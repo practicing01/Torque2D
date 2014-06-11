@@ -1,5 +1,11 @@
 //Modular Structure by practicing01
 
+#include <stdlib.h>
+
+#ifndef _CONSOLE_H_
+#include "console/console.h"
+#endif
+
 struct Struct_Module
 {
 

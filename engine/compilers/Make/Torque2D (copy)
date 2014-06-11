@@ -1,72 +1,12 @@
 APPNAME := ../../../Torque2D
 
-SOURCES := ../../lib/ljpeg/jcapimin.c \
-	../../lib/ljpeg/jcapistd.c \
-	../../lib/ljpeg/jccoefct.c \
-	../../lib/ljpeg/jccolor.c \
-	../../lib/ljpeg/jcdctmgr.c \
-	../../lib/ljpeg/jchuff.c \
-	../../lib/ljpeg/jcinit.c \
-	../../lib/ljpeg/jcmainct.c \
-	../../lib/ljpeg/jcmarker.c \
-	../../lib/ljpeg/jcmaster.c \
-	../../lib/ljpeg/jcomapi.c \
-	../../lib/ljpeg/jcparam.c \
-	../../lib/ljpeg/jcphuff.c \
-	../../lib/ljpeg/jcprepct.c \
-	../../lib/ljpeg/jcsample.c \
-	../../lib/ljpeg/jctrans.c \
-	../../lib/ljpeg/jdapimin.c \
-	../../lib/ljpeg/jdapistd.c \
-	../../lib/ljpeg/jdatadst.c \
-	../../lib/ljpeg/jdatasrc.c \
-	../../lib/ljpeg/jdcoefct.c \
-	../../lib/ljpeg/jdcolor.c \
-	../../lib/ljpeg/jddctmgr.c \
-	../../lib/ljpeg/jdhuff.c \
-	../../lib/ljpeg/jdinput.c \
-	../../lib/ljpeg/jdmainct.c \
-	../../lib/ljpeg/jdmarker.c \
-	../../lib/ljpeg/jdmaster.c \
-	../../lib/ljpeg/jdmerge.c \
-	../../lib/ljpeg/jdphuff.c \
-	../../lib/ljpeg/jdpostct.c \
-	../../lib/ljpeg/jdsample.c \
-	../../lib/ljpeg/jdtrans.c \
-	../../lib/ljpeg/jerror.c \
-	../../lib/ljpeg/jfdctflt.c \
-	../../lib/ljpeg/jfdctfst.c \
-	../../lib/ljpeg/jfdctint.c \
-	../../lib/ljpeg/jidctflt.c \
-	../../lib/ljpeg/jidctfst.c \
-	../../lib/ljpeg/jidctint.c \
-	../../lib/ljpeg/jidctred.c \
-	../../lib/ljpeg/jmemansi.c \
-	../../lib/ljpeg/jmemmgr.c \
-	../../lib/ljpeg/jquant1.c \
-	../../lib/ljpeg/jquant2.c \
-	../../lib/ljpeg/jutils.c \
-	../../lib/lpng/png.c \
-	../../lib/lpng/pngerror.c \
-	../../lib/lpng/pngget.c \
-	../../lib/lpng/pngmem.c \
-	../../lib/lpng/pngpread.c \
-	../../lib/lpng/pngread.c \
-	../../lib/lpng/pngrio.c \
-	../../lib/lpng/pngrtran.c \
-	../../lib/lpng/pngrutil.c \
-	../../lib/lpng/pngset.c \
-	../../lib/lpng/pngtrans.c \
-	../../lib/lpng/pngwio.c \
-	../../lib/lpng/pngwrite.c \
-	../../lib/lpng/pngwtran.c \
-	../../lib/lpng/pngwutil.c \
-	../../source/2d/assets/AnimationAsset.cc \
+SOURCES := ../../source/2d/assets/AnimationAsset.cc \
 	../../source/2d/assets/ImageAsset.cc \
 	../../source/2d/assets/ParticleAsset.cc \
 	../../source/2d/assets/ParticleAssetEmitter.cc \
 	../../source/2d/assets/ParticleAssetField.cc \
 	../../source/2d/assets/ParticleAssetFieldCollection.cc \
+	../../source/2d/assets/SkeletonAsset.cc \
 	../../source/2d/controllers/AmbientForceController.cc \
 	../../source/2d/controllers/BuoyancyController.cc \
 	../../source/2d/controllers/core/GroupedSceneController.cc \
@@ -91,12 +31,14 @@ SOURCES := ../../lib/ljpeg/jcapimin.c \
 	../../source/2d/gui/SceneWindow.cc \
 	../../source/2d/sceneobject/CompositeSprite.cc \
 	../../source/2d/sceneobject/ImageFont.cc \
+	../../source/2d/sceneobject/LiquidFunObject.cc \
 	../../source/2d/sceneobject/ParticlePlayer.cc \
 	../../source/2d/sceneobject/SceneObject.cc \
 	../../source/2d/sceneobject/SceneObjectList.cc \
 	../../source/2d/sceneobject/SceneObjectSet.cc \
 	../../source/2d/sceneobject/Scroller.cc \
 	../../source/2d/sceneobject/ShapeVector.cc \
+	../../source/2d/sceneobject/SkeletonObject.cc \
 	../../source/2d/sceneobject/Sprite.cc \
 	../../source/2d/sceneobject/Trigger.cc \
 	../../source/2d/scene/ContactFilter.cc \
@@ -129,10 +71,13 @@ SOURCES := ../../lib/ljpeg/jcapimin.c \
 	../../source/Box2D/Collision/Shapes/b2PolygonShape.cpp \
 	../../source/Box2D/Common/b2BlockAllocator.cpp \
 	../../source/Box2D/Common/b2Draw.cpp \
+	../../source/Box2D/Common/b2FreeList.cpp \
 	../../source/Box2D/Common/b2Math.cpp \
 	../../source/Box2D/Common/b2Settings.cpp \
 	../../source/Box2D/Common/b2StackAllocator.cpp \
+	../../source/Box2D/Common/b2Stat.cpp \
 	../../source/Box2D/Common/b2Timer.cpp \
+	../../source/Box2D/Common/b2TrackedBlock.cpp \
 	../../source/Box2D/Dynamics/b2Body.cpp \
 	../../source/Box2D/Dynamics/b2ContactManager.cpp \
 	../../source/Box2D/Dynamics/b2Fixture.cpp \
@@ -160,6 +105,10 @@ SOURCES := ../../lib/ljpeg/jcapimin.c \
 	../../source/Box2D/Dynamics/Joints/b2RopeJoint.cpp \
 	../../source/Box2D/Dynamics/Joints/b2WeldJoint.cpp \
 	../../source/Box2D/Dynamics/Joints/b2WheelJoint.cpp \
+	../../source/Box2D/Particle/b2Particle.cpp \
+	../../source/Box2D/Particle/b2ParticleGroup.cpp \
+	../../source/Box2D/Particle/b2ParticleSystem.cpp \
+	../../source/Box2D/Particle/b2VoronoiDiagram.cpp \
 	../../source/Box2D/Rope/b2Rope.cpp \
 	../../source/collection/bitTables.cc \
 	../../source/collection/hashTable.cc \
@@ -338,6 +287,7 @@ SOURCES := ../../lib/ljpeg/jcapimin.c \
 	../../source/math/mMathFn.cc \
 	../../source/math/mMatrix.cc \
 	../../source/math/mPlaneTransformer.cc \
+	../../source/math/mPoint.cpp \
 	../../source/math/mQuadPatch.cc \
 	../../source/math/mQuat.cc \
 	../../source/math/mRandom.cc \
@@ -399,6 +349,28 @@ SOURCES := ../../lib/ljpeg/jcapimin.c \
 	../../source/sim/SimObjectList.cc \
 	../../source/sim/simSerialize.cpp \
 	../../source/sim/simSet.cc \
+	../../source/spine/Animation.c \
+	../../source/spine/AnimationState.c \
+	../../source/spine/AnimationStateData.c \
+	../../source/spine/Atlas.c \
+	../../source/spine/AtlasAttachmentLoader.c \
+	../../source/spine/Attachment.c \
+	../../source/spine/AttachmentLoader.c \
+	../../source/spine/Bone.c \
+	../../source/spine/BoneData.c \
+	../../source/spine/BoundingBoxAttachment.c \
+	../../source/spine/Event.c \
+	../../source/spine/EventData.c \
+	../../source/spine/extension.c \
+	../../source/spine/Json.c \
+	../../source/spine/RegionAttachment.c \
+	../../source/spine/Skeleton.c \
+	../../source/spine/SkeletonBounds.c \
+	../../source/spine/SkeletonData.c \
+	../../source/spine/SkeletonJson.c \
+	../../source/spine/Skin.c \
+	../../source/spine/Slot.c \
+	../../source/spine/SlotData.c \
 	../../source/string/findMatch.cc \
 	../../source/string/stringBuffer.cc \
 	../../source/string/stringStack.cc \
@@ -435,10 +407,7 @@ SOURCES := ../../lib/ljpeg/jcapimin.c \
 	../../source/gui/editor/guiInspectorTypes.cc \
 	../../source/gui/editor/guiMenuBar.cc \
 	../../source/gui/editor/guiSeparatorCtrl.cc \
-	../../source/Banana_Modifications/Scene_Object_3D/Scene_Object_3D.cc \
-	../../source/Banana_Modifications/Module_Banana/Module_Banana.cc \
-	../../source/Banana_Modifications/Struct_Module/Struct_Module.cc \
-	../../source/Banana_Modifications/Struct_Module_Assimp/Struct_Module_Assimp.cc    
+	../../source/Banana_Modifications/Struct_Module/Struct_Module_Functions/Struct_Module_Functions.cc   
 
 LDFLAGS := -g -m32
 LDLIBS := -lstdc++ -lm -ldl -lpthread -lrt -lX11 -lXft -lSDL -lopenal
@@ -479,7 +448,7 @@ OBJS_DEBUG := $(filter %.o,$(OBJS_DEBUG))
 
 $(APP_TARGETS): $(OBJS) $(LIB_TARGETS)
 	@echo Linking release
-	$(LD) $(LBFLAGS) -o $@ $(OBJS) $(LIB_TARGETS) $(LDLIBS)
+	$(LD) $(LDFLAGS) -o $@ $(OBJS) $(LIB_TARGETS) $(LDLIBS)
 
 $(APP_TARGETS_DEBUG): $(OBJS_DEBUG) $(LIB_TARGETS_DEBUG)
 	@echo Linking debug

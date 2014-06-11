@@ -1,8 +1,8 @@
 void Function_Struct_Module_Main_Loop(struct Struct_Module *Pointer_Struct_Module)
 {
 
-//Con::printf("Loop Struct_Module %d Int_Counter=%d\n",Pointer_Struct_Module,
-//Pointer_Struct_Module->Int_Counter);
+Con::printf("Loop Struct_Module %d Int_Counter=%d\n",Pointer_Struct_Module,
+Pointer_Struct_Module->Int_Counter);
 
 Pointer_Struct_Module->Int_Counter++;
 
@@ -18,10 +18,10 @@ struct Struct_Module *Pointer_Struct_Module_Cast_Linked_List_Node=
 do
 {
 
-//Con::printf("Loop Struct_Module Data %d Int_Counter=%d\n",Pointer_Struct_Module_Cast_Linked_List_Node,
-//Pointer_Struct_Module_Cast_Linked_List_Node->Int_Counter);
+Con::printf("Loop Struct_Module Data %d Int_Counter=%d\n",Pointer_Struct_Module_Cast_Linked_List_Node,
+Pointer_Struct_Module_Cast_Linked_List_Node->Int_Counter);
 
-//Pointer_Struct_Module_Cast_Linked_List_Node->Int_Counter++;
+Pointer_Struct_Module_Cast_Linked_List_Node->Int_Counter++;
 
 Pointer_Struct_Module_Linked_List_Node=(unsigned int*)(*(Pointer_Struct_Module_Linked_List_Node+1));
 
