@@ -72,3 +72,4 @@ engine/compilers/android/obj/
 
 *.project
 *.cproject
+/Torque2D_DEBUG

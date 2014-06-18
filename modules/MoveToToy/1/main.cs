@@ -121,15 +121,13 @@ function MoveToToy::createSight( %this )
     %mountedobj.Animation = "ToyAssets:TD_Wizard_WalkSouth";
     %mountedobj.Size = 30;
     SandboxScene.add(%mountedobj);
-    %mountedobj.mount(%object,"20 0",0,true,mDegToRad(90));
-    //%mountedobj.mount(%object,"20 0",0,true,90);
-    //%mountedobj.dismount();
+    %mountedobj.mount(%object,"20 0",1,90);
     
     %mountedobj=new Sprite();
     %mountedobj.Animation = "ToyAssets:TD_Barbarian_WalkSouth";
     %mountedobj.Size = 30;
     SandboxScene.add(%mountedobj);
-    %mountedobj.mount(%object,"-20 0",0,true,-1);
+    %mountedobj.mount(%object,"-20 0",0,0);
 
 }
 
@@ -177,8 +175,6 @@ function MoveToToy::setTrackMouse( %this, %value )
 
 function MoveToToy::onTouchDown(%this, %touchID, %worldPosition)
 {
-
-    echo(%touchID);
 
     // Set the target to the touched position.
     MoveToToy.TargetObject.Position = %worldPosition;

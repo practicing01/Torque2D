@@ -4174,32 +4174,30 @@ ConsoleMethodWithDocs(SceneObject, safeDelete, ConsoleVoid, 2, 2, ())
 
 //-----------------------------------------------------------------------------
 
-/*! Mounts the camera onto the specified object.
-    @param sceneObject The scene object to mount the camera to.
-    @param offsetX / offsetY The offset from the objects position to mount the camera to.  Optional: Defaults to no offset.
-    @param mountForce The force to use to keep the camera mounted to the object.  Zero is a rigid mount.  Optional: Defaults to zero.
-    @param sendToMount Whether to immediately move the camera to the objects position or not.  Optional: Defaults to true.
-    @param mountAngle Whether to mount the cameras angle to the objects angle or not.  Optional: Defaults to false.
+/*! Mounts the SceneObject onto the specified SceneObject.
+    @param SceneObjectParent The scene object to mount the camera to.
+    @param offsetX / offsetY The offset from the objects position to mount the camera to.
+    @param MountwithAngle Whether to offset by angle.
+    @param MountAngleOffset Angle offset.
     @return No return value
 */
-ConsoleMethodWithDocs(SceneObject, mount, ConsoleVoid, 3, 8, (sceneObject, [offsetX / offsetY], [mountForce], [sendToMount?], [mountAngle?]))
+ConsoleMethodWithDocs(SceneObject, mount, ConsoleVoid, 6, 7, (SceneObjectParent, [offsetX / offsetY], [MountwithAngle?], [MountAngleOffset]))
 {
-    // Grab the object. Always specified.
+    // Grab the SceneObject. Always specified.
     SceneObject* pSceneObject = dynamic_cast<SceneObject*>(Sim::findObject(argv[2]));
 
     // Validate Object.
     if (!pSceneObject)
     {
-        Con::warnf("SceneWindow::mount() - Couldn't find/Invalid object '%s'.", argv[2]);
+        Con::warnf("SceneObject::mount() - Couldn't find/Invalid object '%s'.", argv[2]);
         return;
     }
 
     // Set defaults.
-    Vector2 mountOffset(0.0f, 0.0f);
-    F32 mountForce = 0.0f;
-    bool sendToMount = true;
-    F32 mountAngle = 0.0f;
-    
+    Vector2 MountPositionOffset(0.0f, 0.0f);
+    bool MountwithAngle = false;
+    F32 MountAngleOffset = 0.0f;
+
     U32 nextArg = 3;
     if ( (U32)argc > nextArg )
     {
@@ -4209,37 +4207,32 @@ ConsoleMethodWithDocs(SceneObject, mount, ConsoleVoid, 3, 8, (sceneObject, [offs
         // (object, "offsetX offsetY", ...)
         if ( elementCount == 2 )
         {
-            mountOffset = Utility::mGetStringElementVector(argv[nextArg++]);
+        	MountPositionOffset = Utility::mGetStringElementVector(argv[nextArg++]);
         }
         // (object, offsetX, offsetY, ...)
         else if ( elementCount == 1 && (U32)argc >= nextArg+1 )
         {
-            mountOffset = Vector2(dAtof(argv[nextArg]), dAtof(argv[nextArg+1]));
+        	MountPositionOffset = Vector2(dAtof(argv[nextArg]), dAtof(argv[nextArg+1]));
             nextArg += 2;
         }
         // Invalid.
         else
         {
-            Con::warnf("SceneWindow::mount() - Invalid number of parameters!");
+            Con::warnf("SceneObject::mount() - Invalid number of parameters!");
             return;
         }
     }
 
-    // Grab the mount force - if it's specified.
+    // Grab the MountwithAngle.
     if ( (U32)argc > nextArg )
-        mountForce = dAtof(argv[nextArg++]);
+    	MountwithAngle = dAtob(argv[nextArg++]);
 
     // Grab the send to mount flag.
-
-    if ( (U32)argc > nextArg )
-        sendToMount = dAtob(argv[nextArg++]);
-
-
-    if ( (U32)argc > nextArg )
-        mountAngle = dAtof(argv[nextArg++]);
+    if ( (F32)argc > nextArg )
+    	MountAngleOffset = dAtof(argv[nextArg++]);
 
     // Mount Object.
-    object->mount( pSceneObject, mountOffset, mountForce, sendToMount, mountAngle );
+    object->mount( pSceneObject, MountPositionOffset, MountwithAngle, MountAngleOffset );
 }
 
 //-----------------------------------------------------------------------------

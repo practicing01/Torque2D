@@ -167,6 +167,10 @@ SceneObject::SceneObject() :
     /// Camera mounting.
     mpAttachedCamera(NULL),
 
+    //Mount initialize.
+    misMounted (false),
+    mpMountParent (NULL),
+
     /// GUI attachment.
     mAttachedGuiSizeControl(false),
     mpAttachedGui(NULL),
@@ -233,8 +237,6 @@ SceneObject::SceneObject() :
     // Set size.
     setSize( Vector2::getOne() );
 
-	mSceneObjectMounted=false;
-	mpAttachedSceneObject=NULL;
 }
 
 //-----------------------------------------------------------------------------
@@ -338,6 +340,9 @@ bool SceneObject::onAdd()
     if(!Parent::onAdd())
         return false;
 
+    // Register mMountedSceneObjects set.
+    mMountedSceneObjects.registerObject();
+
     // Add to any target scene.
     if ( mpTargetScene )
     {
@@ -355,6 +360,17 @@ bool SceneObject::onAdd()
 
 void SceneObject::onRemove()
 {
+
+	//Go through attached children.
+    for( SimSet::iterator itr = mMountedSceneObjects.begin(); itr != mMountedSceneObjects.end(); ++itr )
+    {
+    	SceneObject* pSceneObjectChild = static_cast<SceneObject*>(*itr);
+    	pSceneObjectChild->dismount();
+    }
+
+	// Unregister mMountedSceneObjects set.
+	mMountedSceneObjects.unregisterObject();
+
     // Detach Any GUI Control.
     detachGui();
 
@@ -565,42 +581,45 @@ void SceneObject::preIntegrate( const F32 totalTime, const F32 elapsedTime, Debu
 
 //-----------------------------------------------------------------------------
 
+void SceneObject::dismountSceneObject( SceneObject* pSceneObject )
+{
+
+	mMountedSceneObjects.removeObject(pSceneObject);
+
+}
+
+//-----------------------------------------------------------------------------
+
+void SceneObject::mountSceneObject( SceneObject* pSceneObject )
+{
+
+	mMountedSceneObjects.addObject(pSceneObject);
+	//mMountedSceneObjects.addObject(SimObjectPtr<pSceneObject>);
+
+}
+
+//-----------------------------------------------------------------------------
+
 void SceneObject::dismount( void )
 {
     // Nothing to do if we're not mounted!
     if (!isSceneObjectMounted() )
         return;
 
-    // Remove Camera Mount Reference.
-    //mpMountedTo->removeSceneObjectMountReference();
+    // Remove SceneObject Mount Reference.
+    mpMountParent->dismountSceneObject(this);
 
-    // Reset Camera Object Mount.
-    mpMountedTo = NULL;
+    // Reset SceneObject Object Mount.
+    mpMountParent = NULL;
 
-    // Flag Camera not mounted.
-    mSceneObjectMounted = false;
+    // Flag SceneObject not mounted.
+    misMounted = false;
 
 }
 
 //-----------------------------------------------------------------------------
 
-void SceneObject::dismountMe( SceneObject* pSceneObject )
-{
-    // Are we mounted to the specified object?
-    if ( isSceneObjectMounted() && pSceneObject != mpMountedTo )
-    {
-        // No, so warn.
-        Con::warnf("SceneWindow::dismountMe() - Object is not mounted by the SceneObject!");
-        return;
-    }
-
-    // Dismount Object.
-    dismount();
-}
-
-//-----------------------------------------------------------------------------
-
-void SceneObject::mount( SceneObject* pSceneObject, const Vector2& mountOffset, const F32 mountForce, const bool sendToMount, F32 mountAngle )
+void SceneObject::mount( SceneObject* pSceneObject, const Vector2& MountPositionOffset, const bool MountwithAngle, const F32 MountAngleOffset )
 {
     // Sanity!
     AssertFatal( pSceneObject != NULL, "Scene object cannot be NULL." );
@@ -609,26 +628,26 @@ void SceneObject::mount( SceneObject* pSceneObject, const Vector2& mountOffset, 
     if ( !mpScene )
     {
         // Warn!
-        Con::warnf("Cannot mount scene window (%d) to a scene object (%d) if scene window is not attached to a scene.", getId(), pSceneObject->getId() );
+        Con::warnf("Cannot mount SceneObject (%d) to SceneObject (%d) if SceneObject is not attached to a scene.", getId(), pSceneObject->getId() );
         return;
     }
 
-    // Fetch objects' scene.
+    // Fetch object's scene.
     const Scene* pScene = pSceneObject->getScene();
 
-    // Scene object must be in a scene.
+    // SceneObject must be in a scene.
     if ( !pScene )
     {
         // Warn!
-        Con::warnf("Cannot mount scene window (%d) to a scene object (%d) that is not in a scene.", getId(), pSceneObject->getId() );
+        Con::warnf("Cannot mount SceneObject (%d) to SceneObject (%d) that is not in a scene.", getId(), pSceneObject->getId() );
         return;
     }
 
-    // Scene object must be in same scene as the one the scene window is attached to.
+    // SceneObject must be in same scene as the one the SceneObject is attached to.
     if ( pScene != mpScene )
     {
         // Warn!
-        Con::warnf("Cannot mount scene window (%d) to a scene object (%d) that are not using the same scene.", getId(), pSceneObject->getId() );
+        Con::warnf("Cannot mount SceneObject (%d) to SceneObject (%d) that are not using the same scene.", getId(), pSceneObject->getId() );
         return;
     }
 
@@ -638,45 +657,30 @@ void SceneObject::mount( SceneObject* pSceneObject, const Vector2& mountOffset, 
         // Yes, so dismount object.
         dismount();
     }
-    else
-    {
-        // No, so stop any Camera Move.
-       // if ( mMovingCamera ) stopCameraMove();
-    }
 
     // Set Mount Object Reference.
-    mpMountedTo = pSceneObject;
+    mpMountParent = pSceneObject;
 
     // Store Mount Offset.
-    mMountOffset = mountOffset;
+    mMountPositionOffset = MountPositionOffset;
 
-    // Set Mount Force.
-    mMountForce = mountForce;
+    // Set if mounted with angle.
+    mMountwithAngle = MountwithAngle;
 
     // Set Mount Angle.
-    mMountAngle = mountAngle;
+    mMountAngleOffset = MountAngleOffset;
 
-    // Add Camera Mount Reference.
-	//don't want this without mpAttachedSceneObject being a list
-    //pSceneObject->addSceneObjectMountReference( this );
+    // Add SceneObject Mount Reference.
+    pSceneObject->mountSceneObject( this );
 
-    // Flag Camera mounted.
-    mSceneObjectMounted = true;
+    // Flag SceneObject mounted.
+    misMounted = true;
 
-    // Send directly to mount (if selected).
-    if ( sendToMount )
-    {
-        // Fetch Mount Position.
-        const Vector2& mountPos = mpMountedTo->getBody()->GetWorldPoint( mountOffset );
+    // Send directly to mount.
+    // Fetch Mount Position.
+    const Vector2& mountPos = mpMountParent->getBody()->GetWorldPoint( mMountPositionOffset );
 
-        // Calculate Window Half-Dimensions.
-        //const F32 halfWidth = mCameraCurrent.mSourceArea.len_x() * 0.5f;
-        //const F32 halfHeight = mCameraCurrent.mSourceArea.len_y() * 0.5f;
-
-        // Set Current View to Object Position.
-        //mCameraCurrent.mSourceArea.point.set( mountPos.x - halfWidth, mountPos.y - halfHeight );
-		setPosition(mountPos);
-    }
+    setPosition(mountPos);
 
 }
 
@@ -688,13 +692,13 @@ void SceneObject::calculateSceneObjectMount( const F32 elapsedTime )
     PROFILE_SCOPE(SceneObject_CalculateSceneObjectMount);
 
     // Fetch Mount Position.
-    const Vector2& mountPos = mpMountedTo->getBody()->GetWorldPoint( mMountOffset );
+    const Vector2& mountPos = mpMountParent->getBody()->GetWorldPoint( mMountPositionOffset );
 
     // Set Current Camera Position.
     setPosition(mountPos);
 
-	if ( mMountAngle!=-1)
-		setAngle(mMountAngle+mpMountedTo->getAngle());
+	if ( mMountwithAngle )
+		setAngle(mMountAngleOffset+mpMountParent->getAngle());
 
 }
 
@@ -749,17 +753,13 @@ void SceneObject::integrateObject( const F32 totalTime, const F32 elapsedTime, D
         mpAttachedCamera->calculateCameraMount( elapsedTime );
     }
 
-	//Is there an object attached?
-	//don't want this unless mpAttachedSceneObject is a list
-	/*if (mpAttachedSceneObject)
-	{
-		mpAttachedSceneObject->calculateSceneObjectMount(elapsedTime);
-	}*/
+	//Go through attached children.
+    for( SimSet::iterator itr = mMountedSceneObjects.begin(); itr != mMountedSceneObjects.end(); ++itr )
+    {
+    	SceneObject* pSceneObjectChild = static_cast<SceneObject*>(*itr);
+    	pSceneObjectChild->calculateSceneObjectMount(elapsedTime);
+    }
 
-	if (isSceneObjectMounted())
-	{
-		calculateSceneObjectMount(elapsedTime);
-	}
 }
 
 //-----------------------------------------------------------------------------

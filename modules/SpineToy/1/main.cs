@@ -134,7 +134,7 @@ function SpineToy::createSpineBoy(%this)
 
     SandboxScene.add(%object);
 
-%object.mount(%this.Skeleton_Goblin,"0 5",0,true,0);
+%object.mount(%this.Skeleton_Goblin,"0 5",0,0);
 
 
     %object.schedule(4000, "doJump");

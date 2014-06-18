@@ -574,23 +574,20 @@ public:
     static const char* getSrcBlendFactorDescription(const GLenum factor);
     static const char* getDstBlendFactorDescription(const GLenum factor);
 
-	//sceneobject mounting :)
-	bool mSceneObjectMounted;
-	SceneObject* mpAttachedSceneObject;
-	SceneObject*        mpMountedTo;
-    Vector2             mMountOffset;
-    U32                 mMountToID;
-    F32                 mMountForce;
-    F32                 mMountAngle;
-	inline bool isSceneObjectMounted( void ) { return mSceneObjectMounted; }
-	void mount( SceneObject* pSceneObject, const Vector2& mountOffset, const F32 mountForce, const bool sendToMount, F32 mountAngle );
-    void dismount( void );
-    void dismountMe( SceneObject* pSceneObject );
-    void calculateSceneObjectMount( const F32 elapsedTime );
-    inline void             addSceneObjectMountReference( SceneObject* pAttachedSceneObject ) { mpAttachedSceneObject = pAttachedSceneObject; }
-    inline void             removeSceneObjectMountReference( void )          { mpAttachedSceneObject = NULL; }
-    inline void             dismountSceneObject( void )                      { if ( mpAttachedSceneObject ) mpAttachedSceneObject->dismountMe( this ); }
-	
+	//SceneObject Mounting
+	bool 					misMounted;//True if this SceneObject is mounted.
+	SceneObject*        	mpMountParent;//SceneObject parent this SceneObject is mounted to.
+    Vector2             	mMountPositionOffset;//Offset from parent position this SceneObject is.
+    bool					mMountwithAngle;//If this SceneObject has an angle offset.
+    F32                 	mMountAngleOffset;//Angle offset for this SceneObject.
+    SimSet					mMountedSceneObjects;//SceneObject children mounted to this SceneObject.
+
+	inline bool 			isSceneObjectMounted( void ) { return misMounted; }
+	void 					mount( SceneObject* pSceneObject, const Vector2& MountPositionOffset, const bool MountwithAngle, const F32 MountAngleOffset );
+    void 					dismount( void );
+    void 					dismountSceneObject( SceneObject* pSceneObject );
+    void 					mountSceneObject( SceneObject* pSceneObject );
+    void 					calculateSceneObjectMount( const F32 elapsedTime );
 
     /// Declare Console Object.
     DECLARE_CONOBJECT( SceneObject );
