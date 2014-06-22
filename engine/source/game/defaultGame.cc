@@ -173,14 +173,14 @@ bool initializeLibraries()
 
     Function_Struct_Module_Main_Initialize(Pointer_Struct_Module_Main);
 
-    struct Struct_Module *Pointer_Struct_Module_Child=
-    Pointer_Struct_Module_Main->Pointer_Function_Create();
+    //struct Struct_Module *Pointer_Struct_Module_Child=
+    //Pointer_Struct_Module_Main->Pointer_Function_Create();
 
-    Pointer_Struct_Module_Main->Pointer_Function_Initialize(Pointer_Struct_Module_Child);
+    //Pointer_Struct_Module_Main->Pointer_Function_Initialize(Pointer_Struct_Module_Child);
 
     //Pointer_Struct_Module_Main->Pointer_Function_Link(Pointer_Struct_Module_Main,Pointer_Struct_Module_Child);
 
-    Pointer_Struct_Module_Child->Int_Counter=1;
+    //Pointer_Struct_Module_Child->Int_Counter=1;
 
     Pointer_Struct_Module_Assimp=Function_Struct_Module_Assimp_Create();
 

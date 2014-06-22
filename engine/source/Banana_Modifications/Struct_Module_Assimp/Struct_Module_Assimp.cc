@@ -10,8 +10,9 @@
 #include <stdlib.h>
 #include <stdio.h>
 
-#include <GL/glut.h>
-#include <GL/gl.h>
+//#include <GL/glut.h>
+//#include <GL/gl.h>
+//#include "graphics/dgl.h"
 
 // assimp include files. These three are usually needed.
 #include <assimp/cimport.h>
@@ -118,22 +119,22 @@ void apply_material(const struct aiMaterial *mtl)
         set_float4(c, 0.8f, 0.8f, 0.8f, 1.0f);
         if(AI_SUCCESS == aiGetMaterialColor(mtl, AI_MATKEY_COLOR_DIFFUSE, &diffuse))
                 color4_to_float4(&diffuse, c);
-        glMaterialfv(GL_FRONT_AND_BACK, GL_DIFFUSE, c);
+        glMaterialfv(GL_FRONT, GL_DIFFUSE, c);
 
         set_float4(c, 0.0f, 0.0f, 0.0f, 1.0f);
         if(AI_SUCCESS == aiGetMaterialColor(mtl, AI_MATKEY_COLOR_SPECULAR, &specular))
                 color4_to_float4(&specular, c);
-        glMaterialfv(GL_FRONT_AND_BACK, GL_SPECULAR, c);
+        glMaterialfv(GL_FRONT, GL_SPECULAR, c);
 
         set_float4(c, 0.2f, 0.2f, 0.2f, 1.0f);
         if(AI_SUCCESS == aiGetMaterialColor(mtl, AI_MATKEY_COLOR_AMBIENT, &ambient))
                 color4_to_float4(&ambient, c);
-        glMaterialfv(GL_FRONT_AND_BACK, GL_AMBIENT, c);
+        glMaterialfv(GL_FRONT, GL_AMBIENT, c);
 
         set_float4(c, 0.0f, 0.0f, 0.0f, 1.0f);
         if(AI_SUCCESS == aiGetMaterialColor(mtl, AI_MATKEY_COLOR_EMISSIVE, &emission))
                 color4_to_float4(&emission, c);
-        glMaterialfv(GL_FRONT_AND_BACK, GL_EMISSION, c);
+        glMaterialfv(GL_FRONT, GL_EMISSION, c);
 
         max = 1;
         ret1 = aiGetMaterialFloatArray(mtl, AI_MATKEY_SHININESS, &shininess, &max);
@@ -141,14 +142,14 @@ void apply_material(const struct aiMaterial *mtl)
             max = 1;
             ret2 = aiGetMaterialFloatArray(mtl, AI_MATKEY_SHININESS_STRENGTH, &strength, &max);
                 if(ret2 == AI_SUCCESS)
-                        glMaterialf(GL_FRONT_AND_BACK, GL_SHININESS, shininess * strength);
+                        glMaterialf(GL_FRONT, GL_SHININESS, shininess * strength);
         else
-                glMaterialf(GL_FRONT_AND_BACK, GL_SHININESS, shininess);
+                glMaterialf(GL_FRONT, GL_SHININESS, shininess);
     }
         else {
-                glMaterialf(GL_FRONT_AND_BACK, GL_SHININESS, 0.0f);
+                glMaterialf(GL_FRONT, GL_SHININESS, 0.0f);
                 set_float4(c, 0.0f, 0.0f, 0.0f, 0.0f);
-                glMaterialfv(GL_FRONT_AND_BACK, GL_SPECULAR, c);
+                glMaterialfv(GL_FRONT, GL_SPECULAR, c);
         }
 
         max = 1;
@@ -156,7 +157,7 @@ void apply_material(const struct aiMaterial *mtl)
                 fill_mode = wireframe ? GL_LINE : GL_FILL;
         else
                 fill_mode = GL_FILL;
-        glPolygonMode(GL_FRONT_AND_BACK, fill_mode);
+        glPolygonMode(GL_FRONT, fill_mode);
 
         max = 1;
         if((AI_SUCCESS == aiGetMaterialIntegerArray(mtl, AI_MATKEY_TWOSIDED, &two_sided, &max)) && two_sided)
@@ -356,7 +357,7 @@ void Assimp_main(/*int argc, char **argv*/)
         if(getenv("MODEL_IS_BROKEN"))
                 glFrontFace(GL_CW);
 
-        glColorMaterial(GL_FRONT_AND_BACK, GL_DIFFUSE);
+        glColorMaterial(GL_FRONT, GL_DIFFUSE);
 		*/
         Platform::getRealMilliseconds();//glutGet(GLUT_ELAPSED_TIME);
         //glutMainLoop();
