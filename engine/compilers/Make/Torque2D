@@ -412,7 +412,7 @@ SOURCES := ../../source/2d/assets/AnimationAsset.cc \
 	
 	
 LDFLAGS := -g -m32
-LDLIBS := -lstdc++ -lm -ldl -lpthread -lrt -lX11 -lXft -lSDL -lopenal -lglut -lGLU -lassimp
+LDLIBS := -lstdc++ -lm -ldl -lpthread -lrt -lX11 -lXft -lSDL -lopenal #-lglut -lGLU -lassimp
 
 CFLAGS := -MMD -I. -Wfatal-errors -Wunused -m32 -msse -march=i686 -pipe
 
