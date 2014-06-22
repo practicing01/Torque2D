@@ -6,7 +6,9 @@
 
 #include <string.h>
 
+#ifndef _STRUCT_BANANA_H_
 #include "Banana_Modifications/Struct_Module/Struct_Module.h"
+#endif
 
 #include "Banana_Modifications/Struct_Module/Struct_Module_Functions/Function_Struct_Module_Main_Create.cc"
 
@@ -16,7 +18,7 @@
 
 #include "Banana_Modifications/Struct_Module/Struct_Module_Functions/Function_Struct_Module_Main_Loop.cc"
 
-#include "Banana_Modifications/Struct_Module/Struct_Module_Functions/Function_Struct_Module_Main_Node_Data_Add.cc"
+//#include "Banana_Modifications/Struct_Module/Struct_Module_Functions/Function_Struct_Module_Main_Node_Data_Add.cc"
 
 #include "Banana_Modifications/Struct_Module/Struct_Module_Functions/Function_Struct_Module_Main_Initialize.cc"
 

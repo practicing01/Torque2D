@@ -6,7 +6,7 @@ Pointer_Struct_Module->Int_Counter);
 
 Pointer_Struct_Module->Int_Counter++;
 
-if (*(Pointer_Struct_Module->Pointer_Linked_List_Struct_Data)!=NULL)
+/*if (*(Pointer_Struct_Module->Pointer_Linked_List_Struct_Data)!=NULL)
 {
 
 unsigned int *Pointer_Struct_Module_Linked_List_Node=
@@ -29,7 +29,7 @@ Pointer_Struct_Module_Linked_List_Node=(unsigned int*)(*(Pointer_Struct_Module_L
 while(Pointer_Struct_Module_Linked_List_Node!=(unsigned int*)(*(Pointer_Struct_Module_Linked_List_Node+1)));
 
 
-}
+}*/
 
 /****************************************************************************************/
 

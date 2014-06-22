@@ -25,7 +25,7 @@ Pointer_Struct_Module->Pointer_Function_Destroy=Function_Struct_Module_Main_Dest
 
 Pointer_Struct_Module->Pointer_Function_Link=Function_Struct_Module_Main_Link;
 
-Pointer_Struct_Module->Pointer_Function_Node_Data_Add=Function_Struct_Module_Main_Node_Data_Add;
+//Pointer_Struct_Module->Pointer_Function_Node_Data_Add=Function_Struct_Module_Main_Node_Data_Add;
 
 Pointer_Struct_Module->Pointer_Function_Loop=Function_Struct_Module_Main_Loop;
 
@@ -49,7 +49,7 @@ Pointer_Struct_Module->Pointer_Struct_Module_Linked_List_Children=
 
 /******************************************************************************/
 
-Pointer_Struct_Module->Pointer_Linked_List_Struct_Data=
+/*Pointer_Struct_Module->Pointer_Linked_List_Struct_Data=
 (unsigned int*)malloc((sizeof(unsigned int)*2));
 
 *(Pointer_Struct_Module->Pointer_Linked_List_Struct_Data)=NULL;
@@ -57,7 +57,7 @@ Pointer_Struct_Module->Pointer_Linked_List_Struct_Data=
 *(Pointer_Struct_Module->Pointer_Linked_List_Struct_Data+1)=NULL;
 
 Pointer_Struct_Module->Pointer_Function_Node_Data_Add(Pointer_Struct_Module);
-
+*/
 /******************************************************************************/
 
 }

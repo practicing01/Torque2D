@@ -58,7 +58,7 @@ while(Pointer_Struct_Module_Linked_List_Node!=(unsigned int*)(*(Pointer_Struct_M
 
 /******************************************************************************/
 
-if (*(Pointer_Struct_Module->Pointer_Linked_List_Struct_Data)!=NULL)
+/*if (*(Pointer_Struct_Module->Pointer_Linked_List_Struct_Data)!=NULL)
 {
 
 unsigned int *Pointer_Struct_Module_Linked_List_Node=
@@ -78,7 +78,7 @@ Pointer_Struct_Module_Linked_List_Node=Pointer_Struct_Module_Linked_List_Node_Ne
 }
 while(Pointer_Struct_Module_Linked_List_Node!=(unsigned int*)(*(Pointer_Struct_Module_Linked_List_Node+1)));
 
-}
+}*/
 
 /******************************************************************************/
 
@@ -86,7 +86,7 @@ free(Pointer_Struct_Module->Pointer_Struct_Module_Linked_List_Parents);
 
 free(Pointer_Struct_Module->Pointer_Struct_Module_Linked_List_Children);
 
-free(Pointer_Struct_Module->Pointer_Linked_List_Struct_Data);
+//free(Pointer_Struct_Module->Pointer_Linked_List_Struct_Data);
 
 free(Pointer_Struct_Module->Pointer_Char_Array_Identifier);
 

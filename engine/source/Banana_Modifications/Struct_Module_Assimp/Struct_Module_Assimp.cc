@@ -11,6 +11,7 @@
 #include <stdio.h>
 
 #include <GL/glut.h>
+#include <GL/gl.h>
 
 // assimp include files. These three are usually needed.
 #include <assimp/cimport.h>
@@ -251,9 +252,9 @@ void display(void)
 
         float tmp;
 glPushMatrix();
-        //glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+        glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
-/*        glMatrixMode(GL_MODELVIEW);
+        glMatrixMode(GL_MODELVIEW);
         glLoadIdentity();
         gluLookAt(0.f,0.f,3.f,0.f,0.f,-5.f,0.f,1.f,0.f);
 
@@ -282,7 +283,7 @@ glPushMatrix();
          glEndList();
         }
 
-        glCallList(scene_list);*/
+        glCallList(scene_list);
 
         //glutSwapBuffers();
 glPopMatrix();
@@ -393,6 +394,8 @@ aiReleaseImport(scene);
 
 aiDetachAllLogStreams();
 
+/******************************************************************************/
+
 if (*(Pointer_Struct_Module->Pointer_Struct_Module_Linked_List_Parents)!=NULL)
 {
 
@@ -425,10 +428,17 @@ unsigned int *Pointer_Struct_Module_Linked_List_Node=
 
 unsigned int *Pointer_Struct_Module_Linked_List_Node_Next;
 
+struct Struct_Module *Pointer_Struct_Module_Cast_Linked_List_Node=NULL;
+
 do
 {
 
 Pointer_Struct_Module_Linked_List_Node_Next=(unsigned int*)(*(Pointer_Struct_Module_Linked_List_Node+1));
+
+Pointer_Struct_Module_Cast_Linked_List_Node=
+(struct Struct_Module *)(*(Pointer_Struct_Module_Linked_List_Node+2));
+
+Pointer_Struct_Module_Cast_Linked_List_Node->Pointer_Function_Destroy(Pointer_Struct_Module_Cast_Linked_List_Node);
 
 free(Pointer_Struct_Module_Linked_List_Node);
 
@@ -441,9 +451,35 @@ while(Pointer_Struct_Module_Linked_List_Node!=(unsigned int*)(*(Pointer_Struct_M
 
 /******************************************************************************/
 
+/*if (*(Pointer_Struct_Module->Pointer_Linked_List_Struct_Data)!=NULL)
+{
+
+unsigned int *Pointer_Struct_Module_Linked_List_Node=
+(unsigned int*)(*(Pointer_Struct_Module->Pointer_Linked_List_Struct_Data));
+
+unsigned int *Pointer_Struct_Module_Linked_List_Node_Next;
+
+do
+{
+
+Pointer_Struct_Module_Linked_List_Node_Next=(unsigned int*)(*(Pointer_Struct_Module_Linked_List_Node+1));
+
+free(Pointer_Struct_Module_Linked_List_Node);
+
+Pointer_Struct_Module_Linked_List_Node=Pointer_Struct_Module_Linked_List_Node_Next;
+
+}
+while(Pointer_Struct_Module_Linked_List_Node!=(unsigned int*)(*(Pointer_Struct_Module_Linked_List_Node+1)));
+
+}*/
+
+/******************************************************************************/
+
 free(Pointer_Struct_Module->Pointer_Struct_Module_Linked_List_Parents);
 
 free(Pointer_Struct_Module->Pointer_Struct_Module_Linked_List_Children);
+
+//free(Pointer_Struct_Module->Pointer_Linked_List_Struct_Data);
 
 free(Pointer_Struct_Module->Pointer_Char_Array_Identifier);
 
@@ -455,114 +491,141 @@ void Function_Struct_Module_Assimp_Link(struct Struct_Module *Pointer_Struct_Mod
 struct Struct_Module *Pointer_Struct_Module_Child)
 {
 
-/*
+	/*
 
-Linked list format:
+	Linked list format:
 
-{First_Node, Last_Node}
+	{First_Node, Last_Node}
 
-Node format:
+	Node format:
 
-{Node_Previous, Node_Next, Data}
+	{Node_Previous, Node_Next, Data}
 
-*/
+	*/
 
-//New linked list.
-if (*(Pointer_Struct_Module_Parent->Pointer_Struct_Module_Linked_List_Children)==NULL)
-{
+	//New linked list.
+	if (*(Pointer_Struct_Module_Parent->Pointer_Struct_Module_Linked_List_Children)==NULL)
+	{
 
-unsigned int *Pointer_Struct_Module_Linked_List_Node=
-(unsigned int*)malloc((sizeof(unsigned int)*2)+sizeof(struct Struct_Module *));
+	unsigned int *Pointer_Struct_Module_Linked_List_Node=
+	(unsigned int*)malloc((sizeof(unsigned int)*2)+sizeof(struct Struct_Module *));
 
-*(Pointer_Struct_Module_Linked_List_Node)=(unsigned int)Pointer_Struct_Module_Linked_List_Node;
+	*(Pointer_Struct_Module_Linked_List_Node)=(unsigned int)Pointer_Struct_Module_Linked_List_Node;
 
-*(Pointer_Struct_Module_Linked_List_Node+1)=(unsigned int)Pointer_Struct_Module_Linked_List_Node;
+	*(Pointer_Struct_Module_Linked_List_Node+1)=(unsigned int)Pointer_Struct_Module_Linked_List_Node;
 
-*(Pointer_Struct_Module_Linked_List_Node+2)=(unsigned int)Pointer_Struct_Module_Child;
+	*(Pointer_Struct_Module_Linked_List_Node+2)=(unsigned int)Pointer_Struct_Module_Child;
 
-*(Pointer_Struct_Module_Parent->Pointer_Struct_Module_Linked_List_Children)=
-(unsigned int)Pointer_Struct_Module_Linked_List_Node;
+	*(Pointer_Struct_Module_Parent->Pointer_Struct_Module_Linked_List_Children)=
+	(unsigned int)Pointer_Struct_Module_Linked_List_Node;
 
-*(Pointer_Struct_Module_Parent->Pointer_Struct_Module_Linked_List_Children+1)=
-(unsigned int)Pointer_Struct_Module_Linked_List_Node;
+	*(Pointer_Struct_Module_Parent->Pointer_Struct_Module_Linked_List_Children+1)=
+	(unsigned int)Pointer_Struct_Module_Linked_List_Node;
 
-}
-else
-{
+	}
+	else
+	{
 
-unsigned int *Pointer_Struct_Module_Linked_List_Node_Penultimate=
-(unsigned int*)(*(Pointer_Struct_Module_Parent->Pointer_Struct_Module_Linked_List_Children+1));
+	unsigned int *Pointer_Struct_Module_Linked_List_Node_Penultimate=
+	(unsigned int*)(*(Pointer_Struct_Module_Parent->Pointer_Struct_Module_Linked_List_Children+1));
 
-unsigned int *Pointer_Struct_Module_Linked_List_Node=
-(unsigned int*)malloc((sizeof(unsigned int)*2)+sizeof(struct Struct_Module *));
+	unsigned int *Pointer_Struct_Module_Linked_List_Node=
+	(unsigned int*)malloc((sizeof(unsigned int)*2)+sizeof(struct Struct_Module *));
 
-*(Pointer_Struct_Module_Linked_List_Node_Penultimate+1)=(unsigned int)Pointer_Struct_Module_Linked_List_Node;
+	*(Pointer_Struct_Module_Linked_List_Node_Penultimate+1)=(unsigned int)Pointer_Struct_Module_Linked_List_Node;
 
-*(Pointer_Struct_Module_Linked_List_Node)=(unsigned int)Pointer_Struct_Module_Linked_List_Node_Penultimate;
+	*(Pointer_Struct_Module_Linked_List_Node)=(unsigned int)Pointer_Struct_Module_Linked_List_Node_Penultimate;
 
-*(Pointer_Struct_Module_Linked_List_Node+1)=(unsigned int)Pointer_Struct_Module_Linked_List_Node;
+	*(Pointer_Struct_Module_Linked_List_Node+1)=(unsigned int)Pointer_Struct_Module_Linked_List_Node;
 
-*(Pointer_Struct_Module_Linked_List_Node+2)=(unsigned int)Pointer_Struct_Module_Child;
+	*(Pointer_Struct_Module_Linked_List_Node+2)=(unsigned int)Pointer_Struct_Module_Child;
 
-*(Pointer_Struct_Module_Parent->Pointer_Struct_Module_Linked_List_Children+1)=
-(unsigned int)Pointer_Struct_Module_Linked_List_Node;
+	*(Pointer_Struct_Module_Parent->Pointer_Struct_Module_Linked_List_Children+1)=
+	(unsigned int)Pointer_Struct_Module_Linked_List_Node;
 
-}
+	}
 
-/****************************************************************************************/
+	/****************************************************************************************/
 
-if (*(Pointer_Struct_Module_Child->Pointer_Struct_Module_Linked_List_Parents)==NULL)
-{
+	if (*(Pointer_Struct_Module_Child->Pointer_Struct_Module_Linked_List_Parents)==NULL)
+	{
 
-unsigned int *Pointer_Struct_Module_Linked_List_Node=
-(unsigned int*)malloc((sizeof(unsigned int)*2)+sizeof(struct Struct_Module *));
+	unsigned int *Pointer_Struct_Module_Linked_List_Node=
+	(unsigned int*)malloc((sizeof(unsigned int)*2)+sizeof(struct Struct_Module *));
 
-*(Pointer_Struct_Module_Linked_List_Node)=(unsigned int)Pointer_Struct_Module_Linked_List_Node;
+	*(Pointer_Struct_Module_Linked_List_Node)=(unsigned int)Pointer_Struct_Module_Linked_List_Node;
 
-*(Pointer_Struct_Module_Linked_List_Node+1)=(unsigned int)Pointer_Struct_Module_Linked_List_Node;
+	*(Pointer_Struct_Module_Linked_List_Node+1)=(unsigned int)Pointer_Struct_Module_Linked_List_Node;
 
-*(Pointer_Struct_Module_Linked_List_Node+2)=(unsigned int)Pointer_Struct_Module_Parent;
+	*(Pointer_Struct_Module_Linked_List_Node+2)=(unsigned int)Pointer_Struct_Module_Parent;
 
-*(Pointer_Struct_Module_Child->Pointer_Struct_Module_Linked_List_Parents)=
-(unsigned int)Pointer_Struct_Module_Linked_List_Node;
+	*(Pointer_Struct_Module_Child->Pointer_Struct_Module_Linked_List_Parents)=
+	(unsigned int)Pointer_Struct_Module_Linked_List_Node;
 
-*(Pointer_Struct_Module_Child->Pointer_Struct_Module_Linked_List_Parents+1)=
-(unsigned int)Pointer_Struct_Module_Linked_List_Node;
+	*(Pointer_Struct_Module_Child->Pointer_Struct_Module_Linked_List_Parents+1)=
+	(unsigned int)Pointer_Struct_Module_Linked_List_Node;
 
-}
-else
-{
+	}
+	else
+	{
 
-unsigned int *Pointer_Struct_Module_Linked_List_Node_Penultimate=
-(unsigned int*)(*(Pointer_Struct_Module_Child->Pointer_Struct_Module_Linked_List_Parents+1));
+	unsigned int *Pointer_Struct_Module_Linked_List_Node_Penultimate=
+	(unsigned int*)(*(Pointer_Struct_Module_Child->Pointer_Struct_Module_Linked_List_Parents+1));
 
-unsigned int *Pointer_Struct_Module_Linked_List_Node=
-(unsigned int*)malloc((sizeof(unsigned int)*2)+sizeof(struct Struct_Module *));
+	unsigned int *Pointer_Struct_Module_Linked_List_Node=
+	(unsigned int*)malloc((sizeof(unsigned int)*2)+sizeof(struct Struct_Module *));
 
-*(Pointer_Struct_Module_Linked_List_Node_Penultimate+1)=(unsigned int)Pointer_Struct_Module_Linked_List_Node;
+	*(Pointer_Struct_Module_Linked_List_Node_Penultimate+1)=(unsigned int)Pointer_Struct_Module_Linked_List_Node;
 
-*(Pointer_Struct_Module_Linked_List_Node)=(unsigned int)Pointer_Struct_Module_Linked_List_Node_Penultimate;
+	*(Pointer_Struct_Module_Linked_List_Node)=(unsigned int)Pointer_Struct_Module_Linked_List_Node_Penultimate;
 
-*(Pointer_Struct_Module_Linked_List_Node+1)=(unsigned int)Pointer_Struct_Module_Linked_List_Node;
+	*(Pointer_Struct_Module_Linked_List_Node+1)=(unsigned int)Pointer_Struct_Module_Linked_List_Node;
 
-*(Pointer_Struct_Module_Linked_List_Node+2)=(unsigned int)Pointer_Struct_Module_Parent;
+	*(Pointer_Struct_Module_Linked_List_Node+2)=(unsigned int)Pointer_Struct_Module_Parent;
 
-*(Pointer_Struct_Module_Child->Pointer_Struct_Module_Linked_List_Parents+1)=
-(unsigned int)Pointer_Struct_Module_Linked_List_Node;
+	*(Pointer_Struct_Module_Child->Pointer_Struct_Module_Linked_List_Parents+1)=
+	(unsigned int)Pointer_Struct_Module_Linked_List_Node;
 
-}
+	}
 
 }
 
 void Function_Struct_Module_Assimp_Loop(struct Struct_Module *Pointer_Struct_Module)
 {
 
-Con::printf("Loop Struct_Module %d Int_Counter=%d\n",Pointer_Struct_Module,
+display();
+
+Con::printf("Assimp Loop Struct_Module %d Int_Counter=%d\n",Pointer_Struct_Module,
 Pointer_Struct_Module->Int_Counter);
 
 Pointer_Struct_Module->Int_Counter++;
 
-display();
+/*if (*(Pointer_Struct_Module->Pointer_Linked_List_Struct_Data)!=NULL)
+{
+
+unsigned int *Pointer_Struct_Module_Linked_List_Node=
+(unsigned int*)(*(Pointer_Struct_Module->Pointer_Linked_List_Struct_Data));
+
+struct Struct_Module *Pointer_Struct_Module_Cast_Linked_List_Node=
+(struct Struct_Module *)(*(Pointer_Struct_Module_Linked_List_Node+2));
+
+do
+{
+
+Con::printf("Loop Struct_Module Data %d Int_Counter=%d\n",Pointer_Struct_Module_Cast_Linked_List_Node,
+Pointer_Struct_Module_Cast_Linked_List_Node->Int_Counter);
+
+Pointer_Struct_Module_Cast_Linked_List_Node->Int_Counter++;
+
+Pointer_Struct_Module_Linked_List_Node=(unsigned int*)(*(Pointer_Struct_Module_Linked_List_Node+1));
+
+}
+while(Pointer_Struct_Module_Linked_List_Node!=(unsigned int*)(*(Pointer_Struct_Module_Linked_List_Node+1)));
+
+
+}*/
+
+/****************************************************************************************/
 
 if (*(Pointer_Struct_Module->Pointer_Struct_Module_Linked_List_Children)==NULL)
 {
@@ -580,7 +643,12 @@ struct Struct_Module *Pointer_Struct_Module_Cast_Linked_List_Node=
 do
 {
 
+if (Pointer_Struct_Module_Cast_Linked_List_Node->Bool_Loop==1)
+{
+
 Pointer_Struct_Module_Cast_Linked_List_Node->Pointer_Function_Loop(Pointer_Struct_Module_Cast_Linked_List_Node);
+
+}
 
 Pointer_Struct_Module_Linked_List_Node=(unsigned int*)(*(Pointer_Struct_Module_Linked_List_Node+1));
 
@@ -592,48 +660,63 @@ while(Pointer_Struct_Module_Linked_List_Node!=(unsigned int*)(*(Pointer_Struct_M
 void Function_Struct_Module_Assimp_Initialize(struct Struct_Module *Pointer_Struct_Module)
 {
 
-Pointer_Struct_Module->Int_Counter=0;
+	Pointer_Struct_Module->Int_Counter=0;
 
-Pointer_Struct_Module->Bool_Loop=1;
+	Pointer_Struct_Module->Bool_Loop=1;
 
-char *Pointer_Char_Array_Identifier=(char *)malloc(sizeof(char)*512);
+	char *Pointer_Char_Array_Identifier=(char *)malloc(sizeof(char)*512);
 
-memset(Pointer_Char_Array_Identifier,NULL,512);
+	memset(Pointer_Char_Array_Identifier,NULL,512);
 
-char Char_Array_Identifier[]="Module_Assimp";
+	char Char_Array_Identifier[]="Module_Assimp";
 
-memcpy(Pointer_Char_Array_Identifier,Char_Array_Identifier,sizeof(Char_Array_Identifier));
+	memcpy(Pointer_Char_Array_Identifier,Char_Array_Identifier,sizeof(Char_Array_Identifier));
 
-Pointer_Struct_Module->Pointer_Char_Array_Identifier=Pointer_Char_Array_Identifier;
+	Pointer_Struct_Module->Pointer_Char_Array_Identifier=Pointer_Char_Array_Identifier;
 
-Pointer_Struct_Module->Int_Size_Identifier=sizeof(Char_Array_Identifier);
+	Pointer_Struct_Module->Int_Size_Identifier=sizeof(Char_Array_Identifier);
 
-Pointer_Struct_Module->Pointer_Function_Create=Function_Struct_Module_Assimp_Create;
+	Pointer_Struct_Module->Pointer_Function_Create=Function_Struct_Module_Assimp_Create;
 
-Pointer_Struct_Module->Pointer_Function_Initialize=Function_Struct_Module_Assimp_Initialize;
+	Pointer_Struct_Module->Pointer_Function_Initialize=Function_Struct_Module_Assimp_Initialize;
 
-Pointer_Struct_Module->Pointer_Function_Destroy=Function_Struct_Module_Assimp_Destroy;
+	Pointer_Struct_Module->Pointer_Function_Destroy=Function_Struct_Module_Assimp_Destroy;
 
-Pointer_Struct_Module->Pointer_Function_Link=Function_Struct_Module_Assimp_Link;
+	Pointer_Struct_Module->Pointer_Function_Link=Function_Struct_Module_Assimp_Link;
 
-Pointer_Struct_Module->Pointer_Function_Loop=Function_Struct_Module_Assimp_Loop;
+	//Pointer_Struct_Module->Pointer_Function_Node_Data_Add=Function_Struct_Module_Main_Node_Data_Add;
 
-/******************************************************************************/
+	Pointer_Struct_Module->Pointer_Function_Loop=Function_Struct_Module_Assimp_Loop;
 
-Pointer_Struct_Module->Pointer_Struct_Module_Linked_List_Parents=
-(unsigned int*)malloc((sizeof(unsigned int)*2));
+	/******************************************************************************/
 
-*(Pointer_Struct_Module->Pointer_Struct_Module_Linked_List_Parents)=NULL;
+	Pointer_Struct_Module->Pointer_Struct_Module_Linked_List_Parents=
+	(unsigned int*)malloc((sizeof(unsigned int)*2));
 
-*(Pointer_Struct_Module->Pointer_Struct_Module_Linked_List_Parents+1)=NULL;
+	*(Pointer_Struct_Module->Pointer_Struct_Module_Linked_List_Parents)=NULL;
 
-Pointer_Struct_Module->Pointer_Struct_Module_Linked_List_Children=
-(unsigned int*)malloc((sizeof(unsigned int*)*2));
+	*(Pointer_Struct_Module->Pointer_Struct_Module_Linked_List_Parents+1)=NULL;
 
-*(Pointer_Struct_Module->Pointer_Struct_Module_Linked_List_Children)=NULL;
+	/******************************************************************************/
 
-*(Pointer_Struct_Module->Pointer_Struct_Module_Linked_List_Children+1)=NULL;
+	Pointer_Struct_Module->Pointer_Struct_Module_Linked_List_Children=
+	(unsigned int*)malloc((sizeof(unsigned int*)*2));
 
-/******************************************************************************/
+	*(Pointer_Struct_Module->Pointer_Struct_Module_Linked_List_Children)=NULL;
+
+	*(Pointer_Struct_Module->Pointer_Struct_Module_Linked_List_Children+1)=NULL;
+
+	/******************************************************************************/
+
+	/*Pointer_Struct_Module->Pointer_Linked_List_Struct_Data=
+	(unsigned int*)malloc((sizeof(unsigned int)*2));
+
+	*(Pointer_Struct_Module->Pointer_Linked_List_Struct_Data)=NULL;
+
+	*(Pointer_Struct_Module->Pointer_Linked_List_Struct_Data+1)=NULL;
+
+	Pointer_Struct_Module->Pointer_Function_Node_Data_Add(Pointer_Struct_Module);
+	*/
+	/******************************************************************************/
 
 }

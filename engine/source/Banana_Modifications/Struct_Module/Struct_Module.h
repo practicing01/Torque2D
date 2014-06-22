@@ -1,5 +1,9 @@
 //Modular Structure by practicing01
 
+#ifndef _STRUCT_BANANA_H_
+#define _STRUCT_BANANA_H_
+#endif
+
 #include <stdlib.h>
 
 #ifndef _CONSOLE_H_
@@ -27,7 +31,7 @@ unsigned int *Pointer_Struct_Module_Linked_List_Parents;
 unsigned int *Pointer_Struct_Module_Linked_List_Children;
 
 //Linked list of this modules custom structures.
-unsigned int *Pointer_Linked_List_Struct_Data;
+//unsigned int *Pointer_Linked_List_Struct_Data;
 
 //Create() dynamically allocates a Struct_Model linked list node.
 struct Struct_Module *(*Pointer_Function_Create)();
@@ -44,7 +48,7 @@ void (*Pointer_Function_Link)
 struct Struct_Module *Pointer_Struct_Module_Child);
 
 //Node_Data_Add() adds an unsigned int pointer, to the data list.
-void (*Pointer_Function_Node_Data_Add)(struct Struct_Module *Pointer_Struct_Module);
+//void (*Pointer_Function_Node_Data_Add)(struct Struct_Module *Pointer_Struct_Module);
 
 //Loop() processes this module's stuffs.
 void (*Pointer_Function_Loop)(struct Struct_Module *Pointer_Struct_Module);
@@ -62,6 +66,6 @@ void Function_Struct_Module_Main_Link(struct Struct_Module *,struct Struct_Modul
 
 void Function_Struct_Module_Main_Loop(struct Struct_Module *);
 
-void Function_Struct_Module_Main_Node_Data_Add(struct Struct_Module *);
+//void Function_Struct_Module_Main_Node_Data_Add(struct Struct_Module *);
 
 void Function_Struct_Module_Main_Initialize(struct Struct_Module *);

@@ -168,8 +168,8 @@ bool initializeLibraries()
     ParticleSystem::Init();
     
     //Struct_Module_Banana_This=Machine_Banana_Create();
-
-/*    Pointer_Struct_Module_Main=Function_Struct_Module_Main_Create();
+/*
+    Pointer_Struct_Module_Main=Function_Struct_Module_Main_Create();
 
     Function_Struct_Module_Main_Initialize(Pointer_Struct_Module_Main);
 
@@ -178,14 +178,16 @@ bool initializeLibraries()
 
     Pointer_Struct_Module_Main->Pointer_Function_Initialize(Pointer_Struct_Module_Child);
 
-    Pointer_Struct_Module_Main->Pointer_Function_Link(Pointer_Struct_Module_Main,Pointer_Struct_Module_Child);
-*/
-    /*Pointer_Struct_Module_Assimp=Function_Struct_Module_Assimp_Create();
+    //Pointer_Struct_Module_Main->Pointer_Function_Link(Pointer_Struct_Module_Main,Pointer_Struct_Module_Child);
+
+    Pointer_Struct_Module_Child->Int_Counter=1;
+
+    Pointer_Struct_Module_Assimp=Function_Struct_Module_Assimp_Create();
 
     Function_Struct_Module_Assimp_Initialize(Pointer_Struct_Module_Assimp);
 
     Pointer_Struct_Module_Assimp->Pointer_Function_Link(Pointer_Struct_Module_Main,Pointer_Struct_Module_Assimp);
-	*/
+*/
 #if defined(TORQUE_OS_IOS) && defined(_USE_STORE_KIT)
     storeInit();
 #endif // TORQUE_OS_IOS && _USE_STORE_KIT
