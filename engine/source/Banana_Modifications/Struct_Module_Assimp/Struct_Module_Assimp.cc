@@ -12,12 +12,118 @@
 
 //#include <GL/glut.h>
 //#include <GL/gl.h>
-//#include "graphics/dgl.h"
 
 // assimp include files. These three are usually needed.
 #include <assimp/cimport.h>
 #include <assimp/scene.h>
 #include <assimp/postprocess.h>
+
+/****************************************************************/
+
+//http://iphonedevelopment.blogspot.com/2008/12/glulookat.html
+//Jeff LaMarche
+
+void gluLookAt(GLfloat eyex, GLfloat eyey, GLfloat eyez,
+          GLfloat centerx, GLfloat centery, GLfloat centerz,
+          GLfloat upx, GLfloat upy, GLfloat upz)
+{
+    GLfloat m[16];
+    GLfloat x[3], y[3], z[3];
+    GLfloat mag;
+
+    /* Make rotation matrix */
+
+    /* Z vector */
+    z[0] = eyex - centerx;
+    z[1] = eyey - centery;
+    z[2] = eyez - centerz;
+    mag = sqrt(z[0] * z[0] + z[1] * z[1] + z[2] * z[2]);
+    if (mag) {          /* mpichler, 19950515 */
+        z[0] /= mag;
+        z[1] /= mag;
+        z[2] /= mag;
+    }
+
+    /* Y vector */
+    y[0] = upx;
+    y[1] = upy;
+    y[2] = upz;
+
+    /* X vector = Y cross Z */
+    x[0] = y[1] * z[2] - y[2] * z[1];
+    x[1] = -y[0] * z[2] + y[2] * z[0];
+    x[2] = y[0] * z[1] - y[1] * z[0];
+
+    /* Recompute Y = Z cross X */
+    y[0] = z[1] * x[2] - z[2] * x[1];
+    y[1] = -z[0] * x[2] + z[2] * x[0];
+    y[2] = z[0] * x[1] - z[1] * x[0];
+
+    /* mpichler, 19950515 */
+    /* cross product gives area of parallelogram, which is < 1.0 for
+     * non-perpendicular unit-length vectors; so normalize x, y here
+     */
+
+    mag = sqrt(x[0] * x[0] + x[1] * x[1] + x[2] * x[2]);
+    if (mag) {
+        x[0] /= mag;
+        x[1] /= mag;
+        x[2] /= mag;
+    }
+
+    mag = sqrt(y[0] * y[0] + y[1] * y[1] + y[2] * y[2]);
+    if (mag) {
+        y[0] /= mag;
+        y[1] /= mag;
+        y[2] /= mag;
+    }
+
+#define M(row,col)  m[col*4+row]
+    M(0, 0) = x[0];
+    M(0, 1) = x[1];
+    M(0, 2) = x[2];
+    M(0, 3) = 0.0;
+    M(1, 0) = y[0];
+    M(1, 1) = y[1];
+    M(1, 2) = y[2];
+    M(1, 3) = 0.0;
+    M(2, 0) = z[0];
+    M(2, 1) = z[1];
+    M(2, 2) = z[2];
+    M(2, 3) = 0.0;
+    M(3, 0) = 0.0;
+    M(3, 1) = 0.0;
+    M(3, 2) = 0.0;
+    M(3, 3) = 1.0;
+#undef M
+    glMultMatrixf(m);
+
+    /* Translate Eye to Origin */
+    glTranslatef(-eyex, -eyey, -eyez);
+
+}
+
+/****************************************************************/
+
+//http://nehe.gamedev.net/article/replacement_for_gluperspective/21002/
+//James Heggie
+
+// Replaces gluPerspective. Sets the frustum to perspective mode.
+// fovY     - Field of vision in degrees in the y direction
+// aspect   - Aspect ratio of the viewport
+// zNear    - The near clipping distance
+// zFar     - The far clipping distance
+
+void perspectiveGL( GLdouble fovY, GLdouble aspect, GLdouble zNear, GLdouble zFar )
+{
+	const GLdouble pi = 3.1415926535897932384626433832795;
+	GLdouble fW, fH;
+	fH = tan( fovY / 360 * pi ) * zNear;
+	fW = fH * aspect;
+    glFrustum( -fW, fW, -fH, fH, zNear, zFar );
+}
+
+/****************************************************************/
 
 // the global Assimp scene object
 const struct aiScene* scene = NULL;
@@ -36,8 +142,10 @@ void reshape(int width, int height)
 
         glMatrixMode(GL_PROJECTION);
         glLoadIdentity();
-        gluPerspective(fieldOfView, aspectRatio,
-                1.0, 1000.0); /* Znear and Zfar */
+        //gluPerspective(fieldOfView, aspectRatio,
+                //1.0, 1000.0); /* Znear and Zfar */
+        perspectiveGL(fieldOfView, aspectRatio,
+                1.0, 1000.0);
         glViewport(0, 0, width, height);
 }
 
@@ -249,11 +357,11 @@ void do_motion (void)
 
 void display(void)
 {
-		Con::printf("Assimp\n");
+		//Con::printf("Assimp\n");
 
         float tmp;
 glPushMatrix();
-        glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+        //glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
         glMatrixMode(GL_MODELVIEW);
         glLoadIdentity();
@@ -319,6 +427,7 @@ void Assimp_main(/*int argc, char **argv*/)
         //glutCreateWindow("Assimp - Very simple OpenGL sample");
         //glutDisplayFunc(display);
         //glutReshapeFunc(reshape);
+        reshape(800,600);
 
         // get a handle to the predefined STDOUT log stream and attach
         // it to the logging system. It remains active for all further
@@ -343,7 +452,7 @@ void Assimp_main(/*int argc, char **argv*/)
 
         loadasset( "./Cube.dae");
 
-        /*glClearColor(0.1f,0.1f,0.1f,1.f);
+        glClearColor(0.1f,0.1f,0.1f,1.f);
 
         glEnable(GL_LIGHTING);
         glEnable(GL_LIGHT0); // Uses default lighting parameters
@@ -354,11 +463,11 @@ void Assimp_main(/*int argc, char **argv*/)
         glEnable(GL_NORMALIZE);
 
         // XXX docs say all polygons are emitted CCW, but tests show that some aren't.
-        if(getenv("MODEL_IS_BROKEN"))
-                glFrontFace(GL_CW);
+        //if(getenv("MODEL_IS_BROKEN"))
+                //glFrontFace(GL_CW);
 
         glColorMaterial(GL_FRONT, GL_DIFFUSE);
-		*/
+
         Platform::getRealMilliseconds();//glutGet(GLUT_ELAPSED_TIME);
         //glutMainLoop();
 
@@ -596,10 +705,10 @@ void Function_Struct_Module_Assimp_Loop(struct Struct_Module *Pointer_Struct_Mod
 
 display();
 
-Con::printf("Assimp Loop Struct_Module %d Int_Counter=%d\n",Pointer_Struct_Module,
-Pointer_Struct_Module->Int_Counter);
+//Con::printf("Assimp Loop Struct_Module %d Int_Counter=%d\n",Pointer_Struct_Module,
+//Pointer_Struct_Module->Int_Counter);
 
-Pointer_Struct_Module->Int_Counter++;
+//Pointer_Struct_Module->Int_Counter++;
 
 /*if (*(Pointer_Struct_Module->Pointer_Linked_List_Struct_Data)!=NULL)
 {

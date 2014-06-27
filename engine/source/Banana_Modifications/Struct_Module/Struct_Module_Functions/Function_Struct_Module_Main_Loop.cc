@@ -1,10 +1,10 @@
 void Function_Struct_Module_Main_Loop(struct Struct_Module *Pointer_Struct_Module)
 {
 
-Con::printf("Loop Struct_Module %d Int_Counter=%d\n",Pointer_Struct_Module,
-Pointer_Struct_Module->Int_Counter);
+//Con::printf("Loop Struct_Module %d Int_Counter=%d\n",Pointer_Struct_Module,
+//Pointer_Struct_Module->Int_Counter);
 
-Pointer_Struct_Module->Int_Counter++;
+//Pointer_Struct_Module->Int_Counter++;
 
 /*if (*(Pointer_Struct_Module->Pointer_Linked_List_Struct_Data)!=NULL)
 {

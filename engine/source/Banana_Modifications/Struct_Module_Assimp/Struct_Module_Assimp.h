@@ -8,15 +8,7 @@ struct Struct_Module_Assimp_Data_Banana
 {
 
 int Banana;
-/*
-const struct aiScene* scene;
 
-GLuint scene_list;
-
-aiVector3D scene_min, scene_max, scene_center;
-
-static float angle;
-*/
 };
 
 struct Struct_Module_Assimp_Data_Nanana
