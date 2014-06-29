@@ -1,7 +1,7 @@
 #ifndef _STRUCT_BANANA_H_
 #include "Banana_Modifications/Struct_Module/Struct_Module.h"
 #endif
-#include "graphics/dgl.h"
+//#include "graphics/dgl.h"
 
 //All custom data for this module will be contained in a linked list of structures.
 struct Struct_Module_Assimp_Data_Banana

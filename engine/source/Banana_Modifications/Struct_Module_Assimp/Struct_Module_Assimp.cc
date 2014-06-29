@@ -12,6 +12,11 @@
 
 //#include <GL/glut.h>
 //#include <GL/gl.h>
+#ifndef _PLATFORMGL_H_
+#include "platform/platformAssert.h"
+#include "platform/platformGL.h"
+#endif
+#include "graphics/dgl.h"
 
 // assimp include files. These three are usually needed.
 #include <assimp/cimport.h>
@@ -463,8 +468,8 @@ void Assimp_main(/*int argc, char **argv*/)
         glEnable(GL_NORMALIZE);
 
         // XXX docs say all polygons are emitted CCW, but tests show that some aren't.
-        //if(getenv("MODEL_IS_BROKEN"))
-                //glFrontFace(GL_CW);
+        if(getenv("MODEL_IS_BROKEN"))
+                glFrontFace(GL_CW);
 
         glColorMaterial(GL_FRONT, GL_DIFFUSE);
 
