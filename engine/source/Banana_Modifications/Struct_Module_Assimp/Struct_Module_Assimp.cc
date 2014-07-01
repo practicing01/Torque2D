@@ -299,7 +299,7 @@ void recursive_render (const struct aiScene *sc, const struct aiNode* nd)
                 if(mesh->mNormals == NULL) {
                         glDisable(GL_LIGHTING);
                 } else {
-                        glEnable(GL_LIGHTING);
+                        //glEnable(GL_LIGHTING);
                 }
 
                 for (t = 0; t < mesh->mNumFaces; ++t) {
@@ -365,7 +365,7 @@ void display(void)
 		//Con::printf("Assimp\n");
 
         float tmp;
-glPushMatrix();
+        glPushMatrix();
         //glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
         glMatrixMode(GL_MODELVIEW);
@@ -400,7 +400,7 @@ glPushMatrix();
         glCallList(scene_list);
 
         //glutSwapBuffers();
-glPopMatrix();
+        glPopMatrix();
         do_motion();
 }
 
