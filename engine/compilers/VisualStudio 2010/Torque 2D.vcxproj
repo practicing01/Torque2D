@@ -63,6 +63,8 @@
     <TargetName Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Torque2D_DEBUG</TargetName>
     <TargetName Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Torque2D</TargetName>
     <TargetName Condition="'$(Configuration)|$(Platform)'=='Shipping|Win32'">Torque2D</TargetName>
+    <IncludePath Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(VCInstallDir)include;$(VCInstallDir)atlmfc\include;$(WindowsSdkDir)include;$(FrameworkSDKDir)\include;/home/practicing01/Downloads/assimp-3.1.1-win-binaries/include;</IncludePath>
+    <LibraryPath Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(VCInstallDir)lib;$(VCInstallDir)atlmfc\lib;$(WindowsSdkDir)lib;$(FrameworkSDKDir)\lib;/home/practicing01/Downloads/assimp-3.1.1-win-binaries/lib32;</LibraryPath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <Midl>
@@ -144,10 +146,10 @@
       <AdditionalIncludeDirectories>../../Lib/MSPlatformSDK/Include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
     <Link>
-      <AdditionalDependencies>Leap.lib;COMCTL32.LIB;COMDLG32.LIB;USER32.LIB;ADVAPI32.LIB;GDI32.LIB;WINMM.LIB;WSOCK32.LIB;vfw32.lib;Imm32.lib;unicows.lib;shell32.lib;shlwapi.lib;ole32.lib;RPCRT4.LIB;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>Leap.lib;COMCTL32.LIB;COMDLG32.LIB;USER32.LIB;ADVAPI32.LIB;GDI32.LIB;WINMM.LIB;WSOCK32.LIB;vfw32.lib;Imm32.lib;unicows.lib;shell32.lib;shlwapi.lib;ole32.lib;RPCRT4.LIB;assimp.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <OutputFile>../../../Torque2D.exe</OutputFile>
       <SuppressStartupBanner>false</SuppressStartupBanner>
-      <AdditionalLibraryDirectories>../../lib/LeapSDK/lib/x86;../../Lib/unicode;../../Lib/MSPlatformSDK/Lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>../../lib/LeapSDK/lib/x86;../../Lib/unicode;../../Lib/MSPlatformSDK/Lib;/home/practicing01/Downloads/assimp-3.1.1-win-binaries/lib32;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <IgnoreSpecificDefaultLibraries>LIBC;%(IgnoreSpecificDefaultLibraries)</IgnoreSpecificDefaultLibraries>
       <GenerateDebugInformation>false</GenerateDebugInformation>
       <ProgramDatabaseFile>$(IntDir)$(ProjectName).pdb</ProgramDatabaseFile>
@@ -289,6 +291,14 @@
     <ClCompile Include="..\..\source\assets\referencedAssets.cc" />
     <ClCompile Include="..\..\source\audio\AudioAsset.cc" />
     <ClCompile Include="..\..\source\audio\audio_ScriptBinding.cc" />
+    <ClCompile Include="..\..\source\Banana_Modifications\Struct_Module\Struct_Module_Functions\Function_Struct_Module_Main_Create.cc" />
+    <ClCompile Include="..\..\source\Banana_Modifications\Struct_Module\Struct_Module_Functions\Function_Struct_Module_Main_Destroy.cc" />
+    <ClCompile Include="..\..\source\Banana_Modifications\Struct_Module\Struct_Module_Functions\Function_Struct_Module_Main_Initialize.cc" />
+    <ClCompile Include="..\..\source\Banana_Modifications\Struct_Module\Struct_Module_Functions\Function_Struct_Module_Main_Link.cc" />
+    <ClCompile Include="..\..\source\Banana_Modifications\Struct_Module\Struct_Module_Functions\Function_Struct_Module_Main_Loop.cc" />
+    <ClCompile Include="..\..\source\Banana_Modifications\Struct_Module\Struct_Module_Functions\Function_Struct_Module_Main_Node_Data_Add.cc" />
+    <ClCompile Include="..\..\source\Banana_Modifications\Struct_Module\Struct_Module_Functions\Struct_Module_Functions.cc" />
+    <ClCompile Include="..\..\source\Banana_Modifications\Struct_Module_Assimp\Struct_Module_Assimp.cc" />
     <ClCompile Include="..\..\source\Box2D\Collision\b2BroadPhase.cpp" />
     <ClCompile Include="..\..\source\Box2D\Collision\b2CollideCircle.cpp" />
     <ClCompile Include="..\..\source\Box2D\Collision\b2CollideEdge.cpp" />
@@ -750,6 +760,8 @@
     <ClInclude Include="..\..\source\assets\tamlAssetReferencedUpdateVisitor.h" />
     <ClInclude Include="..\..\source\assets\tamlAssetReferencedVisitor.h" />
     <ClInclude Include="..\..\source\audio\AudioAsset.h" />
+    <ClInclude Include="..\..\source\Banana_Modifications\Struct_Module\Struct_Module.h" />
+    <ClInclude Include="..\..\source\Banana_Modifications\Struct_Module_Assimp\Struct_Module_Assimp.h" />
     <ClInclude Include="..\..\source\Box2D\Box2D.h" />
     <ClInclude Include="..\..\source\Box2D\Collision\b2BroadPhase.h" />
     <ClInclude Include="..\..\source\Box2D\Collision\b2Collision.h" />

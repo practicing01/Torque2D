@@ -12,11 +12,30 @@
 
 //#include <GL/glut.h>
 //#include <GL/gl.h>
+
+#ifndef _PLATFORM_H_
+#include "platform/platform.h"
+#endif
+
 #ifndef _PLATFORMGL_H_
 #include "platform/platformAssert.h"
 #include "platform/platformGL.h"
 #endif
 #include "graphics/dgl.h"
+
+#define GL_FUNCTION(fn_return,fn_name,fn_args,fn_value) extern fn_return (*fn_name)fn_args;
+#include "platform/GLCoreFunc.h"
+#include "platform/GLExtFunc.h"
+#undef GL_FUNCTION
+
+// GLU functions are linked at compile time, except in the dedicated server build
+#ifndef DEDICATED
+#define GL_FUNCTION(fn_return,fn_name,fn_args,fn_value) fn_return fn_name fn_args;
+#else
+#define GL_FUNCTION(fn_return,fn_name,fn_args,fn_value) extern fn_return (*fn_name)fn_args;
+#endif
+#include "platform/GLUFunc.h"
+#undef GL_FUNCTION
 
 // assimp include files. These three are usually needed.
 #include <assimp/cimport.h>
@@ -36,38 +55,38 @@ void gluLookAt(GLfloat eyex, GLfloat eyey, GLfloat eyez,
     GLfloat x[3], y[3], z[3];
     GLfloat mag;
 
-    /* Make rotation matrix */
+    //* Make rotation matrix
 
-    /* Z vector */
+    //* Z vector
     z[0] = eyex - centerx;
     z[1] = eyey - centery;
     z[2] = eyez - centerz;
     mag = sqrt(z[0] * z[0] + z[1] * z[1] + z[2] * z[2]);
-    if (mag) {          /* mpichler, 19950515 */
+    if (mag) {          //* mpichler, 19950515
         z[0] /= mag;
         z[1] /= mag;
         z[2] /= mag;
     }
 
-    /* Y vector */
+    //* Y vector
     y[0] = upx;
     y[1] = upy;
     y[2] = upz;
 
-    /* X vector = Y cross Z */
+    //* X vector = Y cross Z
     x[0] = y[1] * z[2] - y[2] * z[1];
     x[1] = -y[0] * z[2] + y[2] * z[0];
     x[2] = y[0] * z[1] - y[1] * z[0];
 
-    /* Recompute Y = Z cross X */
+    //* Recompute Y = Z cross X
     y[0] = z[1] * x[2] - z[2] * x[1];
     y[1] = -z[0] * x[2] + z[2] * x[0];
     y[2] = z[0] * x[1] - z[1] * x[0];
 
-    /* mpichler, 19950515 */
-    /* cross product gives area of parallelogram, which is < 1.0 for
-     * non-perpendicular unit-length vectors; so normalize x, y here
-     */
+    //* mpichler, 19950515
+    //* cross product gives area of parallelogram, which is < 1.0 for
+    // * non-perpendicular unit-length vectors; so normalize x, y here
+    //
 
     mag = sqrt(x[0] * x[0] + x[1] * x[1] + x[2] * x[2]);
     if (mag) {
@@ -103,7 +122,7 @@ void gluLookAt(GLfloat eyex, GLfloat eyey, GLfloat eyez,
 #undef M
     glMultMatrixf(m);
 
-    /* Translate Eye to Origin */
+    ///* Translate Eye to Origin
     glTranslatef(-eyex, -eyey, -eyez);
 
 }
@@ -118,7 +137,7 @@ void gluLookAt(GLfloat eyex, GLfloat eyey, GLfloat eyez,
 // aspect   - Aspect ratio of the viewport
 // zNear    - The near clipping distance
 // zFar     - The far clipping distance
-
+/*
 void perspectiveGL( GLdouble fovY, GLdouble aspect, GLdouble zNear, GLdouble zFar )
 {
 	const GLdouble pi = 3.1415926535897932384626433832795;
@@ -127,7 +146,7 @@ void perspectiveGL( GLdouble fovY, GLdouble aspect, GLdouble zNear, GLdouble zFa
 	fW = fH * aspect;
     glFrustum( -fW, fW, -fH, fH, zNear, zFar );
 }
-
+*/
 /****************************************************************/
 
 // the global Assimp scene object
@@ -142,15 +161,15 @@ static float angle = 0.f;
 #define aisgl_max(x,y) (y>x?y:x)
 
 void reshape(int width, int height)
-{
+{return;
         const double aspectRatio = (float) width / height, fieldOfView = 45.0;
 
         glMatrixMode(GL_PROJECTION);
         glLoadIdentity();
-        //gluPerspective(fieldOfView, aspectRatio,
-                //1.0, 1000.0); /* Znear and Zfar */
-        perspectiveGL(fieldOfView, aspectRatio,
-                1.0, 1000.0);
+        gluPerspective(fieldOfView, aspectRatio,
+                1.0, 1000.0); /* Znear and Zfar */
+        //perspectiveGL(fieldOfView, aspectRatio,
+                //1.0, 1000.0);
         glViewport(0, 0, width, height);
 }
 
@@ -283,7 +302,7 @@ void recursive_render (const struct aiScene *sc, const struct aiNode* nd)
 {
         unsigned int i;
         unsigned int n = 0, t;
-        aiMatrix4x4 m = nd->mTransformation;
+        /*struct*/ aiMatrix4x4 m = nd->mTransformation;
 
         // update transform
         aiTransposeMatrix4(&m);
@@ -296,11 +315,11 @@ void recursive_render (const struct aiScene *sc, const struct aiNode* nd)
 
                 apply_material(sc->mMaterials[mesh->mMaterialIndex]);
 
-                if(mesh->mNormals == NULL) {
-                        glDisable(GL_LIGHTING);
-                } else {
+                //if(mesh->mNormals == NULL) {
+                        //glDisable(GL_LIGHTING);
+                //} else {
                         //glEnable(GL_LIGHTING);
-                }
+                //}
 
                 for (t = 0; t < mesh->mNumFaces; ++t) {
                         const struct aiFace* face = &mesh->mFaces[t];
@@ -362,11 +381,9 @@ void do_motion (void)
 
 void display(void)
 {
-		//Con::printf("Assimp\n");
-
         float tmp;
-        glPushMatrix();
-        //glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+
+        glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
         glMatrixMode(GL_MODELVIEW);
         glLoadIdentity();
@@ -400,7 +417,7 @@ void display(void)
         glCallList(scene_list);
 
         //glutSwapBuffers();
-        glPopMatrix();
+
         do_motion();
 }
 

@@ -173,7 +173,7 @@ function TruckToy::reset( %this )
     // Truck.
     %truckStartX = TruckToy.WorldLeft + (TruckToy.CameraWidth/6);
     %truckStartY = 3;   
-    %this.createTruck( 0,0 );//%truckStartX, %truckStartY );    
+    %this.createTruck( %truckStartX, %truckStartY );    
     
     // Start the timer.
     TruckToy.startTimer( "createProjectile", TruckToy.ProjectileRate );

@@ -515,8 +515,8 @@ void DefaultGame::mainLoop( void )
 
          //Machine_Banana_Process(Struct_Module_Banana_This);
 
-         Pointer_Struct_Module_Main->Pointer_Function_Loop(Pointer_Struct_Module_Main);
-    
+          Pointer_Struct_Module_Main->Pointer_Function_Loop(Pointer_Struct_Module_Main);
+
 #ifdef TORQUE_OS_IOS_PROFILE
     iPhoneProfilerEnd("MAIN_LOOP");
     if(iPhoneProfilerGetCount() >= 60){
