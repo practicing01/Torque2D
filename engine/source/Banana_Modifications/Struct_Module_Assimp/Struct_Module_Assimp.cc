@@ -12,6 +12,7 @@
 
 //#include <GL/glut.h>
 //#include <GL/gl.h>
+#include "math/mRect.h"
 
 #ifndef _PLATFORM_H_
 #include "platform/platform.h"
@@ -381,13 +382,33 @@ void do_motion (void)
 
 void display(void)
 {
+		glEnable(GL_DEPTH_TEST);
+
         float tmp;
 
-        glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+        RectI Previous_Viewport;
+
+        RectI Temp_Viewport;
+
+        dglGetViewport(&Previous_Viewport);
+
+        Temp_Viewport.set(Point2I(0,0),Point2I(800,600));
+
+        dglSetViewport(Temp_Viewport);
+
+        //glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+
+        glMatrixMode(GL_PROJECTION);
+        glPushMatrix();
+        glLoadIdentity();
 
         glMatrixMode(GL_MODELVIEW);
+        glPushMatrix();
         glLoadIdentity();
-        gluLookAt(0.f,0.f,3.f,0.f,0.f,-5.f,0.f,1.f,0.f);
+        //gluLookAt(0.f,0.f,3.f,0.f,0.f,-5.f,0.f,1.f,0.f);
+
+        dglSetFrustum(-Temp_Viewport.extent.x,Temp_Viewport.extent.x,
+        		-Temp_Viewport.extent.y,Temp_Viewport.extent.y,-1000.0f,1000.0f,true);
 
         // rotate it around the y axis
         glRotatef(angle,0.f,1.f,0.f);
@@ -400,25 +421,34 @@ void display(void)
         glScalef(tmp, tmp, tmp);
 
         // center the model
-        glTranslatef( -scene_center.x, -scene_center.y, -scene_center.z );
+        //glTranslatef( -scene_center.x, -scene_center.y, -scene_center.z );
+
+        glTranslatef( 0.0f, 0.0f, 0.0f );
 
         // if the display list has not been made yet, create a new one and
         // fill it with scene contents
-        if(scene_list == 0) {
-         scene_list = glGenLists(1);
-         glNewList(scene_list, GL_COMPILE);
+        //if(scene_list == 0) {
+         //scene_list = glGenLists(1);
+         //glNewList(scene_list, GL_COMPILE);
             // now begin at the root node of the imported data and traverse
             // the scenegraph by multiplying subsequent local transforms
             // together on GL's matrix stack.
          recursive_render(scene, scene->mRootNode);
-         glEndList();
-        }
+         //glEndList();
+        //}
 
-        glCallList(scene_list);
+        //glCallList(scene_list);
 
         //glutSwapBuffers();
 
+        glPopMatrix();
+        glMatrixMode(GL_PROJECTION);
+        glPopMatrix();
+        glMatrixMode(GL_MODELVIEW);
+
         do_motion();
+
+        glDisable(GL_DEPTH_TEST);
 }
 
 int loadasset (const char* path)
@@ -474,21 +504,21 @@ void Assimp_main(/*int argc, char **argv*/)
 
         loadasset( "./Cube.dae");
 
-        glClearColor(0.1f,0.1f,0.1f,1.f);
+        //glClearColor(0.1f,0.1f,0.1f,1.f);
 
-        glEnable(GL_LIGHTING);
-        glEnable(GL_LIGHT0); // Uses default lighting parameters
+        //glEnable(GL_LIGHTING);
+        //glEnable(GL_LIGHT0); // Uses default lighting parameters
 
-        glEnable(GL_DEPTH_TEST);
+        //glEnable(GL_DEPTH_TEST);
 
-        glLightModeli(GL_LIGHT_MODEL_TWO_SIDE, GL_TRUE);
-        glEnable(GL_NORMALIZE);
+        //glLightModeli(GL_LIGHT_MODEL_TWO_SIDE, GL_TRUE);
+        //glEnable(GL_NORMALIZE);
 
         // XXX docs say all polygons are emitted CCW, but tests show that some aren't.
-        if(getenv("MODEL_IS_BROKEN"))
-                glFrontFace(GL_CW);
+        //if(getenv("MODEL_IS_BROKEN"))
+                //glFrontFace(GL_CW);
 
-        glColorMaterial(GL_FRONT, GL_DIFFUSE);
+        //glColorMaterial(GL_FRONT, GL_DIFFUSE);
 
         Platform::getRealMilliseconds();//glutGet(GLUT_ELAPSED_TIME);
         //glutMainLoop();
