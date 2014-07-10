@@ -317,7 +317,7 @@ void recursive_render (const struct aiScene *sc, const struct aiNode* nd)
                 apply_material(sc->mMaterials[mesh->mMaterialIndex]);
 
                 //if(mesh->mNormals == NULL) {
-                        //glDisable(GL_LIGHTING);
+                        glDisable(GL_LIGHTING);
                 //} else {
                         //glEnable(GL_LIGHTING);
                 //}
@@ -402,13 +402,13 @@ void display(void)
         glPushMatrix();
         glLoadIdentity();
 
+        dglSetFrustum(-Temp_Viewport.extent.x*0.5,Temp_Viewport.extent.x*0.5,
+        		-Temp_Viewport.extent.y*0.5,Temp_Viewport.extent.y*0.5,-1000.0f,1000.0f,true);
+
         glMatrixMode(GL_MODELVIEW);
         glPushMatrix();
         glLoadIdentity();
         //gluLookAt(0.f,0.f,3.f,0.f,0.f,-5.f,0.f,1.f,0.f);
-
-        dglSetFrustum(-Temp_Viewport.extent.x,Temp_Viewport.extent.x,
-        		-Temp_Viewport.extent.y,Temp_Viewport.extent.y,-1000.0f,1000.0f,true);
 
         // rotate it around the y axis
         glRotatef(angle,0.f,1.f,0.f);
