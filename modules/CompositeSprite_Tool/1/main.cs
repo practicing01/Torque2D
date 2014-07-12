@@ -20,11 +20,13 @@
 // IN THE SOFTWARE.
 //-----------------------------------------------------------------------------
 
+//Thanks for using! ~practicing01
+
 function CompositeSprite_Tool::create( %this )
 {
 
     //Variables
-    %this.String_Filename="Filename.txt";
+    %this.String_Filename="Level";
 
     %this.Vector2D_Resolution=getRes();
 
@@ -59,6 +61,8 @@ function CompositeSprite_Tool::create( %this )
     %this.Camera_Move_Units="1";
     
     %this.Bool_Moving_Camera=false;
+
+    %this.SimSet_Backgrounds=new SimSet();
 
     %this.Script_Object_Input_Controller=new ScriptObject()
     {
@@ -123,6 +127,13 @@ function CompositeSprite_Tool::destroy( %this )
         SandboxWindow.removeInputListener(%this.Script_Object_Input_Controller);
 
         %this.Script_Object_Input_Controller.delete();
+
+    }
+
+    if (isObject(%this.SimSet_Backgrounds))
+    {
+
+        %this.SimSet_Backgrounds.delete();
 
     }
 

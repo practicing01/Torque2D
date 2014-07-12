@@ -4,7 +4,7 @@ function CompositeSprite_Tool::Initialize_CompositeSprite(%this)
 %this.CompositeSprite_Level=new CompositeSprite()
 {
 
-SceneLayer=0;
+SceneLayer=1;
 
 BodyType="static";
 

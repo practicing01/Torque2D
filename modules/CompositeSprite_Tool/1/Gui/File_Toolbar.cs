@@ -31,7 +31,7 @@ Extent="160 24";
 
 maxChars="255";
 
-text="Filename.txt";
+text="Level";
 
 class="Class_CompositeSprite_Tool_GuiTextEditCtrl";
 

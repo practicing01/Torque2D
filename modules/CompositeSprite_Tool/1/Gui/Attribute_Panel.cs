@@ -651,6 +651,33 @@ String_Type="DRight";
 
 %GuiControl_Panel.add(%GuiButtonCtrl_DRight);
 
+%Int_Y_Position+=48;
+
+%GuiButtonCtrl_Delete=new GuiButtonCtrl()
+{
+
+Profile="BlueButtonProfile";
+
+ButtonType="PushButton";
+
+HorizSizing="relative";
+
+VertSizing="relative";
+
+Position="40" SPC %Int_Y_Position;
+
+Extent="40 24";
+
+Text="Delete";
+
+class="Class_CompositeSprite_Tool_GuiButtonCtrl";
+
+String_Type="Delete";
+
+};
+
+%GuiControl_Panel.add(%GuiButtonCtrl_Delete);
+
 SandboxWindow.addGuiControl(%this.GuiControl_Attribute_Panel);
 
 }

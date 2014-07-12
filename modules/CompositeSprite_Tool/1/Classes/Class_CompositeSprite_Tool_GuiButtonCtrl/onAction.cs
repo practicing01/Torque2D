@@ -7,6 +7,36 @@ if (%this.String_Type$="Ass")
 CompositeSprite_Tool.String_Selected_Image=%this->GuiSpriteCtrl_Ass.Image;
 
 }
+else if (%this.String_Type$="Save")
+{
+
+CompositeSprite_Tool.Save_CompositeSprite();
+
+}
+else if (%this.String_Type$="Load")
+{
+
+CompositeSprite_Tool.Load_CompositeSprite();
+
+}
+else if (%this.String_Type$="Add_Background")
+{
+
+CompositeSprite_Tool.Add_Background();
+
+}
+else if (%this.String_Type$="Remove_Background")
+{
+
+CompositeSprite_Tool.Remove_Background();
+
+}
+else if (%this.String_Type$="Delete")
+{
+
+CompositeSprite_Tool.Delete_Sprite();
+
+}
 else if (%this.String_Type$="ULeft")
 {
 
