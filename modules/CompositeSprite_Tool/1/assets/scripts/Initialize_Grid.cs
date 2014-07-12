@@ -6,6 +6,8 @@ if (isObject(%this.CompositeSprite_Grid))
 
 %this.CompositeSprite_Grid.clearSprites();
 
+%this.CompositeSprite_Grid.Position=%this.CompositeSprite_Level.Position;
+
 }
 else
 {
@@ -35,13 +37,13 @@ SandboxScene.add(%this.CompositeSprite_Grid);
 
 %Vector_2D_Scaled_Grid_Unit_Size=Vector2Mult(%this.Grid_Unit_Size,%this.Camera_World_Scale);
 
-%Vector_2D_Scaled_Grid_Unit_Size_Half=Vector2Mult(%this.Grid_Unit_Size,"0.5 0.5");
+%Vector_2D_Scaled_Grid_Unit_Size_Half=Vector2Mult(%Vector_2D_Scaled_Grid_Unit_Size,"0.5 0.5");
 
 %Vector_2D_CompositeSprite_Size_Half=Vector2Mult(%this.CompositeSprite_Size,"0.5 0.5");
 
 %Vector_2D_CompositeSprite_Size_Half=Vector2Mult(%Vector_2D_CompositeSprite_Size_Half,%this.Camera_World_Scale);
 
-%Vector_2D_CompositeSprite_Size_Half=Vector2Add(%Vector_2D_CompositeSprite_Size_Half,%Vector_2D_Scaled_Grid_Unit_Size_Half);
+%Vector_2D_CompositeSprite_Size_Half=Vector2Sub(%Vector_2D_CompositeSprite_Size_Half,%Vector_2D_Scaled_Grid_Unit_Size_Half);
 
 for (%y=0;%y<%this.CompositeSprite_Size.Y;%y+=%this.Grid_Unit_Size.Y)
 {
@@ -51,7 +53,7 @@ for (%x=0;%x<%this.CompositeSprite_Size.X;%x+=%this.Grid_Unit_Size.X)
 
 %Vector_2D_Position=Vector2Mult(%x SPC %y,%this.Camera_World_Scale);
 
-//%Vector_2D_Position=Vector2Add(%Vector_2D_Position,Vector2Mult(%x SPC %y,%Vector_2D_CompositeSprite_Size_Half));
+%Vector_2D_Position=Vector2Sub(%Vector_2D_Position,%Vector_2D_CompositeSprite_Size_Half);
 
 %this.CompositeSprite_Grid.addSprite();
 
