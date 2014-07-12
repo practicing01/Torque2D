@@ -1,0 +1,15 @@
+<ModuleDefinition
+	ModuleId="CompositeSprite_Tool"
+	VersionId="1"
+	Description="Edit CompositeSprites."
+	Dependencies="ToyAssets=1"
+	Type="toy"
+	ToyCategoryIndex="8"
+	ScriptFile="main.cs"
+	CreateFunction="create"
+	DestroyFunction="destroy">
+        <DeclaredAssets
+            Path="assets"
+            Extension="asset.taml"
+            Recurse="true"/>		
+</ModuleDefinition>

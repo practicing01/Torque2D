@@ -1,0 +1,9 @@
+<ImageAsset
+    AssetCategory="Image"
+    AssetName="Image_Floor_Tile"
+    ImageFile="Floor_Tile.png"
+	CellCountX="1"
+    CellCountY="1"
+    CellWidth="16"
+    CellHeight="16"
+	Optimal_Resolution="800 480"/>
