@@ -10,13 +10,145 @@
 #include <stdlib.h>
 #include <stdio.h>
 
-#include <GL/glut.h>
-#include <GL/gl.h>
+//#include <GL/glut.h>
+//#include <GL/gl.h>
+#include "math/mRect.h"
+
+#ifndef _PLATFORM_H_
+#include "platform/platform.h"
+#endif
+
+#ifndef _PLATFORMGL_H_
+#include "platform/platformAssert.h"
+#include "platform/platformGL.h"
+#endif
+#include "graphics/dgl.h"
+
+#define GL_FUNCTION(fn_return,fn_name,fn_args,fn_value) extern fn_return (*fn_name)fn_args;
+#include "platform/GLCoreFunc.h"
+#include "platform/GLExtFunc.h"
+#undef GL_FUNCTION
+
+// GLU functions are linked at compile time, except in the dedicated server build
+#ifndef DEDICATED
+#define GL_FUNCTION(fn_return,fn_name,fn_args,fn_value) fn_return fn_name fn_args;
+#else
+#define GL_FUNCTION(fn_return,fn_name,fn_args,fn_value) extern fn_return (*fn_name)fn_args;
+#endif
+#include "platform/GLUFunc.h"
+#undef GL_FUNCTION
 
 // assimp include files. These three are usually needed.
 #include <assimp/cimport.h>
 #include <assimp/scene.h>
 #include <assimp/postprocess.h>
+
+/****************************************************************/
+
+//http://iphonedevelopment.blogspot.com/2008/12/glulookat.html
+//Jeff LaMarche
+
+void gluLookAt(GLfloat eyex, GLfloat eyey, GLfloat eyez,
+          GLfloat centerx, GLfloat centery, GLfloat centerz,
+          GLfloat upx, GLfloat upy, GLfloat upz)
+{
+    GLfloat m[16];
+    GLfloat x[3], y[3], z[3];
+    GLfloat mag;
+
+    //* Make rotation matrix
+
+    //* Z vector
+    z[0] = eyex - centerx;
+    z[1] = eyey - centery;
+    z[2] = eyez - centerz;
+    mag = sqrt(z[0] * z[0] + z[1] * z[1] + z[2] * z[2]);
+    if (mag) {          //* mpichler, 19950515
+        z[0] /= mag;
+        z[1] /= mag;
+        z[2] /= mag;
+    }
+
+    //* Y vector
+    y[0] = upx;
+    y[1] = upy;
+    y[2] = upz;
+
+    //* X vector = Y cross Z
+    x[0] = y[1] * z[2] - y[2] * z[1];
+    x[1] = -y[0] * z[2] + y[2] * z[0];
+    x[2] = y[0] * z[1] - y[1] * z[0];
+
+    //* Recompute Y = Z cross X
+    y[0] = z[1] * x[2] - z[2] * x[1];
+    y[1] = -z[0] * x[2] + z[2] * x[0];
+    y[2] = z[0] * x[1] - z[1] * x[0];
+
+    //* mpichler, 19950515
+    //* cross product gives area of parallelogram, which is < 1.0 for
+    // * non-perpendicular unit-length vectors; so normalize x, y here
+    //
+
+    mag = sqrt(x[0] * x[0] + x[1] * x[1] + x[2] * x[2]);
+    if (mag) {
+        x[0] /= mag;
+        x[1] /= mag;
+        x[2] /= mag;
+    }
+
+    mag = sqrt(y[0] * y[0] + y[1] * y[1] + y[2] * y[2]);
+    if (mag) {
+        y[0] /= mag;
+        y[1] /= mag;
+        y[2] /= mag;
+    }
+
+#define M(row,col)  m[col*4+row]
+    M(0, 0) = x[0];
+    M(0, 1) = x[1];
+    M(0, 2) = x[2];
+    M(0, 3) = 0.0;
+    M(1, 0) = y[0];
+    M(1, 1) = y[1];
+    M(1, 2) = y[2];
+    M(1, 3) = 0.0;
+    M(2, 0) = z[0];
+    M(2, 1) = z[1];
+    M(2, 2) = z[2];
+    M(2, 3) = 0.0;
+    M(3, 0) = 0.0;
+    M(3, 1) = 0.0;
+    M(3, 2) = 0.0;
+    M(3, 3) = 1.0;
+#undef M
+    glMultMatrixf(m);
+
+    ///* Translate Eye to Origin
+    glTranslatef(-eyex, -eyey, -eyez);
+
+}
+
+/****************************************************************/
+
+//http://nehe.gamedev.net/article/replacement_for_gluperspective/21002/
+//James Heggie
+
+// Replaces gluPerspective. Sets the frustum to perspective mode.
+// fovY     - Field of vision in degrees in the y direction
+// aspect   - Aspect ratio of the viewport
+// zNear    - The near clipping distance
+// zFar     - The far clipping distance
+/*
+void perspectiveGL( GLdouble fovY, GLdouble aspect, GLdouble zNear, GLdouble zFar )
+{
+	const GLdouble pi = 3.1415926535897932384626433832795;
+	GLdouble fW, fH;
+	fH = tan( fovY / 360 * pi ) * zNear;
+	fW = fH * aspect;
+    glFrustum( -fW, fW, -fH, fH, zNear, zFar );
+}
+*/
+/****************************************************************/
 
 // the global Assimp scene object
 const struct aiScene* scene = NULL;
@@ -30,13 +162,15 @@ static float angle = 0.f;
 #define aisgl_max(x,y) (y>x?y:x)
 
 void reshape(int width, int height)
-{
+{return;
         const double aspectRatio = (float) width / height, fieldOfView = 45.0;
 
         glMatrixMode(GL_PROJECTION);
         glLoadIdentity();
         gluPerspective(fieldOfView, aspectRatio,
                 1.0, 1000.0); /* Znear and Zfar */
+        //perspectiveGL(fieldOfView, aspectRatio,
+                //1.0, 1000.0);
         glViewport(0, 0, width, height);
 }
 
@@ -118,22 +252,22 @@ void apply_material(const struct aiMaterial *mtl)
         set_float4(c, 0.8f, 0.8f, 0.8f, 1.0f);
         if(AI_SUCCESS == aiGetMaterialColor(mtl, AI_MATKEY_COLOR_DIFFUSE, &diffuse))
                 color4_to_float4(&diffuse, c);
-        glMaterialfv(GL_FRONT_AND_BACK, GL_DIFFUSE, c);
+        glMaterialfv(GL_FRONT, GL_DIFFUSE, c);
 
         set_float4(c, 0.0f, 0.0f, 0.0f, 1.0f);
         if(AI_SUCCESS == aiGetMaterialColor(mtl, AI_MATKEY_COLOR_SPECULAR, &specular))
                 color4_to_float4(&specular, c);
-        glMaterialfv(GL_FRONT_AND_BACK, GL_SPECULAR, c);
+        glMaterialfv(GL_FRONT, GL_SPECULAR, c);
 
         set_float4(c, 0.2f, 0.2f, 0.2f, 1.0f);
         if(AI_SUCCESS == aiGetMaterialColor(mtl, AI_MATKEY_COLOR_AMBIENT, &ambient))
                 color4_to_float4(&ambient, c);
-        glMaterialfv(GL_FRONT_AND_BACK, GL_AMBIENT, c);
+        glMaterialfv(GL_FRONT, GL_AMBIENT, c);
 
         set_float4(c, 0.0f, 0.0f, 0.0f, 1.0f);
         if(AI_SUCCESS == aiGetMaterialColor(mtl, AI_MATKEY_COLOR_EMISSIVE, &emission))
                 color4_to_float4(&emission, c);
-        glMaterialfv(GL_FRONT_AND_BACK, GL_EMISSION, c);
+        glMaterialfv(GL_FRONT, GL_EMISSION, c);
 
         max = 1;
         ret1 = aiGetMaterialFloatArray(mtl, AI_MATKEY_SHININESS, &shininess, &max);
@@ -141,14 +275,14 @@ void apply_material(const struct aiMaterial *mtl)
             max = 1;
             ret2 = aiGetMaterialFloatArray(mtl, AI_MATKEY_SHININESS_STRENGTH, &strength, &max);
                 if(ret2 == AI_SUCCESS)
-                        glMaterialf(GL_FRONT_AND_BACK, GL_SHININESS, shininess * strength);
+                        glMaterialf(GL_FRONT, GL_SHININESS, shininess * strength);
         else
-                glMaterialf(GL_FRONT_AND_BACK, GL_SHININESS, shininess);
+                glMaterialf(GL_FRONT, GL_SHININESS, shininess);
     }
         else {
-                glMaterialf(GL_FRONT_AND_BACK, GL_SHININESS, 0.0f);
+                glMaterialf(GL_FRONT, GL_SHININESS, 0.0f);
                 set_float4(c, 0.0f, 0.0f, 0.0f, 0.0f);
-                glMaterialfv(GL_FRONT_AND_BACK, GL_SPECULAR, c);
+                glMaterialfv(GL_FRONT, GL_SPECULAR, c);
         }
 
         max = 1;
@@ -156,7 +290,7 @@ void apply_material(const struct aiMaterial *mtl)
                 fill_mode = wireframe ? GL_LINE : GL_FILL;
         else
                 fill_mode = GL_FILL;
-        glPolygonMode(GL_FRONT_AND_BACK, fill_mode);
+        glPolygonMode(GL_FRONT, fill_mode);
 
         max = 1;
         if((AI_SUCCESS == aiGetMaterialIntegerArray(mtl, AI_MATKEY_TWOSIDED, &two_sided, &max)) && two_sided)
@@ -169,7 +303,7 @@ void recursive_render (const struct aiScene *sc, const struct aiNode* nd)
 {
         unsigned int i;
         unsigned int n = 0, t;
-        aiMatrix4x4 m = nd->mTransformation;
+        /*struct*/ aiMatrix4x4 m = nd->mTransformation;
 
         // update transform
         aiTransposeMatrix4(&m);
@@ -182,11 +316,11 @@ void recursive_render (const struct aiScene *sc, const struct aiNode* nd)
 
                 apply_material(sc->mMaterials[mesh->mMaterialIndex]);
 
-                if(mesh->mNormals == NULL) {
+                //if(mesh->mNormals == NULL) {
                         glDisable(GL_LIGHTING);
-                } else {
-                        glEnable(GL_LIGHTING);
-                }
+                //} else {
+                        //glEnable(GL_LIGHTING);
+                //}
 
                 for (t = 0; t < mesh->mNumFaces; ++t) {
                         const struct aiFace* face = &mesh->mFaces[t];
@@ -248,15 +382,33 @@ void do_motion (void)
 
 void display(void)
 {
-		Con::printf("Assimp\n");
+		glEnable(GL_DEPTH_TEST);
 
         float tmp;
-glPushMatrix();
-        glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+
+        RectI Previous_Viewport;
+
+        RectI Temp_Viewport;
+
+        dglGetViewport(&Previous_Viewport);
+
+        Temp_Viewport.set(Point2I(0,0),Point2I(800,600));
+
+        dglSetViewport(Temp_Viewport);
+
+        //glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+
+        glMatrixMode(GL_PROJECTION);
+        glPushMatrix();
+        glLoadIdentity();
+
+        dglSetFrustum(-Temp_Viewport.extent.x*0.5,Temp_Viewport.extent.x*0.5,
+        		-Temp_Viewport.extent.y*0.5,Temp_Viewport.extent.y*0.5,-1000.0f,1000.0f,true);
 
         glMatrixMode(GL_MODELVIEW);
+        glPushMatrix();
         glLoadIdentity();
-        gluLookAt(0.f,0.f,3.f,0.f,0.f,-5.f,0.f,1.f,0.f);
+        //gluLookAt(0.f,0.f,3.f,0.f,0.f,-5.f,0.f,1.f,0.f);
 
         // rotate it around the y axis
         glRotatef(angle,0.f,1.f,0.f);
@@ -269,25 +421,34 @@ glPushMatrix();
         glScalef(tmp, tmp, tmp);
 
         // center the model
-        glTranslatef( -scene_center.x, -scene_center.y, -scene_center.z );
+        //glTranslatef( -scene_center.x, -scene_center.y, -scene_center.z );
+
+        glTranslatef( 0.0f, 0.0f, 0.0f );
 
         // if the display list has not been made yet, create a new one and
         // fill it with scene contents
-        if(scene_list == 0) {
-         scene_list = glGenLists(1);
-         glNewList(scene_list, GL_COMPILE);
+        //if(scene_list == 0) {
+         //scene_list = glGenLists(1);
+         //glNewList(scene_list, GL_COMPILE);
             // now begin at the root node of the imported data and traverse
             // the scenegraph by multiplying subsequent local transforms
             // together on GL's matrix stack.
          recursive_render(scene, scene->mRootNode);
-         glEndList();
-        }
+         //glEndList();
+        //}
 
-        glCallList(scene_list);
+        //glCallList(scene_list);
 
         //glutSwapBuffers();
-glPopMatrix();
+
+        glPopMatrix();
+        glMatrixMode(GL_PROJECTION);
+        glPopMatrix();
+        glMatrixMode(GL_MODELVIEW);
+
         do_motion();
+
+        glDisable(GL_DEPTH_TEST);
 }
 
 int loadasset (const char* path)
@@ -318,6 +479,7 @@ void Assimp_main(/*int argc, char **argv*/)
         //glutCreateWindow("Assimp - Very simple OpenGL sample");
         //glutDisplayFunc(display);
         //glutReshapeFunc(reshape);
+        reshape(800,600);
 
         // get a handle to the predefined STDOUT log stream and attach
         // it to the logging system. It remains active for all further
@@ -342,22 +504,22 @@ void Assimp_main(/*int argc, char **argv*/)
 
         loadasset( "./Cube.dae");
 
-        /*glClearColor(0.1f,0.1f,0.1f,1.f);
+        //glClearColor(0.1f,0.1f,0.1f,1.f);
 
-        glEnable(GL_LIGHTING);
-        glEnable(GL_LIGHT0); // Uses default lighting parameters
+        //glEnable(GL_LIGHTING);
+        //glEnable(GL_LIGHT0); // Uses default lighting parameters
 
-        glEnable(GL_DEPTH_TEST);
+        //glEnable(GL_DEPTH_TEST);
 
-        glLightModeli(GL_LIGHT_MODEL_TWO_SIDE, GL_TRUE);
-        glEnable(GL_NORMALIZE);
+        //glLightModeli(GL_LIGHT_MODEL_TWO_SIDE, GL_TRUE);
+        //glEnable(GL_NORMALIZE);
 
         // XXX docs say all polygons are emitted CCW, but tests show that some aren't.
-        if(getenv("MODEL_IS_BROKEN"))
-                glFrontFace(GL_CW);
+        //if(getenv("MODEL_IS_BROKEN"))
+                //glFrontFace(GL_CW);
 
-        glColorMaterial(GL_FRONT_AND_BACK, GL_DIFFUSE);
-		*/
+        //glColorMaterial(GL_FRONT, GL_DIFFUSE);
+
         Platform::getRealMilliseconds();//glutGet(GLUT_ELAPSED_TIME);
         //glutMainLoop();
 
@@ -595,10 +757,10 @@ void Function_Struct_Module_Assimp_Loop(struct Struct_Module *Pointer_Struct_Mod
 
 display();
 
-Con::printf("Assimp Loop Struct_Module %d Int_Counter=%d\n",Pointer_Struct_Module,
-Pointer_Struct_Module->Int_Counter);
+//Con::printf("Assimp Loop Struct_Module %d Int_Counter=%d\n",Pointer_Struct_Module,
+//Pointer_Struct_Module->Int_Counter);
 
-Pointer_Struct_Module->Int_Counter++;
+//Pointer_Struct_Module->Int_Counter++;
 
 /*if (*(Pointer_Struct_Module->Pointer_Linked_List_Struct_Data)!=NULL)
 {

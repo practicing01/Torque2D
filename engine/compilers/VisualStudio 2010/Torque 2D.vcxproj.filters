@@ -199,6 +199,18 @@
     <Filter Include="spine">
       <UniqueIdentifier>{66c23a1a-4275-490a-aaf0-7a6796ec5fa2}</UniqueIdentifier>
     </Filter>
+    <Filter Include="2d\Banana_Modifications">
+      <UniqueIdentifier>{5a77a616-cef0-4c13-8a38-249a6e646fbb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="2d\Banana_Modifications\Struct_Module">
+      <UniqueIdentifier>{befc17f0-c8ce-4256-a3c3-76866fac6612}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="2d\Banana_Modifications\Struct_Module\Struct_Module_Functions">
+      <UniqueIdentifier>{79c00350-4a6c-4b26-9bab-78feea37cd26}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="2d\Banana_Modifications\Struct_Module_Assimp">
+      <UniqueIdentifier>{9978868b-27af-470b-820f-2bd6cc8ea552}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\source\audio\audio.cc">
@@ -1424,6 +1436,30 @@
     </ClCompile>
     <ClCompile Include="..\..\source\2d\assets\SkeletonAsset.cc">
       <Filter>2d\assets</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\source\Banana_Modifications\Struct_Module\Struct_Module_Functions\Function_Struct_Module_Main_Create.cc">
+      <Filter>2d\Banana_Modifications\Struct_Module\Struct_Module_Functions</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\source\Banana_Modifications\Struct_Module\Struct_Module_Functions\Function_Struct_Module_Main_Destroy.cc">
+      <Filter>2d\Banana_Modifications\Struct_Module\Struct_Module_Functions</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\source\Banana_Modifications\Struct_Module\Struct_Module_Functions\Function_Struct_Module_Main_Initialize.cc">
+      <Filter>2d\Banana_Modifications\Struct_Module\Struct_Module_Functions</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\source\Banana_Modifications\Struct_Module\Struct_Module_Functions\Function_Struct_Module_Main_Link.cc">
+      <Filter>2d\Banana_Modifications\Struct_Module\Struct_Module_Functions</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\source\Banana_Modifications\Struct_Module\Struct_Module_Functions\Function_Struct_Module_Main_Loop.cc">
+      <Filter>2d\Banana_Modifications\Struct_Module\Struct_Module_Functions</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\source\Banana_Modifications\Struct_Module\Struct_Module_Functions\Function_Struct_Module_Main_Node_Data_Add.cc">
+      <Filter>2d\Banana_Modifications\Struct_Module\Struct_Module_Functions</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\source\Banana_Modifications\Struct_Module\Struct_Module_Functions\Struct_Module_Functions.cc">
+      <Filter>2d\Banana_Modifications\Struct_Module\Struct_Module_Functions</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\source\Banana_Modifications\Struct_Module_Assimp\Struct_Module_Assimp.cc">
+      <Filter>2d\Banana_Modifications\Struct_Module_Assimp</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -3158,6 +3194,12 @@
     </ClInclude>
     <ClInclude Include="..\..\source\2d\assets\SkeletonAsset_ScriptBinding.h">
       <Filter>2d\assets</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\source\Banana_Modifications\Struct_Module\Struct_Module.h">
+      <Filter>2d\Banana_Modifications\Struct_Module</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\source\Banana_Modifications\Struct_Module_Assimp\Struct_Module_Assimp.h">
+      <Filter>2d\Banana_Modifications\Struct_Module_Assimp</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
