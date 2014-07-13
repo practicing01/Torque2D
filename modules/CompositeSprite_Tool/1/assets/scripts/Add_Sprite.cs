@@ -24,6 +24,12 @@ if (%this.String_Tile_Animation!$="")
 %this.CompositeSprite_Level.setSpriteAnimation(%this.String_Tile_Animation);
 
 }
+else
+{
+
+%this.CompositeSprite_Level.setSpriteImageFrame(%this.Tile_Frame);
+
+}
 
 }
 else
@@ -55,6 +61,12 @@ if (%this.String_Tile_Animation!$="")
 {
 
 %this.CompositeSprite_Level.setSpriteAnimation(%this.String_Tile_Animation);
+
+}
+else
+{
+
+%this.CompositeSprite_Level.setSpriteImageFrame(%this.Tile_Frame);
 
 }
 

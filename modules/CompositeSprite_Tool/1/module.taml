@@ -2,7 +2,6 @@
 	ModuleId="CompositeSprite_Tool"
 	VersionId="1"
 	Description="Edit CompositeSprites."
-	Dependencies="ToyAssets=1"
 	Type="toy"
 	ToyCategoryIndex="8"
 	ScriptFile="main.cs"

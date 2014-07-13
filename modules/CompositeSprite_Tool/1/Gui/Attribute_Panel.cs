@@ -235,6 +235,56 @@ String_Type="Tile_Animation";
 
 %Int_Y_Position+=24;
 
+%GuiTextCtrl_Tile_Frame=new GuiTextCtrl()
+{
+
+text="Tile Frame";
+
+maxLength="1024";
+
+position="0" SPC %Int_Y_Position;
+
+extent="128 12";
+
+HorizSizing="relative";
+
+VertSizing="relative";
+
+profile="GuiTextProfile";
+
+};
+
+%GuiControl_Panel.add(%GuiTextCtrl_Tile_Frame);
+
+%Int_Y_Position+=12;
+
+%GuiTextEditCtrl_Tile_Frame=new GuiTextEditCtrl()
+{
+
+text="0";
+
+maxLength="1024";
+
+position="0" SPC %Int_Y_Position;
+
+extent="128 24";
+
+HorizSizing="relative";
+
+VertSizing="relative";
+
+profile="GuiTextEditProfile";
+
+class="Class_CompositeSprite_Tool_GuiTextEditCtrl";
+
+String_Type="Tile_Frame";
+
+};
+
+%GuiControl_Panel.add(%GuiTextEditCtrl_Tile_Frame);
+
+%Int_Y_Position+=24;
+
 %GuiTextCtrl_Grid_Unit_Size=new GuiTextCtrl()
 {
 

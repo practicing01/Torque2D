@@ -33,6 +33,12 @@ else if (%this.String_Type$="Tile_Animation")
 CompositeSprite_Tool.String_Tile_Animation=%this.getText();
 
 }
+else if (%this.String_Type$="Tile_Frame")
+{
+
+CompositeSprite_Tool.Tile_Frame=%this.getText();
+
+}
 else if (%this.String_Type$="Grid_Unit_Size")
 {
 

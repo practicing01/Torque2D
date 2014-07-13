@@ -42,6 +42,8 @@ function CompositeSprite_Tool::create( %this )
 
     %this.String_Tile_Animation="";
 
+    %this.Tile_Frame=0;
+
     %this.CompositeSprite_Level=0;
 
     %this.CompositeSprite_Grid=0;

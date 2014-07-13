@@ -1,5 +1,4 @@
 <ImageAsset
-    AssetCategory="Image"
     AssetName="Image_Grid_Highlighted_Tile"
     ImageFile="Grid_Highlighted_Tile.png"
 	CellCountX="1"
