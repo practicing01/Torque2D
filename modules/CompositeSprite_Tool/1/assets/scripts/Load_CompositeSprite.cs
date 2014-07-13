@@ -14,6 +14,8 @@ if (isObject(%this.CompositeSprite_Level))
 
 %this.CompositeSprite_Level=%CompositeSprite_Object;
 
+%this.CompositeSprite_Level.SceneLayer=1;
+
 SandboxScene.add(%this.CompositeSprite_Level);
 
 }
