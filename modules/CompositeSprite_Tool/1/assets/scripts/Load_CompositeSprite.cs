@@ -1,7 +1,7 @@
 function CompositeSprite_Tool::Load_CompositeSprite(%this)
 {
 
-%CompositeSprite_Object=TamlRead("./../saved_CompositeSprites/"@%this.String_Filename@".taml");
+%CompositeSprite_Object=TamlRead("./../CompositeSprites/"@%this.String_Filename@".taml");
 
 if (!isObject(%CompositeSprite_Object)){return;}
 

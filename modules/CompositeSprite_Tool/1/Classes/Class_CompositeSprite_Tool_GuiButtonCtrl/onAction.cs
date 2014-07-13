@@ -34,7 +34,7 @@ CompositeSprite_Tool.Remove_Background();
 else if (%this.String_Type$="Delete")
 {
 
-CompositeSprite_Tool.Delete_Sprite();
+CompositeSprite_Tool.Bool_Deleting=!CompositeSprite_Tool.Bool_Deleting;
 
 }
 else if (%this.String_Type$="ULeft")

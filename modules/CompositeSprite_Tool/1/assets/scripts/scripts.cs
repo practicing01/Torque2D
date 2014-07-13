@@ -6,3 +6,4 @@ exec("./Load_CompositeSprite.cs");
 exec("./Add_Background.cs");
 exec("./Remove_Background.cs");
 exec("./Delete_Sprite.cs");
+exec("./Pick_For_Deletion.cs");

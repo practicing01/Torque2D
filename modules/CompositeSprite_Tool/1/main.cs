@@ -64,6 +64,8 @@ function CompositeSprite_Tool::create( %this )
 
     %this.SimSet_Backgrounds=new SimSet();
 
+    %this.Bool_Deleting=false;
+
     %this.Script_Object_Input_Controller=new ScriptObject()
     {
 
@@ -74,6 +76,81 @@ function CompositeSprite_Tool::create( %this )
     };
 
     SandboxWindow.addInputListener(%this.Script_Object_Input_Controller);
+
+    %this.SimSet_Picked_Object_List=new SimSet();
+
+    %this.Highlighted_Object_BlendColor=0;
+
+    %this.Highlighted_Object=0;
+
+    %this.Picked_Object=0;
+
+    %this.GuiControl_Object_List=new GuiControl()
+    {
+
+        Profile="Gui_Profile_Modalless";
+
+        HorizSizing="relative";
+
+        VertSizing="relative";
+
+        Position="0 0";
+
+        Extent="100 50";
+
+        MinExtent="1 1";
+
+        GuiListBoxCtrl_Object_List=0;
+
+    };
+
+    %GuiScrollCtrl_Object_List=new GuiScrollCtrl()
+    {
+
+        Profile="GuiScrollProfile";
+
+        HorizSizing="relative";
+
+        VertSizing="relative";
+
+        Position="0 0";
+
+        Extent="100 50";
+
+        MinExtent="1 1";
+
+        vScrollBar="dynamic";
+
+        hScrollBar="dynamic";
+
+    };
+
+    %GuiListBoxCtrl_Object_List=new GuiListBoxCtrl()
+    {
+
+        class="Class_CompositeSprite_Tool_GuiListBoxCtrl";
+
+        Profile="Gui_List_Profile_Colored";
+
+        HorizSizing="relative";
+
+        VertSizing="relative";
+
+        Position="0 0";
+
+        Extent="100 50";
+
+        MinExtent="1 1";
+
+        AllowMultipleSelections="0";
+
+    };
+
+    %GuiScrollCtrl_Object_List.add(%GuiListBoxCtrl_Object_List);
+
+    %this.GuiControl_Object_List.GuiListBoxCtrl_Object_List=%GuiListBoxCtrl_Object_List;
+
+    %this.GuiControl_Object_List.add(%GuiScrollCtrl_Object_List);
 
     //Load gui.
     exec("./Gui/Gui.cs");
@@ -134,6 +211,22 @@ function CompositeSprite_Tool::destroy( %this )
     {
 
         %this.SimSet_Backgrounds.delete();
+
+    }
+
+    if (isObject(%this.SimSet_Picked_Object_List))
+    {
+
+        %this.SimSet_Picked_Object_List.deleteObjects();
+
+        %this.SimSet_Picked_Object_List.delete();
+
+    }
+
+    if (isObject(%this.GuiControl_Object_List)&&SandboxWindow.isMember(%this.GuiControl_Object_List))
+    {
+
+        SandboxWindow.remove(%this.GuiControl_Object_List);
 
     }
 
