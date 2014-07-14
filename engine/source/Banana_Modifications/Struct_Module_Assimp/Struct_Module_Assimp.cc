@@ -24,20 +24,20 @@
 #endif
 #include "graphics/dgl.h"
 
-#define GL_FUNCTION(fn_return,fn_name,fn_args,fn_value) extern fn_return (*fn_name)fn_args;
+/*#define GL_FUNCTION(fn_return,fn_name,fn_args,fn_value) extern fn_return (*fn_name)fn_args;
 #include "platform/GLCoreFunc.h"
 #include "platform/GLExtFunc.h"
 #undef GL_FUNCTION
-
+*/
 // GLU functions are linked at compile time, except in the dedicated server build
-#ifndef DEDICATED
+/*#ifndef DEDICATED
 #define GL_FUNCTION(fn_return,fn_name,fn_args,fn_value) fn_return fn_name fn_args;
 #else
 #define GL_FUNCTION(fn_return,fn_name,fn_args,fn_value) extern fn_return (*fn_name)fn_args;
 #endif
 #include "platform/GLUFunc.h"
 #undef GL_FUNCTION
-
+*/
 // assimp include files. These three are usually needed.
 #include <assimp/cimport.h>
 #include <assimp/scene.h>
@@ -382,7 +382,7 @@ void do_motion (void)
 
 void display(void)
 {
-		glEnable(GL_DEPTH_TEST);
+		//glEnable(GL_DEPTH_TEST);
 
         float tmp;
 
@@ -448,7 +448,7 @@ void display(void)
 
         do_motion();
 
-        glDisable(GL_DEPTH_TEST);
+        //glDisable(GL_DEPTH_TEST);
 }
 
 int loadasset (const char* path)
