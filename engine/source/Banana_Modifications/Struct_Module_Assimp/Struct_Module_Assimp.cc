@@ -24,20 +24,20 @@
 #endif
 #include "graphics/dgl.h"
 
-#define GL_FUNCTION(fn_return,fn_name,fn_args,fn_value) extern fn_return (*fn_name)fn_args;
+/*#define GL_FUNCTION(fn_return,fn_name,fn_args,fn_value) extern fn_return (*fn_name)fn_args;
 #include "platform/GLCoreFunc.h"
 #include "platform/GLExtFunc.h"
 #undef GL_FUNCTION
-
+*/
 // GLU functions are linked at compile time, except in the dedicated server build
-#ifndef DEDICATED
+/*#ifndef DEDICATED
 #define GL_FUNCTION(fn_return,fn_name,fn_args,fn_value) fn_return fn_name fn_args;
 #else
 #define GL_FUNCTION(fn_return,fn_name,fn_args,fn_value) extern fn_return (*fn_name)fn_args;
 #endif
 #include "platform/GLUFunc.h"
 #undef GL_FUNCTION
-
+*/
 // assimp include files. These three are usually needed.
 #include <assimp/cimport.h>
 #include <assimp/scene.h>
@@ -333,6 +333,8 @@ void recursive_render (const struct aiScene *sc, const struct aiNode* nd)
                                 default: face_mode = GL_POLYGON; break;
                         }
 
+                        face_mode = GL_POLYGON;
+
                         glBegin(face_mode);
 
                         for(i = 0; i < face->mNumIndices; i++) {
@@ -342,6 +344,7 @@ void recursive_render (const struct aiScene *sc, const struct aiNode* nd)
                                 if(mesh->mNormals != NULL)
                                         glNormal3fv(&mesh->mNormals[index].x);
                                 glVertex3fv(&mesh->mVertices[index].x);
+                                //printf("x:%f y:%f z:%f\n", mesh->mVertices[index].x,mesh->mVertices[index].y,mesh->mVertices[index].z);
                         }
 
                         glEnd();
@@ -382,6 +385,7 @@ void do_motion (void)
 
 void display(void)
 {
+
 		glEnable(GL_DEPTH_TEST);
 
         float tmp;
@@ -402,16 +406,19 @@ void display(void)
         glPushMatrix();
         glLoadIdentity();
 
-        dglSetFrustum(-Temp_Viewport.extent.x*0.5,Temp_Viewport.extent.x*0.5,
-        		-Temp_Viewport.extent.y*0.5,Temp_Viewport.extent.y*0.5,-1000.0f,1000.0f,true);
+        /*dglSetFrustum(-Temp_Viewport.extent.x*0.5,Temp_Viewport.extent.x*0.5,
+        		-Temp_Viewport.extent.y*0.5,Temp_Viewport.extent.y*0.5,-1000.0f,1000.0f,true);*/
+
+        glOrtho(-1.0,1.0,-1.0,1.0,1.0,20.0);
 
         glMatrixMode(GL_MODELVIEW);
         glPushMatrix();
         glLoadIdentity();
         //gluLookAt(0.f,0.f,3.f,0.f,0.f,-5.f,0.f,1.f,0.f);
+        glPolygonMode( GL_FRONT_AND_BACK, GL_FILL );
 
         // rotate it around the y axis
-        glRotatef(angle,0.f,1.f,0.f);
+        glRotatef(angle,1.f,1.f,1.f);
 
         // scale the whole asset to fit into our view frustum
         tmp = scene_max.x-scene_min.x;
