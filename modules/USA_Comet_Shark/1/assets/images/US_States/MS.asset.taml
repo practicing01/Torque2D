@@ -1,0 +1,8 @@
+<ImageAsset
+    AssetName="Image_MS"
+    ImageFile="MS.png"
+	CellCountX="1"
+    CellCountY="1"
+    CellWidth="62"
+    CellHeight="106"
+	Optimal_Resolution="800 480"/>

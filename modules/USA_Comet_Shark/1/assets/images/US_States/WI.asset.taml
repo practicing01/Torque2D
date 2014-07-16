@@ -1,0 +1,8 @@
+<ImageAsset
+    AssetName="Image_WI"
+    ImageFile="WI.png"
+	CellCountX="1"
+    CellCountY="1"
+    CellWidth="92"
+    CellHeight="96"
+	Optimal_Resolution="800 480"/>

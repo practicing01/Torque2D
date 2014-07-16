@@ -1,0 +1,8 @@
+<ImageAsset
+    AssetName="Image_MT"
+    ImageFile="MT.png"
+	CellCountX="1"
+    CellCountY="1"
+    CellWidth="178"
+    CellHeight="112"
+	Optimal_Resolution="800 480"/>

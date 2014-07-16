@@ -1,0 +1,8 @@
+<ImageAsset
+    AssetName="Image_PA"
+    ImageFile="PA.png"
+	CellCountX="1"
+    CellCountY="1"
+    CellWidth="100"
+    CellHeight="66"
+	Optimal_Resolution="800 480"/>

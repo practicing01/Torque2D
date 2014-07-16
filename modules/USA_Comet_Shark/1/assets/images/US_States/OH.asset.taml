@@ -1,0 +1,8 @@
+<ImageAsset
+    AssetName="Image_OH"
+    ImageFile="OH.png"
+	CellCountX="1"
+    CellCountY="1"
+    CellWidth="76"
+    CellHeight="82"
+	Optimal_Resolution="800 480"/>

@@ -1,0 +1,8 @@
+<ImageAsset
+    AssetName="Image_FL"
+    ImageFile="FL.png"
+	CellCountX="1"
+    CellCountY="1"
+    CellWidth="160"
+    CellHeight="134"
+	Optimal_Resolution="800 480"/>

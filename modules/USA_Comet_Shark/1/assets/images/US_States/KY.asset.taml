@@ -1,0 +1,8 @@
+<ImageAsset
+    AssetName="Image_KY"
+    ImageFile="KY.png"
+	CellCountX="1"
+    CellCountY="1"
+    CellWidth="130"
+    CellHeight="64"
+	Optimal_Resolution="800 480"/>
