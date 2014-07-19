@@ -1,0 +1,8 @@
+<ImageAsset
+    AssetName="Image_DE"
+    ImageFile="DE.png"
+	CellCountX="1"
+    CellCountY="1"
+    CellWidth="20"
+    CellHeight="30"
+	Optimal_Resolution="800 480"/>

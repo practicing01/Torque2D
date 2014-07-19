@@ -1,0 +1,8 @@
+<ImageAsset
+    AssetName="Image_MN"
+    ImageFile="MN.png"
+	CellCountX="1"
+    CellCountY="1"
+    CellWidth="116"
+    CellHeight="128"
+	Optimal_Resolution="800 480"/>

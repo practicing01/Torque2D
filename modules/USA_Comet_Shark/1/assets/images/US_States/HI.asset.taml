@@ -1,0 +1,8 @@
+<ImageAsset
+    AssetName="Image_HI"
+    ImageFile="HI.png"
+	CellCountX="1"
+    CellCountY="1"
+    CellWidth="114"
+    CellHeight="74"
+	Optimal_Resolution="800 480"/>

@@ -1,0 +1,8 @@
+<ImageAsset
+    AssetName="Image_UT"
+    ImageFile="UT.png"
+	CellCountX="1"
+    CellCountY="1"
+    CellWidth="96"
+    CellHeight="124"
+	Optimal_Resolution="800 480"/>

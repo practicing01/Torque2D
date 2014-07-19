@@ -1,0 +1,8 @@
+<ImageAsset
+    AssetName="Image_AK"
+    ImageFile="AK.png"
+	CellCountX="1"
+    CellCountY="1"
+    CellWidth="210"
+    CellHeight="156"
+	Optimal_Resolution="800 480"/>
