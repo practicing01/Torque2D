@@ -213,12 +213,125 @@ ALuint AudioBuffer::getALBuffer()
            malBuffer = bufferID;
        }
 #endif
+
+      if (len > 4 && !dStricmp(mFilename + len - 5, ".opus")) {
+        Con::printf("Reading Opus: %s\n", mFilename);
+        readSuccess = readOpus(obj);
+      }
+
       if(readSuccess)
          return(malBuffer);
    }
 
    alDeleteBuffers(1, &malBuffer);
    return 0;
+}
+
+static int _op_read_func(void *datasource, unsigned char *ptr, int size)
+{
+  Stream *stream = reinterpret_cast<Stream*>(datasource);
+
+  // Stream::read() returns true is any data was
+  // read, so we must track the read bytes ourselves.
+  U32 startByte = stream->getPosition();
+  stream->read(size, ptr);
+  U32 endByte = stream->getPosition();
+
+  return (endByte - startByte);
+}
+
+static int _op_seek_func(void *datasource, opus_int64 offset, int whence)
+{
+  Stream *stream = reinterpret_cast<Stream*>(datasource);
+
+  U32 newPos = 0;
+  if (whence == SEEK_CUR)
+    newPos = stream->getPosition() + (U32)offset;
+  else if (whence == SEEK_END)
+    newPos = stream->getStreamSize() - (U32)offset;
+  else
+    newPos = (U32)offset;
+
+  return stream->setPosition(newPos) ? 0 : -1;
+}
+
+static opus_int64 _op_tell_func(void *datasource)
+{
+  Stream *stream = reinterpret_cast<Stream*>(datasource);
+  return stream->getPosition();
+}
+
+bool AudioBuffer::readOpus(ResourceObject *obj)
+{
+  ALsizei freq = 48000;
+
+  Stream *stream = ResourceManager->openStream(obj);
+  if (!stream) {
+    Con::errorf("No resource stream available!");
+    return false;
+  }
+
+  // Setup our callbacks
+  OpusFileCallbacks cb;
+  cb.read = _op_read_func;
+  cb.seek = _op_seek_func;
+  cb.tell = _op_tell_func;
+
+  // Open
+  int opResult = 0;
+  OggOpusFile* file = op_open_callbacks(stream, &cb, NULL, 0, &opResult);
+  if (opResult != 0) {
+    Con::errorf("Error using Opus file: %d", opResult);
+    ResourceManager->closeStream(stream);
+    return false;
+  }
+
+  int channels = op_channel_count(file, -1);
+  int pcm_size = op_pcm_total(file, -1);
+
+  Con::printf("Opus info: %d channels, %d samples, %d seconds", channels, pcm_size, pcm_size/freq);
+
+  ALenum format;
+  if (channels == 1) {
+    format = AL_FORMAT_MONO16;
+  } else if (channels == 2) {
+    format = AL_FORMAT_STEREO16;
+  } else {
+    Con::errorf("Audio stream contains an unsupported number of channels (%d).", channels);
+    return false;
+  }
+
+  int16_t* data = new int16_t[pcm_size*channels];
+
+  if (!data) {
+    Con::errorf("Unable to allocate decode buffer.");
+    return false;
+  }
+
+  int samplesRead = 0;
+
+  while (samplesRead < pcm_size)
+  {
+    // op_read returns number of samples read (per channel), and accepts number of samples which fit in the buffer, not number of bytes.
+    int newSamplesRead = op_read(file, data + (samplesRead * channels), pcm_size * channels, 0);
+    if (newSamplesRead < 0)
+    {
+      Con::errorf("Couldn't decode at offset %d: Error %d", samplesRead, newSamplesRead);
+      return false;
+    }
+    samplesRead += newSamplesRead;
+  }
+
+  // op_free(file);
+
+  ResourceManager->closeStream(stream);
+  if (data) {
+    alBufferData(malBuffer, format, data, pcm_size*channels, freq);
+    delete [] data;
+    return (alGetError() == AL_NO_ERROR);
+  }
+
+  return false;
 }
 
 /*!   The Read a WAV file from the given ResourceObject and initialize
