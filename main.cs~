@@ -20,6 +20,10 @@
 // IN THE SOFTWARE.
 //-----------------------------------------------------------------------------
 
+allowConnections(true);
+
+setNetPort(9001);
+
 // Set log mode.
 setLogMode(2);
 
@@ -58,7 +62,7 @@ ModuleDatabase.scanModules( "modules" );
 
 // Load AppCore module.
 ModuleDatabase.LoadExplicit( "AppCore" );
-echo(new Scene_Object_3D());
+
 //-----------------------------------------------------------------------------
 
 function onExit()

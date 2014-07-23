@@ -33,7 +33,7 @@
 #include "io/resource/resourceManager.h"
 #endif
 
-#include "opus/opusfile.h"
+#include <opus/opusfile.h>
 
 //--------------------------------------------------------------------------
 
@@ -52,6 +52,10 @@ private:
    bool readOpus(ResourceObject *obj);
 
    long opusRead(OggOpusFile *file, int16_t *buffer, int length, int *bitstream);
+
+   bool readOgg(ResourceObject *obj);
+   long oggRead(struct OggVorbis_File* vf, char *buffer,int length,
+        int bigendianp,int *bitstream);
 
 public:
    AudioBuffer(StringTableEntry filename);

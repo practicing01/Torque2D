@@ -12,17 +12,24 @@
 
 //#include <GL/glut.h>
 //#include <GL/gl.h>
-#include "math/mRect.h"
+//#include "math/mRect.h"
 
-#ifndef _PLATFORM_H_
+/*#ifndef _PLATFORM_H_
 #include "platform/platform.h"
 #endif
 
 #ifndef _PLATFORMGL_H_
 #include "platform/platformAssert.h"
 #include "platform/platformGL.h"
+#endif*/
+
+#ifndef _SCENE_OBJECT_H_
+#include "2d/sceneobject/SceneObject.h"
 #endif
+
+#ifndef _DGL_H_
 #include "graphics/dgl.h"
+#endif
 
 /*#define GL_FUNCTION(fn_return,fn_name,fn_args,fn_value) extern fn_return (*fn_name)fn_args;
 #include "platform/GLCoreFunc.h"
@@ -316,11 +323,11 @@ void recursive_render (const struct aiScene *sc, const struct aiNode* nd)
 
                 apply_material(sc->mMaterials[mesh->mMaterialIndex]);
 
-                //if(mesh->mNormals == NULL) {
+                if(mesh->mNormals == NULL) {
                         glDisable(GL_LIGHTING);
-                //} else {
-                        //glEnable(GL_LIGHTING);
-                //}
+                } else {
+                        glEnable(GL_LIGHTING);
+                }
 
                 for (t = 0; t < mesh->mNumFaces; ++t) {
                         const struct aiFace* face = &mesh->mFaces[t];
@@ -333,7 +340,7 @@ void recursive_render (const struct aiScene *sc, const struct aiNode* nd)
                                 default: face_mode = GL_POLYGON; break;
                         }
 
-                        face_mode = GL_POLYGON;
+                        //face_mode = GL_POINTS;
 
                         glBegin(face_mode);
 
@@ -386,8 +393,6 @@ void do_motion (void)
 void display(void)
 {
 
-		glEnable(GL_DEPTH_TEST);
-
         float tmp;
 
         RectI Previous_Viewport;
@@ -400,16 +405,30 @@ void display(void)
 
         dglSetViewport(Temp_Viewport);
 
-        //glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+        glClearColor(0.0f,1.0f,1.0f,1.f);
+
+        glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+
+        glEnable(GL_LIGHTING);
+        glEnable(GL_LIGHT0); // Uses default lighting parameters
+
+        glLightModeli(GL_LIGHT_MODEL_TWO_SIDE, GL_TRUE);
+        glEnable(GL_NORMALIZE);
+
+        glColorMaterial(GL_FRONT, GL_DIFFUSE);
 
         glMatrixMode(GL_PROJECTION);
         glPushMatrix();
         glLoadIdentity();
 
-        /*dglSetFrustum(-Temp_Viewport.extent.x*0.5,Temp_Viewport.extent.x*0.5,
-        		-Temp_Viewport.extent.y*0.5,Temp_Viewport.extent.y*0.5,-1000.0f,1000.0f,true);*/
+		glEnable(GL_DEPTH_TEST);
 
-        glOrtho(-1.0,1.0,-1.0,1.0,1.0,20.0);
+		glDepthFunc(GL_ALWAYS);
+
+        dglSetFrustum(-Temp_Viewport.extent.x*0.5,Temp_Viewport.extent.x*0.5,
+        		-Temp_Viewport.extent.y*0.5,Temp_Viewport.extent.y*0.5,-1000.0f,1000.0f,true);
+
+        //glOrtho(-1.0,1.0,-1.0,1.0,1.0,20.0);
 
         glMatrixMode(GL_MODELVIEW);
         glPushMatrix();
@@ -418,7 +437,7 @@ void display(void)
         glPolygonMode( GL_FRONT_AND_BACK, GL_FILL );
 
         // rotate it around the y axis
-        glRotatef(angle,1.f,1.f,1.f);
+        glRotatef(angle,1.0f,1.0f,1.0f);
 
         // scale the whole asset to fit into our view frustum
         tmp = scene_max.x-scene_min.x;
@@ -431,6 +450,10 @@ void display(void)
         //glTranslatef( -scene_center.x, -scene_center.y, -scene_center.z );
 
         glTranslatef( 0.0f, 0.0f, 0.0f );
+
+		glEnable(GL_DEPTH_TEST);
+
+		glDepthFunc(GL_LEQUAL);
 
         // if the display list has not been made yet, create a new one and
         // fill it with scene contents
@@ -453,9 +476,14 @@ void display(void)
         glPopMatrix();
         glMatrixMode(GL_MODELVIEW);
 
+        glDisable(GL_DEPTH_TEST);
+
+        dglSetViewport(Previous_Viewport);
+
         do_motion();
 
-        glDisable(GL_DEPTH_TEST);
+        glDisable(GL_LIGHTING);
+
 }
 
 int loadasset (const char* path)
@@ -761,7 +789,7 @@ struct Struct_Module *Pointer_Struct_Module_Child)
 
 void Function_Struct_Module_Assimp_Loop(struct Struct_Module *Pointer_Struct_Module)
 {
-
+return;
 display();
 
 //Con::printf("Assimp Loop Struct_Module %d Int_Counter=%d\n",Pointer_Struct_Module,

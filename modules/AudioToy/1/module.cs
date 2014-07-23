@@ -36,7 +36,8 @@ function AudioToy::create(%this)
     SandboxWindow.setCameraSize(40, 30);
     
     // Setup default values.
-    AudioToy.Music = "ToyAssets:titleMusic";
+    //AudioToy.Music = "ToyAssets:titleMusic";
+    AudioToy.Music = "ToyAssets:sita-final";
     
     // Sandbox options
     addSelectionOption("Title Music,Level Music,Win Music,Lose Music", "Background Music", 4, "setupMusic", true, "Choose a music file");
@@ -97,7 +98,8 @@ function AudioToy::setupMusic(%this, %value)
     switch$(%value)
     {
         case "Title Music":
-        AudioToy.Music = "ToyAssets:titleMusic";
+        //AudioToy.Music = "ToyAssets:titleMusic";
+    	AudioToy.Music = "ToyAssets:sita-final";
       
         case "Level Music":
         AudioToy.Music = "ToyAssets:level1Music";

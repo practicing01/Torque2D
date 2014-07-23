@@ -1,0 +1,5 @@
+<AudioAsset
+    AssetName="sita-final"
+    AssetAutoUnload="0"
+    AudioFile="sita-final.ogg"
+    Looping="1" />
