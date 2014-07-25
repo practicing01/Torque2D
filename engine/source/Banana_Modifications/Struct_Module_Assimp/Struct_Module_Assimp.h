@@ -1,6 +1,8 @@
 #ifndef _STRUCT_BANANA_H_
 #include "Banana_Modifications/Struct_Module/Struct_Module.h"
 #endif
+
+#include "2d/core/Utility.h"
 //#include "graphics/dgl.h"
 
 //All custom data for this module will be contained in a linked list of structures.
@@ -29,3 +31,5 @@ void Function_Struct_Module_Assimp_Link(struct Struct_Module *,struct Struct_Mod
 void Function_Struct_Module_Assimp_Loop(struct Struct_Module *);
 
 void Function_Struct_Module_Assimp_Initialize(struct Struct_Module *);
+
+void display(Vector2);

@@ -390,7 +390,7 @@ void do_motion (void)
         //glutPostRedisplay ();
 }
 
-void display(void)
+void display(Vector2 position)
 {
 
         float tmp;
@@ -399,15 +399,15 @@ void display(void)
 
         RectI Temp_Viewport;
 
-        dglGetViewport(&Previous_Viewport);
+        //dglGetViewport(&Previous_Viewport);
 
-        Temp_Viewport.set(Point2I(0,0),Point2I(800,600));
+        //Temp_Viewport.set(Point2I(0,0),Point2I(800,600));
 
-        dglSetViewport(Temp_Viewport);
+        //dglSetViewport(Temp_Viewport);
 
-        glClearColor(0.0f,1.0f,1.0f,1.f);
+        //glClearColor(0.0f,0.0f,0.0f,1.f);
 
-        glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+        //glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
         glEnable(GL_LIGHTING);
         glEnable(GL_LIGHT0); // Uses default lighting parameters
@@ -417,22 +417,22 @@ void display(void)
 
         glColorMaterial(GL_FRONT, GL_DIFFUSE);
 
-        glMatrixMode(GL_PROJECTION);
-        glPushMatrix();
-        glLoadIdentity();
+        //glMatrixMode(GL_PROJECTION);
+        //glPushMatrix();
+        //glLoadIdentity();
 
-		glEnable(GL_DEPTH_TEST);
+		//glEnable(GL_DEPTH_TEST);
 
-		glDepthFunc(GL_ALWAYS);
+		//glDepthFunc(GL_ALWAYS);
 
-        dglSetFrustum(-Temp_Viewport.extent.x*0.5,Temp_Viewport.extent.x*0.5,
-        		-Temp_Viewport.extent.y*0.5,Temp_Viewport.extent.y*0.5,-1000.0f,1000.0f,true);
+        //dglSetFrustum(-Temp_Viewport.extent.x*0.5,Temp_Viewport.extent.x*0.5,
+        		//-Temp_Viewport.extent.y*0.5,Temp_Viewport.extent.y*0.5,-1000.0f,1000.0f,true);
 
         //glOrtho(-1.0,1.0,-1.0,1.0,1.0,20.0);
 
-        glMatrixMode(GL_MODELVIEW);
-        glPushMatrix();
-        glLoadIdentity();
+        //glMatrixMode(GL_MODELVIEW);
+        //glPushMatrix();
+        //glLoadIdentity();
         //gluLookAt(0.f,0.f,3.f,0.f,0.f,-5.f,0.f,1.f,0.f);
         glPolygonMode( GL_FRONT_AND_BACK, GL_FILL );
 
@@ -449,36 +449,36 @@ void display(void)
         // center the model
         //glTranslatef( -scene_center.x, -scene_center.y, -scene_center.z );
 
-        glTranslatef( 0.0f, 0.0f, 0.0f );
+        //glTranslatef( position.x, position.y, 0.0f );
 
-		glEnable(GL_DEPTH_TEST);
+		//glEnable(GL_DEPTH_TEST);
 
-		glDepthFunc(GL_LEQUAL);
+		//glDepthFunc(GL_LEQUAL);
 
         // if the display list has not been made yet, create a new one and
         // fill it with scene contents
-        //if(scene_list == 0) {
-         //scene_list = glGenLists(1);
-         //glNewList(scene_list, GL_COMPILE);
+        if(scene_list == 0) {
+         scene_list = glGenLists(1);
+         glNewList(scene_list, GL_COMPILE);
             // now begin at the root node of the imported data and traverse
             // the scenegraph by multiplying subsequent local transforms
             // together on GL's matrix stack.
          recursive_render(scene, scene->mRootNode);
-         //glEndList();
-        //}
+         glEndList();
+        }
 
-        //glCallList(scene_list);
+        glCallList(scene_list);
 
         //glutSwapBuffers();
 
-        glPopMatrix();
-        glMatrixMode(GL_PROJECTION);
-        glPopMatrix();
-        glMatrixMode(GL_MODELVIEW);
+        //glPopMatrix();
+        //glMatrixMode(GL_PROJECTION);
+        //glPopMatrix();
+        //glMatrixMode(GL_MODELVIEW);
 
-        glDisable(GL_DEPTH_TEST);
+        //glDisable(GL_DEPTH_TEST);
 
-        dglSetViewport(Previous_Viewport);
+        //dglSetViewport(Previous_Viewport);
 
         do_motion();
 
@@ -790,7 +790,7 @@ struct Struct_Module *Pointer_Struct_Module_Child)
 void Function_Struct_Module_Assimp_Loop(struct Struct_Module *Pointer_Struct_Module)
 {
 return;
-display();
+display(Vector2(0,0));
 
 //Con::printf("Assimp Loop Struct_Module %d Int_Counter=%d\n",Pointer_Struct_Module,
 //Pointer_Struct_Module->Int_Counter);

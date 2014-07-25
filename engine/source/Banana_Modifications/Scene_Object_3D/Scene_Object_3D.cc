@@ -31,6 +31,8 @@
 
 #include "Scene_Object_3D_ScriptBinding.h"
 
+#include "Banana_Modifications/Struct_Module_Assimp/Struct_Module_Assimp.h"
+
 //-----------------------------------------------------------------------------
 
 IMPLEMENT_CONOBJECT( Scene_Object_3D );
@@ -124,7 +126,7 @@ void Scene_Object_3D::sceneRender( const SceneRenderState* pSceneRenderState, co
         return;
 
     // Disable Texturing.
-    glDisable( GL_TEXTURE_2D );
+    //glDisable( GL_TEXTURE_2D );
 
     glMatrixMode(GL_PROJECTION);
     glPushMatrix();
@@ -149,9 +151,12 @@ void Scene_Object_3D::sceneRender( const SceneRenderState* pSceneRenderState, co
     // Restore color.
     glColor4f( 1,1,1,1 );
 
+    display(position);
+
     // Restore Matrix.
     glPopMatrix();
     glPopMatrix();
+
 }
 
 void Scene_Object_3D::renderPolygonShape(U32 vertexCount)

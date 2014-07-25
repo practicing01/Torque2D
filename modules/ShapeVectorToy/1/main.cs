@@ -69,7 +69,7 @@ function ShapeVectorToy::reset( %this )
 {
     // Clear the scene.
     SandboxScene.clear();
-    
+    /*
         // Create the sprite.
     %object = new Sprite();
     
@@ -90,7 +90,7 @@ function ShapeVectorToy::reset( %this )
         
     // Add the sprite to the scene.
     SandboxScene.add( %object ); 
-
+*/
     // Add a single shape
     %this.addShape();
 }
