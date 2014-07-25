@@ -69,7 +69,7 @@ function ShapeVectorToy::reset( %this )
 {
     // Clear the scene.
     SandboxScene.clear();
-    
+    /*
         // Create the sprite.
     %object = new Sprite();
     
@@ -83,14 +83,14 @@ function ShapeVectorToy::reset( %this )
     %object.Size = 40;
     
     // Set the sprite to use an image.  This is known as "static" image mode.
-    //%object.Image = "ToyAssets:Tiles";
+    %object.Image = "ToyAssets:Tiles";
     
     // We don't really need to do this as the frame is set to zero by default.
     %object.Frame = 0;
         
     // Add the sprite to the scene.
     SandboxScene.add( %object ); 
-
+*/
     // Add a single shape
     %this.addShape();
 }
