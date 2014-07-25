@@ -216,10 +216,10 @@ ALuint AudioBuffer::getALBuffer()
        }
 #endif
 
-      if (len > 4 && !dStricmp(mFilename + len - 5, ".opus")) {
+      /*if (len > 4 && !dStricmp(mFilename + len - 5, ".opus")) {
         Con::printf("Reading Opus: %s\n", mFilename);
         readSuccess = readOpus(obj);
-      }
+      }*/
 
       if(len > 3 && !dStricmp(mFilename + len - 4, ".ogg"))
             {
@@ -237,7 +237,7 @@ ALuint AudioBuffer::getALBuffer()
    return 0;
 }
 
-static int _op_read_func(void *datasource, unsigned char *ptr, int size)
+/*static int _op_read_func(void *datasource, unsigned char *ptr, int size)
 {
   Stream *stream = reinterpret_cast<Stream*>(datasource);
 
@@ -342,7 +342,7 @@ bool AudioBuffer::readOpus(ResourceObject *obj)
   }
 
   return false;
-}
+}*/
 
 /*!   The Read a WAV file from the given ResourceObject and initialize
       an alBuffer with it.

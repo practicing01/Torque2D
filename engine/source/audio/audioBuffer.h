@@ -33,7 +33,7 @@
 #include "io/resource/resourceManager.h"
 #endif
 
-#include <opus/opusfile.h>
+//#include <opus/opusfile.h>
 
 //--------------------------------------------------------------------------
 
@@ -49,9 +49,9 @@ private:
    bool readRIFFchunk(Stream &s, const char *seekLabel, U32 *size);
    bool readWAV(ResourceObject *obj);
 
-   bool readOpus(ResourceObject *obj);
+   //bool readOpus(ResourceObject *obj);
 
-   long opusRead(OggOpusFile *file, int16_t *buffer, int length, int *bitstream);
+   //long opusRead(OggOpusFile *file, int16_t *buffer, int length, int *bitstream);
 
    bool readOgg(ResourceObject *obj);
    long oggRead(struct OggVorbis_File* vf, char *buffer,int length,

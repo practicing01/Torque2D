@@ -412,7 +412,7 @@ SOURCES := ../../source/2d/assets/AnimationAsset.cc \
 	../../source/Banana_Modifications/Scene_Object_3D/Scene_Object_3D.cc
 
 LDFLAGS := -g -m32
-LDLIBS := -lstdc++ -lm -ldl -lpthread -lrt -lX11 -lXft -lSDL -lopenal -lassimp -lopus -lopusfile -lvorbisfile#-lglut -lGLU -lassimp
+LDLIBS := -lstdc++ -lm -ldl -lpthread -lrt -lX11 -lXft -lSDL -lopenal -lassimp -lvorbisfile#-lopus -lopusfile
 
 CFLAGS := -MMD -I. -Wfatal-errors -Wunused -m32 -msse -march=i686 -pipe
 
