@@ -25,6 +25,8 @@
 
 //-----------------------------------------------------------------------------
 
+//#define DEDICATED
+
 /// Version number is major * 1000 + minor * 100 + revision * 10.
 #define TORQUE_GAME_ENGINE          1000
 

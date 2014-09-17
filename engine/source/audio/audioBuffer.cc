@@ -26,7 +26,7 @@
 #include "console/console.h"
 #include "memory/frameAllocator.h"
 
-#include "vorbis/vorbisfile.h"
+//#include "vorbis/vorbisfile.h"
 
 #ifndef _MMATH_H_
 #include "math/mMath.h"
@@ -221,13 +221,13 @@ ALuint AudioBuffer::getALBuffer()
         readSuccess = readOpus(obj);
       }*/
 
-      if(len > 3 && !dStricmp(mFilename + len - 4, ".ogg"))
+      /*if(len > 3 && !dStricmp(mFilename + len - 4, ".ogg"))
             {
       #  ifdef LOG_SOUND_LOADS
                Con::printf("Reading Ogg: %s\n", mFilename);
       #  endif
                readSuccess = readOgg(obj);
-            }
+            }*/
 
       if(readSuccess)
          return(malBuffer);
@@ -502,7 +502,7 @@ static size_t _ov_read_func( void *ptr, size_t size, size_t nmemb, void *datasou
    return readItems;
 }
 
-static int _ov_seek_func( void *datasource, ogg_int64_t offset, int whence )
+/*static int _ov_seek_func( void *datasource, ogg_int64_t offset, int whence )
 {
    Stream *stream = reinterpret_cast<Stream*>( datasource );
 
@@ -521,12 +521,12 @@ static long _ov_tell_func( void *datasource )
 {
    Stream *stream = reinterpret_cast<Stream*>( datasource );
    return stream->getPosition();
-}
+}*/
 
 /*!   The Read an Ogg Vorbis file from the given ResourceObject and initialize
       an alBuffer with it.
 */
-bool AudioBuffer::readOgg(ResourceObject *obj)
+/*bool AudioBuffer::readOgg(ResourceObject *obj)
 {
    ALenum  format = AL_FORMAT_MONO16;
    char   *data   = NULL;
@@ -585,7 +585,7 @@ bool AudioBuffer::readOgg(ResourceObject *obj)
       long ret = oggRead( &vf, data, size, endian, &current_section );
    }
 
-   /* cleanup */
+   // cleanup 
    ov_clear( &vf );
 
    ResourceManager->closeStream(stream);
@@ -597,11 +597,11 @@ bool AudioBuffer::readOgg(ResourceObject *obj)
    }
 
    return false;
-}
+}*/
 
 // ov_read() only returns a maximum of one page worth of data
 // this helper function will repeat the read until buffer is full
-long AudioBuffer::oggRead(OggVorbis_File* vf, char *buffer,int length,
+/*long AudioBuffer::oggRead(OggVorbis_File* vf, char *buffer,int length,
           int bigendianp,int *bitstream)
 {
    long bytesRead = 0;
@@ -623,4 +623,4 @@ long AudioBuffer::oggRead(OggVorbis_File* vf, char *buffer,int length,
       buffer += bytesRead;
    }
    return offset;
-}
+}*/

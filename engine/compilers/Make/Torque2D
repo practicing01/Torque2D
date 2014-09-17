@@ -406,13 +406,13 @@ SOURCES := ../../source/2d/assets/AnimationAsset.cc \
 	../../source/gui/editor/guiInspector.cc \
 	../../source/gui/editor/guiInspectorTypes.cc \
 	../../source/gui/editor/guiMenuBar.cc \
-	../../source/gui/editor/guiSeparatorCtrl.cc \
-	../../source/Banana_Modifications/Struct_Module/Struct_Module_Functions/Struct_Module_Functions.cc \
-	../../source/Banana_Modifications/Struct_Module_Assimp/Struct_Module_Assimp.cc \
-	../../source/Banana_Modifications/Scene_Object_3D/Scene_Object_3D.cc
+	../../source/gui/editor/guiSeparatorCtrl.cc #\
+	#../../source/Banana_Modifications/Struct_Module/Struct_Module_Functions/Struct_Module_Functions.cc \
+	#../../source/Banana_Modifications/Struct_Module_Assimp/Struct_Module_Assimp.cc \
+	#../../source/Banana_Modifications/Scene_Object_3D/Scene_Object_3D.cc
 
 LDFLAGS := -g -m32
-LDLIBS := -lstdc++ -lm -ldl -lpthread -lrt -lX11 -lXft -lSDL -lopenal -lassimp -lvorbisfile#-lopus -lopusfile
+LDLIBS := -lstdc++ -lm -ldl -lpthread -lrt -lX11 -lXft -lSDL -lopenal #-lassimp -lvorbisfile#-lopus -lopusfile
 
 CFLAGS := -MMD -I. -Wfatal-errors -Wunused -m32 -msse -march=i686 -pipe
 
