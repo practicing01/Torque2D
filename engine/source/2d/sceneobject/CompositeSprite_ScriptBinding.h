@@ -1019,6 +1019,29 @@ ConsoleMethodWithDocs(CompositeSprite, getSpriteDataObject, ConsoleString, 2, 2,
 
 //-----------------------------------------------------------------------------
 
+/*! Set the sprite user data field.
+    @param data A space separated string containing the data you wish to store.
+    @return No return Value.
+*/
+ConsoleMethodWithDocs(CompositeSprite, setSpriteUserData, ConsoleVoid, 3, 3, (data))
+{
+    StringTableEntry userData = StringTable->insert(argv[2]);
+    object->setUserData( (void*)userData );
+}
+
+//-----------------------------------------------------------------------------
+
+/*! Gets the sprite user data.
+    @return The sprite user data.
+*/
+ConsoleMethodWithDocs(CompositeSprite, getSpriteUserData, ConsoleString, 2, 2, ())
+{
+    const char* userData = (const char*) object->getUserData();
+    return userData;
+}
+
+//-----------------------------------------------------------------------------
+
 /*! Set the sprite name.
     This must be unique within this composite sprite instance.  To clear the name you can pass an empty string.
     @return No return Value.
